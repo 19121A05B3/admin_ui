@@ -1,0 +1,37 @@
+$col-shade-green: #12805C;
+
+.landing-page-header-bar {
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5em 2em;
+    height: 13vh;
+    width: 100%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.16);
+    position: fixed;
+    z-index: 1;
+
+    .header-breadcrumb {
+        width: fit-content;
+        float: left;
+        font-size: 1.15vw;
+        padding-top: 5vh;
+    }
+
+    .custom-breadcrumb {
+        .ant-breadcrumb-link {
+            color: black;
+        }
+    
+        .ant-breadcrumb-link:hover,
+        .ant-breadcrumb-link:focus {
+            color: black;
+            border-bottom: 0.25em solid $col-shade-green;
+        }
+    }
+}
+
+.custom-badge {
+    padding-left: 1em !important;
+}

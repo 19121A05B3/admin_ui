@@ -1,0 +1,19 @@
+
+
+.ongoing-trasnactions-details-container {
+    margin: 2rem 0;
+    .ongoing-trasnactions-details-table {
+        .ant-table-thead tr th {
+            background-color: #F6A041;
+        }
+    }
+}
+
+.current-matches-container {
+    margin: 2rem 0;
+    .current-matches-table {
+        .ant-table-thead tr th {
+            background-color: #2D487B;
+        }
+    }
+}

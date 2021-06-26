@@ -1,0 +1,33 @@
+body {
+  background: #E5E5E5;
+}
+
+.app-content {
+  padding: 3rem;
+}
+
+.display-flex-row {
+  display: flex;
+  flex-direction: row;
+  
+  &.align-center {
+    align-items: center;
+  }
+
+  &.justify-content {
+    justify-content: space-between;
+  }
+}
+
+.display-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.margin-unset {
+  margin: unset !important;
+}
+
+.margin-top-3rem {
+  margin-top: 3rem;
+}
