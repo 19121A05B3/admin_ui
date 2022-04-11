@@ -1,0 +1,193 @@
+{
+    "language": "en",
+    "title": "VikasBandhu",
+    "landing_page": {
+        "welcomeText":"Welcome to <bold>VikasBandhu</bold>",
+        "footerText":"A friendly digital E-market place for agricultural produce",
+        "footerBtnText":"Explore Vikasbandhu",
+        "actions": {
+            "login": "Login",
+            "register": "Register",
+            "terms_and_conditions": "Terms and Conditions",
+            "privacy_policy": "Privacy Policy",
+            "read_more": "Read More",
+            "submit": "Submit",
+            "explore": "Explore VikasBandhu"
+        },
+        "header": {
+            "breadcrumb": {
+                "home": "Home",
+                "aim": "Aim",
+                "ecosystem": "Ecosystem",
+                "commodities": "Commodities",
+                "users": "Users",
+                "about_us": "About Us",
+                "team": "Team",
+                "legal": "Legal",
+                "contact_us": "Contact Us",
+                "updates":"Updates"
+            }
+        }
+    },
+    "home_page": {
+        "text1":"A friendly digital E-market place for agricultural produce",
+        "text2":"Be part of VikasBandhu family!",
+        "text3":"Recent Updates",
+        "text4":"view all",
+        "text5":"MVP Launched!",
+        "text6":"Food and Agri Tech exhibition",
+        "text7":"Academia Collaboration"
+    },
+    "aim_page": {
+        "text1":"What is VikasBandhu?",
+        "text2":"VikasBandhu is a technology enabled agriculture free e-market place for a willing buyer and seller to make informed decisions.  It is aimed to help the buyers and sellers (Farmer self-help groups) to connect, engage and transact for win-win relationships",
+        "text3":"Why VikasBandhu?",
+        "text4":"At present, sellers and buyers face many issues while trading",
+        "text5":"Sellers",
+        "text6":"(Farmer community, FPOs & Societies, Mills, Storage units/ Agents)",
+        "text7":"Buyers",
+        "text8":"(Whole, Food Industries, Processors, Institutions)",
+        "text9":"Majority of farmers are tenant farmers, i.e they farm on land owned by others and pay rent to the owner.",
+        "text10":"They don’t have reliable source to guide them to make right decision while selling the produce.",
+        "text11":"Sellers don’t get a fair price for their produce.",
+        "text12":"Limited capabilites to process their produce.",
+        "text13":"Less to no information on current market.",
+        "text14":"And other issues such as very limited reach, time constraints to sell, limited financial resource",
+        "text15":"Many middle men in the supply chain.",
+        "text16":"Lack of quality options to find right seller.",
+        "text17":"Unstructured agri ecosystem",
+        "text18":"and many more...",
+        "text19":"To address the above issues, at VikasBandhu, we are building an ecosystem to ensure",
+        "text20":"in addition, we",
+        "text21":"Provide Expert Help",
+        "text22":"Help from local agro experts to help during trade",
+        "text23":"Provide Local Employment",
+        "text24":"Boost rural economy by providing local employment.",
+        "text25":"Work with Government",
+        "text26":"Partnering with Government's vision"
+    },
+    "ecosystem_page": {
+        "firstHead":"How VikasBandhu work?",
+        "text1":"Key featues of VikasBandhu platform",
+        "text2":"Simple KYC process",
+        "text3":"Easy and guided KYC process to verify account",
+        "text4":"Dashboard",
+        "text5":"View all your produce, matches and transaction on user friendly dashboard",
+        "text6":"Produce",
+        "text7":"We support wide verity of produce category",
+        "text8":"Pricing Guide",
+        "text9":"Get information of latest market price for your produce",
+        "text10":"Support",
+        "text11":"Reachout to your local expert for any help",
+        "text12":"Seller and Buyers register with VikasBandhu by providing basic information and documents",
+        "text13":"After verification, the can add produce to sell or requirement to buy",
+        "text14":"Get best match from our best VikasBandhu matching system powered by AI",
+        "text15":"Start your trade and track full transaction with full transparency",
+        "text16":"Send and recieve payment with 100% online transaction once trade is complete"
+    },
+    "commodities_page": {
+        "title": "Commodities we facilitate",
+        "paragraph": "VikasBandhu focus is currently limited to the non perishable agricultural produce from Farmers and Farmer Self help groups. The coverage initially is targetted in Karnataka covering the  major crops native to this region. The scope of produce is intended/limited to be below categories at this point.",
+        "commodities_name": {
+            "1": "Staple Crops",
+            "2": "Pulses",
+            "3": "Cash Crops",
+            "4": "Spices",
+            "5": "Oil Seeds"
+        }
+    },
+    "users_page": {
+        "title": "VikasBandhu for",
+        "user_card1": {
+            "title": "Sellers",
+            "subtitle": "Atmanirbar Farmers towards Atmanirbhar Bharat",
+            "text": "The farmer and farmer communities are the centre of our efforts. We help to connect sellers to buyers directly. We aim to provide Logistics and better price for their produce at their doorstep."
+        },
+        "user_card2": {
+            "title": "Buyers",
+            "subtitle": "Buyer Community Optimize and enable direct connect",
+            "text": "VikasBandhu attempts to identify the right quantity source, taking care of the logistics, minimizing on overheads with customized packing where requested."
+        }
+    },
+    "about_us": {
+        "title": "About us",
+        "paragraph": "We are a young enterprise working with knowledge and passion for partnering Government's vision of Freedom, Protection, and Higher Income to farmer communities. We have worked tirelessly with farmers and everyone in the value chain to understand the needs.We are committed to ensure a meaningful facilitation to the buyers and sellers.",
+        "vision_card": {
+            "text": "Our Vision",
+            "description": "Ensure that we create a brand which is synonymous with trust and respect amongst communities in the agriculture space."
+        },
+        "philosophy_card": {
+            "text": "Our Philosophy",
+            "description": "Continuously improve our services to add value and Brand to our business, our partners and our communities. "
+        },
+        "title1": "Partnering Government's Vision",
+        "paragraph1": "We take pride in partnering Government's vision of doubling farmer's income by reducing middlemen. This is our contribution to nation building and making it truly 'Atmanirbhar Bharat'."
+    },
+    "our_team": {
+        "title": "Our Team",
+        "founders": {
+            "title": "Founders",
+            "name": {
+                "1": "G SADANANDA MURTHY",
+                "2": "G S NAGAPPA",
+                "3": "SUMA SADANANDA"
+            },
+            "designation": {
+                "1": "Director,Eng. and Technology",
+                "2": "Director,Marketing and Sales",
+                "3": "Director,Administration"
+            },
+            "subDesignation": {
+                "1": "(Ex. Broadcom, NetApp, Motorola)",
+                "2": "(Ex. COO Diageo India)"
+            },
+            "description": {
+                "1": "Sadananda Murthy is a management & delivery Leader with more than two decades of Experience in building software products, running Programs and operations at <strong>Fortune 500</strong> companies. He is focusing his efforts to develop and drive digital transformation to enable local community and groups at large.",
+                "2": "G S Nagappa’s has over four decades of leadership experience. He retired as COO at Diageo India. Today, as a veteran and philanthropist, he continues to passionately work towards building new businesses by understanding new opportunities in Indian market. He has a deep commitment to community and aims to achieve shared success.",
+                "3": "Suma Sadananda is deeply committed to Social endeavours that  lead her to take up teaching profession in the initial years. After focusing on family , she has started her second innings to pursue her interests. She is keen to promote product lines that solve local problems."
+            }
+        },
+        "advisors": {
+            "title": "Management Team",
+            "name": {
+                "1": "SATISH CHANDRA C S",
+                "2": "GANESH M S",
+                "3": "GURUPRASAD KV"
+            },
+            "designation": {
+                "1": "Agriculture Technology and Finance",
+                "2": "FMCG, Backend",
+                "3": "Regional Manager-Operations , Karnataka"
+            },
+            "description": {
+                "1": "Over three decades of experience as a valuator, finance researcher, mentor in Agri Tech. He is guiding us a mentor providing the needed support on Agriculture Strategy, roadmap and finance.",
+                "2": "Over three decades of experience at backend operations in FMCG and lifestyle. He is helping us as an Advisor on sourcing and backend ops.",
+                "3": "Sales Professions with over two decades of experience in FMCG and beverages. He is leading the Operations activities and strategy."
+            }
+        }
+    },
+    "legal_page": {
+        "title": "Legal"
+    },
+    "contact_us_page": {
+        "title": "Contact Us",
+        "address1": "617, Shivam, Royal Park Residency,",
+        "address2": "J P Nagar 9th Phase, Bengaluru-560062",
+        "contact_form": {
+            "title": "We would like to hear from you!",
+            "full_name": "Full Name",
+            "email": "Email",
+            "phone": "Phone",
+            "message": "Message"
+        }
+    },
+    "updates_page":{
+        "title":"Updates",
+        "title1":"Minimal Viable Product (27th December 2021)",
+        "title2":"Techbharat 2022(5th January 2022)",
+        "title3":"Memorandum of Understanding(MOU) (21st December 2021)",
+        "text1":"VikasBandhu is live! We are glad to announce the availability of the Minimum Viable Product (MVP). The Pilot is available as a browser (https://vikasbandhu.in) and Android Application. This Pilot will be available towards field exposure, usage and feedback with Closed User Groups in select markets in Karnataka. This will help the buyers and sellers (Farmer self-help groups) to connect, engage and transact for win-win relationships",
+        "text2":"We were selected to showcase our solution 'VikasBandhu' in the first Pre-Event “Food and Agri Tech exhibition” in Belagavi, Karnataka by Techbharat. The forum is using this opportunity to show case a vast array of exciting start-ups showcasing innovation and enable networking in the Agri tech space This is a three-fold event which continues in Bangalore in March and culminates in Mysore in May’21",
+        "text3":"The industry and academia collaboration is paramount and the need of the hour. We are glad to have signed a MOU with Sri Vidyanikethan Engineering College (SVEC) in the areas of the AI, Voice recognition, Big Data and Cloud first apps. This collaboration will be a win-win. The faculty and its students get the required exposure to the latest industry trends to apply their domain knowledge to solve cutting-edge real-life problems in AgriTech. SamparkBindhu will also attain critical mass needed to accelerate and fast pace its technology driven product lines"
+    }
+}

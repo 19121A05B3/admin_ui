@@ -1,0 +1,126 @@
+$col-shade-green: #12805c;
+
+.custom-primary-button {
+    background-color: $col-shade-green !important;
+    border-color: $col-shade-green !important;
+}
+
+.custom-default-button:hover,
+.custom-default-button:focus,
+.focus-button-item {
+    color: $col-shade-green !important;
+    border-color: $col-shade-green !important;
+}
+
+.custom-cancel-button:hover,
+.custom-cancel-button:focus {
+    background-color: #fafafa !important;
+    border-color: #c1c1c1 !important;
+}
+
+.custom-input:hover,
+.custom-input:focus {
+    color: $col-shade-green !important;
+    border-color: $col-shade-green !important;
+}
+
+.custom-select {
+    .ant-select-selector:hover,
+    .ant-select-selector:focus {
+        border-color: $col-shade-green !important;
+    }
+}
+
+.custom-search {
+    .ant-input-search .ant-input:hover,
+    .ant-input-search .ant-input:focus {
+        border-color: $col-shade-green !important;
+    }
+} // Not working
+
+.custom-checkbox {
+    .ant-checkbox-checked .ant-checkbox-inner {
+        background-color: $col-shade-green !important;
+    }
+}
+
+.custom-dropdown-button {
+    padding-left: 1em;
+
+    .ant-btn-default:first-of-type {
+        display: none;
+    }
+
+    .ant-btn-icon-only {
+        border-radius: 2em !important;
+    }
+
+    .ant-btn-icon-only:hover,
+    .ant-btn-icon-only:focus {
+        border-color: $col-shade-green !important;
+        color: $col-shade-green !important;
+    }
+}
+
+.custom-breadcrumb {
+    .ant-breadcrumb-link {
+        color: black;
+    }
+
+    .ant-breadcrumb-link:hover,
+    .ant-breadcrumb-link:focus {
+        color: black;
+        border-bottom: 0.25em solid $col-shade-green;
+    }
+}
+
+.custom-badge {
+    padding-left: 1em !important;
+}
+
+.mobile-register-modal {
+    text-align: center;
+
+    .download-btn {
+        width: 100%;
+    }
+}
+
+.welcome-modal {
+    text-align: center;
+
+    .dear-name-text {
+        margin-bottom: 0%;
+        font-weight: 500;
+    }
+
+    .welcome-text {
+        font-size: 2rem;
+        font-weight: 700;
+        width: 20rem;
+        margin: 0 auto;
+    }
+    
+    h3.ant-typography {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .welcome-explore {
+        width: 12rem;
+        margin-top: 1rem;
+        font-weight: 500;
+    }
+}
+
+.custom-divider{
+    width:100vw !important;
+    .wimage{
+        position: relative;
+        // background-image: url("../static/assets/wheatCustomised.svg");
+        background-repeat: repeat;
+        width:20.125rem;
+        height:1.25rem;
+        color:#f5a31a;
+    }
+}

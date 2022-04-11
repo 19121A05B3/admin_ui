@@ -1,33 +1,431 @@
-body {
-  background: #E5E5E5;
-}
+// Header
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+.header {
+  @media only screen and (max-width: 720px) {
+    /* For mobile phones: */
+    .header-breadcrumb {
+      color: black;
+      align-content: center;
+      width: 25rem !important;
+      height: 3rem;
+      font-size: 1rem !important;
+      align-items: center;
+      padding-top: 1.2rem;
+    }
+    .left-text-first {
+      font-size: 10px !important;
+    }
+    .standard-bar {
+      font-size: 12px !important;
+    }
+    .landing-page-header-bar {
+      background: #ffffff;
+      display: flex;
+      flex-direction: row;
+      height: 4rem !important;
+      width: 100%;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.16);
+      position: absolute;
+      z-index: 1;
+    }
+    .col-2-2-2 {
+      flex-basis: 30%;
+      padding-top: 0.5rem !important;
+      align-items: center;
+      align-content: center;
+      text-align: right;
+      top: 20%;
+    }
+    .logo {
+      padding-left: 1px;
 
-.app-content {
-  padding: 3rem;
-}
-
-.display-flex-row {
-  display: flex;
-  flex-direction: row;
-  
-  &.align-center {
+      width: 3.8rem !important;
+      height: 3rem !important;
+      float: left;
+    }
+    .col-2 {
+      display: flex;
+      flex-direction: row;
+      flex-basis: 20% !important;
+    }
+    .col-22 {
+      display: flex;
+      flex-direction: row;
+      flex-basis: 80% !important;
+    }
+    .ant-breadcrumb-separator {
+      margin: 0 4px;
+      color: rgba(0, 0, 0, 0.45);
+    }
+  }
+  .mb15 {
+    margin-bottom: 15px;
+  }
+  .bellfill {
+    font-size: 115%;
+    margin-right: 10px;
+  }
+  .foname {
+    font-size: 16px;
+    line-height: 18.75px;
+    font-weight: 500;
+  }
+  .foid {
+    font-size: 14px;
+    line-height: 16.41px;
+    font-weight: 400;
+  }
+  .app-header {
+    background-color: white;
+  }
+  .navbar {
+    z-index: 500;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    display: flex;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     align-items: center;
+    height: 80px;
   }
 
-  &.justify-content {
-    justify-content: space-between;
+  .ant-anchor {
+    display: flex;
+    padding-left: 1rem;
+  }
+  .ant-anchor-link {
+    margin-right: 50px;
+    font-style: bold;
+  }
+  .ant-anchor-ink {
+    display: none;
+  }
+  .navbar img {
+    aspect-ratio: auto 185/77;
+    margin: 0 auto;
+    margin-left: 0px;
+  }
+  .navbar a {
+    cursor: pointer;
+    font-weight: 700;
+    font-style: bold;
+    min-height: 21px;
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif;
+    line-height: 19.5px;
+    text-decoration: none;
+    color: #343434;
+    margin-right: auto;
+  }
+  .navbar a:active {
+    color: #343434 !important;
+  }
+
+  .navbar a:hover {
+    color: #e6b31e !important ;
+  }
+  .left-text {
+    display: inline-block;
+    padding-right: 1.4rem;
+  }
+  .left-text-first {
+    display: inline;
+    padding-right: 0.8rem;
+  }
+  .left-text-second {
+    display: inline-block;
+  }
+  .right-text {
+    display: inline-block;
+    padding-right: 1.5rem;
+  }
+  .standard-bar {
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: row-reverse;
+    min-height: 2.5rem;
+    align-items: center;
+    padding-right: 1.5rem;
+    top: 20%;
+  }
+  .grp-element {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 1.5rem;
+  }
+  .element {
+    display: inline-block;
+    margin-top: 1.1rem;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 20px;
+    /* identical to box height */
+    padding-left: 1.5rem;
+    text-align: left;
+    color: #000000 !important;
+  }
+  .element a:active {
+    background-color: blanchedalmond;
+  }
+  a:focus::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 0.2rem;
+    border-radius: 10;
+    left: 0;
+    bottom: 0;
+
+    background: #12805c;
+  }
+  .item {
+    border: 10dp;
+  }
+
+  .bell {
+    min-height: 10rem;
+  }
+  .col-2 {
+    display: flex;
+    flex-direction: row;
+    flex-basis: 50%;
+  }
+  .col-22 {
+    display: flex;
+    flex-direction: row;
+    flex-basis: 50% !important;
+  }
+  .col-2-2 {
+    flex-direction: row-reverse;
+    flex-basis: 70%;
+  }
+  .col-2-2-2 {
+    flex-basis: 30%;
+    padding-top: 1.5rem;
+    align-items: center;
+    align-content: center;
+    text-align: right;
+    top: 20%;
+  }
+  .empty-70 {
+    display: inline-block;
+    flex-basis: 70%;
+  }
+  .top-text {
+    display: inline-block;
+    flex-basis: 30%;
+  }
+  .bottom-text {
+    display: inline-block;
+    flex-basis: 50%;
+  }
+  .button {
+    height: 20rem;
+    position: relative;
+    width: 10rem;
+    border: 15px;
+    margin-bottom: 3rem;
+  }
+  .button:focus::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 0.2rem;
+    border-radius: 10;
+    left: 0;
+    top: 1.5rem;
+    background: #12805c;
+  }
+
+  .breadcrumb {
+    flex-direction: row;
+    color: black;
+    float: left;
+    left: 0;
+  }
+  .landing-page-header-bar {
+    background: #ffffff;
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.16);
+    position: absolute;
+    z-index: 1;
+
+    .logo {
+      padding-left: 1px;
+
+      width: 4.8rem;
+      height: 3.3rem;
+      float: left;
+    }
+
+    .header-breadcrumb {
+      color: black;
+      align-content: center;
+      width: auto;
+      height: 3rem;
+      font-size: 1.2rem;
+      align-items: center;
+      padding-top: 1.2rem;
+    }
+
+    .header-breadcrumb-item {
+      color: black;
+      height: 5rem;
+      margin-bottom: 10rem;
+    }
+    .custom-login-button,
+    .custom-register-button {
+      width: 10rem;
+      height: 3rem;
+    }
+  }
+  .ant-breadcrumb {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: black;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px !important;
+    font-variant: tabular-nums;
+    line-height: 19.92px;
+    list-style: none;
+    font-feature-settings: "tnum";
+    color: rgb(0, 0, 0) !important;
+  }
+  .ant-breadcrumb .anticon {
+    font-size: 14px;
+  }
+  .ant-breadcrumb a {
+    color: rgb(0, 0, 0) !important;
+  }
+  .ant-breadcrumb a:hover {
+    color: black !important;
+  }
+  .ant-breadcrumb > span:last-child {
+    color: rgb(0, 0, 0);
+  }
+  .ant-breadcrumb > span:last-child a {
+    color: rgb(0, 0, 0);
+  }
+  .ant-breadcrumb > span:last-child .ant-breadcrumb-separator {
+    display: none;
+  }
+  .ant-breadcrumb-link > .anticon + span,
+  .ant-breadcrumb-link > .anticon + a {
+    margin-left: 4px;
+  }
+  .ant-breadcrumb-overlay-link > .anticon {
+    margin-left: 4px;
+  }
+  .ant-breadcrumb-rtl {
+    direction: rtl;
+  }
+  .ant-breadcrumb-rtl::before {
+    display: table;
+    content: "";
+  }
+  .ant-breadcrumb-rtl::after {
+    display: table;
+    clear: both;
+    content: "";
+  }
+  .ant-breadcrumb-rtl > span {
+    float: right;
+  }
+  .ant-breadcrumb-rtl .ant-breadcrumb-link > .anticon + span,
+  .ant-breadcrumb-rtl .ant-breadcrumb-link > .anticon + a {
+    margin-right: 4px;
+    margin-left: 0;
+  }
+  .ant-breadcrumb-rtl .ant-breadcrumb-overlay-link > .anticon {
+    margin-right: 4px;
+    margin-left: 0;
+  }
+  // Details
+  @media only screen and (max-width: 720px) {
+    .cid {
+      display: inline-block;
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 8px !important;
+      line-height: 16px;
+      align-items: center;
+      text-align: right;
+
+      color: #4e4e4e;
+    }
+    .cname {
+      display: inline-block;
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: 100 !important;
+      font-size: 14px !important;
+      line-height: 19px;
+      /* identical to box height */
+      align-items: center;
+      text-align: right;
+
+      color: #000000;
+    }
+  }
+  .details {
+    margin: 0;
+    position: relative;
+    top: 20%;
+  }
+  .container {
+    display: flex;
+  }
+  .cid {
+    display: inline-block;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    align-items: center;
+    text-align: right;
+    color: #4e4e4e;
+  }
+  .cname {
+    display: inline-block;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+    align-items: center;
+    text-align: right;
+
+    color: #000000;
+  }
+  .row-2-70 {
+    flex-basis: 70%;
+  }
+  .row-2-30 {
+    flex-basis: 30%;
   }
 }
 
-.display-flex-column {
+.no-data-fo {
+  max-width: 600px;
+  margin: 50px auto;
   display: flex;
   flex-direction: column;
-}
-
-.margin-unset {
-  margin: unset !important;
-}
-
-.margin-top-3rem {
-  margin-top: 3rem;
+  align-items: center;
+  justify-content: center;
 }

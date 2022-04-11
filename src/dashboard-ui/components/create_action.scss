@@ -1,0 +1,251 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+.createnewaction {
+  .action-button {
+    position:relative;
+    width: 160px;
+    height: 40px;
+    left: -30px;
+    top: 0px;
+    background: #12805c;
+    color: #ffffff;
+    font-family: Roboto;
+    cursor: pointer;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 140.62%;
+    margin: 0 35px;
+  }
+
+  //form div
+  .action-form {
+    position: relative;
+    width: 72vw;
+    height: 335px;
+    left: 40px;
+    top: 10px;
+    background: #ffffff;
+    border-radius: 10px;
+    border: 2px solid #12805c;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    padding-left: 30px;
+    padding-top: 40px;
+    padding-bottom: 30px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px !important;
+    line-height: 140.62%;
+    // z-index: 1;
+    margin: 0px 25px;
+  }
+
+  //for category input
+  .category {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+  }
+  .category-select {
+    position: absolute;
+    top: 25px;
+  }
+  .category + .category-select {
+    margin-left: 130px;
+    text-align: left;
+  }
+
+  //for request/issue input
+  .req-issue {
+    position: absolute;
+    top: 70px;
+    left: 30px;
+  }
+
+  .req-issue-select {
+    position: absolute;
+    top: 65px;
+  }
+
+  .req-issue + .req-issue-select {
+    margin-left: 130px;
+    text-align: left;
+  }
+
+  //add user
+  .details {
+    position: absolute;
+    left: 30px;
+    top: 110px;
+  }
+
+  .details-textarea {
+    position: absolute;
+    top: 106px;
+  }
+
+  .details + .details-textarea {
+    margin-left: 130px;
+    text-align: left;
+  }
+
+  /* .attach-file{
+          
+          position:absolute;
+          left:171px;
+          top:229px;
+          
+      }
+      */
+  .file-attach {
+    position: absolute;
+    left: 171px;
+    top: 170px;
+  }
+  //login same for change-phone-number, update-bank-info
+  .seller-buyer-id {
+    position: absolute;
+    left: 30px;
+    top: 110px;
+  }
+  .seller-buyer-text {
+    position: absolute;
+    top: 106px;
+  }
+
+  .seller-buyer-id + .seller-buyer-text {
+    margin-left: -50px;
+    text-align: left;
+  }
+
+  .seller-buyer-details {
+    position: absolute;
+    left: 30px;
+    top: 152px;
+  }
+
+  .seller-buyer-details-textarea {
+    position: absolute;
+    top: 147px;
+  }
+
+  .seller-buyer-details + .seller-buyer-details-textarea {
+    margin-left: 130px;
+    text-align: left;
+  }
+
+  //update bank info attach file
+  .update-bank-info-attach-file {
+    position: absolute;
+    left: 171px;
+    top: 210px;
+  }
+
+  select {
+    width: 205px;
+    height: 34px;
+    /* margin:5px 0; */
+    background: #ffffff;
+    border: 1px solid #c4c4c4;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 140.62%;
+  }
+  label {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 140.62%;
+
+    margin: 10px;
+    left: 10px;
+    color: #000000;
+  }
+
+  textarea {
+    width: 30%;
+    height: 69px;
+
+    background: #ffffff;
+    border: 1px solid #c4c4c4;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 140.62%;
+  }
+
+  button[type="submit"] {
+    position: absolute;
+    width: 71px;
+    height: 40px;
+    left: 90px;
+    bottom: 26px;
+    /* top: 268px; */
+
+    background: #12805c;
+    border-radius: 3px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 140.62%;
+    /* identical to box height, or 20px */
+    cursor: pointer;
+
+    color: #ffffff;
+  }
+
+  .cancel {
+    /* Cancel */
+
+    position: absolute;
+    width: 43px;
+    height: 20px;
+    left: 30px;
+    bottom: 36px;
+    /* top: 278px; */
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 140.62%;
+    /* identical to box height, or 20px */
+
+    cursor: pointer;
+    color: #c4c4c4;
+  }
+
+  .input {
+    position: absolute;
+    width: 205px;
+    height: 34px;
+    left: 220px;
+
+    background: #ffffff;
+    border: 1px solid #c4c4c4;
+    box-sizing: border-box;
+    border-radius: 5px;
+  }
+  input[type="file"] {
+    width: 131px;
+    height: 34px;
+    background: #ffffff;
+    border: 1px solid #4285f4;
+    box-sizing: border-box;
+    border-radius: 5px;
+    color: #4285f4;
+    font-family: Roboto;
+    font-size: 14px;
+  }
+}
