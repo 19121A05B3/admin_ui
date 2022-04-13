@@ -422,6 +422,7 @@ import { IItsy } from "../../store/app_interfaces";
 import Photos from "./Modal";
 import { RangeSelector } from "../../components/common/range_selector";
 import { loadingIndicator } from "./transactions";
+import { dp } from "../../helper";
 
 const { Option } = Select;
 
@@ -540,6 +541,11 @@ const ProduceTab = (props: propType) => {
           parseInt(item.price_per_qnt) >= allFilters.price_per_qnt[0] &&
           item.price_per_qnt &&
           parseInt(item.price_per_qnt) <= allFilters.price_per_qnt[1]
+          //  &&
+          // item.apmc_rate_data &&
+          // item.apmc_rate_data.apmc_price &&
+          // item.apmc_rate_data.apmc_price >= allFilters.apmc_rate_data[0] &&
+          // item.apmc_rate_data.apmc_price <= allFilters.apmc_rate_data[1]
           // item.apmc_rate_data != undefined
           //   ? item.apmc_rate_data.apmc_price >= allFilters.apmc_rate_data[0] &&
           //     item.apmc_rate_data.apmc_price <= allFilters.apmc_rate_data[1]
@@ -567,10 +573,11 @@ const ProduceTab = (props: propType) => {
             parseInt(item.price_per_qnt) >= allFilters.price_per_qnt[0] &&
             item.price_per_qnt &&
             parseInt(item.price_per_qnt) <= allFilters.price_per_qnt[1])
-          // item.apmc_rate_data != undefined
-          //   ? item.apmc_rate_data.apmc_price >= allFilters.apmc_rate_data[0] &&
-          //     item.apmc_rate_data.apmc_price <= allFilters.apmc_rate_data[1]
-          //   : console.log("")
+          //   ||
+          // (item.apmc_rate_data &&
+          //   item.apmc_rate_data.apmc_price &&
+          //   item.apmc_rate_data.apmc_price >= allFilters.apmc_rate_data[0] &&
+          //   item.apmc_rate_data.apmc_price <= allFilters.apmc_rate_data[1])
         )
           finalFilteredData.push(item);
       }
@@ -608,6 +615,7 @@ const ProduceTab = (props: propType) => {
   //   });
   // };
   // const apmcratedataSelector = (range: any) => {
+  //   dp(range);
   //   if (!range) return;
   //   setAllFilters((prevState) => {
   //     const f = { ...prevState, apmc_rate_data: range };
@@ -777,14 +785,14 @@ const ProduceTab = (props: propType) => {
       },
     },
     {
-      // title: (
-      //   <RangeSelector
-      //     name="Apmc Rate"
-      //     min={apmc_price?.min ?? 0}
-      //     max={apmc_price?.max ?? 90000}
-      //     onSubmit={apmcratedataSelector}
-      //   />
-      // ),
+      //   title: (
+      //     <RangeSelector
+      //       name="Apmc Rate"
+      //       min={apmc_price?.min ?? 0}
+      //       max={apmc_price?.max ?? 90000}
+      //       onSubmit={apmcratedataSelector}
+      //     />
+      //   ),
       title: "Apmc Rate",
       dataIndex: "apmc_rate_data",
       render: (details: any) => {

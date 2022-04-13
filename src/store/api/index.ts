@@ -16,22 +16,20 @@ import store from "../index";
 //   userName = token;
 // }
 
-// const baseUrl = "https://i2esbt8nni.execute-api.ap-south-1.amazonaws.com/dev";
+const baseUrl =
+  "https://i2esbt8nni.execute-api.ap-south-1.amazonaws.com/dev/admin";
 
 const headerValue = {
-  "Content-Type": "text/plain",
-  "Access-Control-Allow-Origin": "*",
+  "Content-Type": "application/json",
 };
+
 export const fetchSellerBuyerData = async (id: String) => {
   try {
     let finalData = await axios({
       method: "post",
-      // url: baseUrl + "/transactions",
-      url: "/transactions",
-      headers: {
-        "Content-Type": "text/plain",
-        "Access-Control-Allow-Origin": "*",
-      },
+      url: baseUrl + "/transactions",
+      // url: "/transactions",
+      headers: headerValue,
       data: {
         admin: "admin#" + id,
       },
@@ -47,13 +45,10 @@ export const fetchVBUserData = async (id: String) => {
   try {
     let finalData = await axios({
       method: "post",
-      // url: baseUrl + "/vbusers",
-      url: "/vbusers",
+      url: baseUrl + "/vbusers",
+      // url: "/vbusers",
 
-      headers: {
-        "Content-Type": "text/plain",
-        "Access-Control-Allow-Origin": "*",
-      },
+      headers: headerValue,
       data: {
         admin: "admin#" + id,
       },
@@ -68,12 +63,9 @@ export const fetchProduceData = async (id: String) => {
   try {
     let finalData = await axios({
       method: "post",
-      // url: baseUrl + "/produces",
-      url: "/produces",
-      headers: {
-        "Content-Type": "text/plain",
-        "Access-Control-Allow-Origin": "*",
-      },
+      url: baseUrl + "/produces",
+      // url: "/produces",
+      headers: headerValue,
       data: {
         admin: "admin#" + id,
       },
@@ -88,13 +80,10 @@ export const fetchactionTabData = async (id: string) => {
   try {
     let finalData = await axios({
       method: "post",
-      // url: baseUrl + "/request_issues",
-      url: "/request_issues",
+      url: baseUrl + "/request_issues",
+      // url: "/request_issues",
 
-      headers: {
-        "Content-Type": "text/plain",
-        "Access-Control-Allow-Origin": "*",
-      },
+      headers: headerValue,
       data: { admin: "admin#" + id },
     });
     console.log(finalData.data);
@@ -109,16 +98,11 @@ export const updateStatusApi = async (dataToPost: any) => {
   try {
     let finalData = await axios({
       method: "post",
-      url: "/status_change",
-      // url: baseUrl + "/status_change",
-
-      headers: {
-        "Content-Type": "text/plain",
-        "Access-Control-Allow-Origin": "*",
-      },
+      // url: "/status_change",
+      url: baseUrl + "/status_change",
+      headers: headerValue,
       data: dataToPost,
     });
-
     console.log(finalData);
     return true;
   } catch (err) {
@@ -131,11 +115,8 @@ export const idCardApi = async (dataToPost: any) => {
   try {
     let finalData = await axios({
       method: "post",
-      url: "/idcard",
-      headers: {
-        "Content-Type": "text/plain",
-        "Access-Control-Allow-Origin": "*",
-      },
+      url: baseUrl + "/idcard",
+      headers: headerValue,
       data: dataToPost,
     });
     console.log(finalData);
@@ -150,12 +131,9 @@ export const createNewActionApi = async (dataToPost: any) => {
   try {
     let finalData = await axios({
       method: "post",
-      // url: baseUrl + "/create_action",
-      url: "/create_action",
-      headers: {
-        "Content-Type": "text/plain",
-        "Access-Control-Allow-Origin": "*",
-      },
+      url: baseUrl + "/create_action",
+      // url: "/create_action",
+      headers: headerValue,
       data: dataToPost,
     });
     return finalData.data;
@@ -169,7 +147,7 @@ export const fetchFODetails = async (id: String) => {
   try {
     let finalData = await axios({
       method: "post",
-      url: "/fieldofficer_details",
+      url: baseUrl + "/fieldofficer_details",
       headers: headerValue,
       data: {
         admin: "admin#" + id,
@@ -183,15 +161,13 @@ export const fetchFODetails = async (id: String) => {
     return undefined;
   }
 };
+
 export const fetchUserName = async (userID: String) => {
   try {
     let finalData = await axios({
       method: "post",
       url: "/findusername",
-      headers: {
-        "Content-Type": "text/plain",
-        "Access-Control-Allow-Origin": "*",
-      },
+      headers: headerValue,
       data: {
         user: "user#" + userID,
       },

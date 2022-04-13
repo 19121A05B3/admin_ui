@@ -526,7 +526,7 @@ export interface itemInterface {
   sk: string;
   pk: string;
   details: string;
-  doc_location:string;
+  doc_location: string;
 }
 interface propType {
   data: any;
@@ -774,12 +774,25 @@ const OngoingActions = (props: propType) => {
         </Row>
       ),
 
-      render: (details: any,record:any) => {
+      render: (details: any, record: any) => {
         return (
           <>
             {!details && !record.doc_location && <>No details provided</>}
-            {details && <>{details}<br></br></>}
-            {record.doc_location && <a href={record.doc_location} target="_blank"><PaperClipOutlined/>{record.doc_location.slice(record.doc_location.lastIndexOf("/") + 1, record.doc_location.length)}</a>}
+            {details && (
+              <>
+                {details}
+                <br></br>
+              </>
+            )}
+            {record.doc_location && (
+              <a href={record.doc_location} target="_blank">
+                <PaperClipOutlined />
+                {record.doc_location.slice(
+                  record.doc_location.lastIndexOf("/") + 1,
+                  record.doc_location.length
+                )}
+              </a>
+            )}
           </>
         );
       },
@@ -814,9 +827,12 @@ const OngoingActions = (props: propType) => {
       key: "status",
       dataIndex: "status",
       className: props.name == "ongoing" ? "" : "display-none",
-      render: (status: any, record: any | itemInterface) => (
-        <>{decideHtml(status, record.pk, record.sk)}</>
-      ),
+      render: (status: any, record: any | itemInterface) =>
+        status == undefined ? (
+          <h4>---</h4>
+        ) : (
+          <>{decideHtml(status, record.pk, record.sk)}</>
+        ),
     },
   ];
   const ACCEPT = "approved";
@@ -847,7 +863,7 @@ const OngoingActions = (props: propType) => {
 
   const decideHtml = (text: string, pk: string, sk: string) => {
     text = text.toLocaleLowerCase();
-    if (text.includes("pending")) {
+    if (text && text.includes("pending")) {
       return (
         <Row gutter={[10, 10]}>
           <Col span={12}>

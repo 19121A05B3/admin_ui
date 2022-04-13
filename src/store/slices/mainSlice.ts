@@ -32,7 +32,8 @@ export const getFODetails = createAsyncThunk(
     if (res == undefined) throw "Error while fetching fo details";
     dp("fo data fetched success");
 
-    return res;
+    const finalData = await JSON.parse(res.body);
+    return finalData;
   }
 );
 
@@ -47,8 +48,8 @@ export const getTransactionData = createAsyncThunk(
     const res = await fetchSellerBuyerData(id);
     if (res == undefined) throw "Error while transaction data";
     dp("transaction data fetched success");
-
-    return res;
+    const finalData = await JSON.parse(res.body);
+    return finalData;
   }
 );
 
@@ -61,6 +62,8 @@ export const getVBUsersData = createAsyncThunk(
     const res = await fetchVBUserData(id);
     if (res == undefined) throw "Error while fetching vb user data";
     dp("VB USER data fetched success");
+    const finalData = await JSON.parse(res.body);
+    return finalData;
     return res;
   }
 );
@@ -74,7 +77,8 @@ export const getProduceData = createAsyncThunk(
     const res = await fetchProduceData(id);
     if (res == undefined) throw "Error while produce data";
     dp("produce data fetched success");
-
+    const finalData = await JSON.parse(res.body);
+    return finalData;
     return res;
   }
 );
@@ -88,7 +92,8 @@ export const getActionsTabData = createAsyncThunk(
     const res = await fetchactionTabData(userName);
     if (res == undefined) throw "Error while action tab data";
     dp("action tab data fetched success");
-
+    const finalData = await JSON.parse(res.body);
+    return finalData;
     return res;
   }
 );

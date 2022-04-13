@@ -2,7 +2,6 @@
   "name": "vikas-admin",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://i2esbt8nni.execute-api.ap-south-1.amazonaws.com/dev",
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@reduxjs/toolkit": "^1.6.2",

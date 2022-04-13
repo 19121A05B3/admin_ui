@@ -60,7 +60,6 @@ const ProduceTab = (props: propType) => {
     estimatedvalue: [0, 9999900000],
     apmc_rate_data: [0, 9999900000],
   });
-
   const [filteredData, setFilteredData] = useState([{}]);
   const [isFiltering, setIsFiltering] = useState(false);
 
@@ -149,21 +148,30 @@ const ProduceTab = (props: propType) => {
           (item.sub_category &&
             item.sub_category.includes(noEmptyVal(allFilters.sub_category))) ||
           (item.grade && item.grade.includes(noEmptyVal(allFilters.grade))) ||
-          item.pk &&item.pk.includes(noEmptyVal(allFilters.pk)) ||
-          (item.quantity&&parseInt(item.quantity) >= allFilters.quantity[0] &&
-            item.quantity&&parseInt(item.quantity) <= allFilters.quantity[1]) ||
-            item.created_timestamp&&item.created_timestamp
-            .slice(0, item.created_timestamp.indexOf("T"))
-            .includes(
-              noEmptyVal(
-                allFilters.created_timestamp.slice(
-                  0,
-                  item.created_timestamp.indexOf("T")
+          (item.pk && item.pk.includes(noEmptyVal(allFilters.pk))) ||
+          (item.quantity &&
+            parseInt(item.quantity) >= allFilters.quantity[0] &&
+            item.quantity &&
+            parseInt(item.quantity) <= allFilters.quantity[1]) ||
+          (item.created_timestamp &&
+            item.created_timestamp
+              .slice(0, item.created_timestamp.indexOf("T"))
+              .includes(
+                noEmptyVal(
+                  allFilters.created_timestamp.slice(
+                    0,
+                    item.created_timestamp.indexOf("T")
+                  )
                 )
-              )
-            ) ||
-          (item.price_per_qnt&&parseInt(item.price_per_qnt) >= allFilters.price_per_qnt[0] &&
-            item.price_per_qnt&&parseInt(item.price_per_qnt) <= allFilters.price_per_qnt[1])
+              )) ||
+          (item.price_per_qnt &&
+            parseInt(item.price_per_qnt) >= allFilters.price_per_qnt[0] &&
+            item.price_per_qnt &&
+            parseInt(item.price_per_qnt) <= allFilters.price_per_qnt[1]) ||
+          (item.apmc_rate_data &&
+            item.apmc_rate_data.apmc_price &&
+            item.apmc_rate_data.apmc_price >= allFilters.apmc_rate_data[0] &&
+            item.apmc_rate_data.apmc_price <= allFilters.apmc_rate_data[1])
         )
           finalFilteredData.push(item);
       }
