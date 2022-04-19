@@ -6,7 +6,7 @@ import { RootState } from "../../store";
 import store from "../index";
 
 const getAppHeaders = () => {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   const headerData = {
     "Authorization": token ?? "",
     "Content-Type": 'application/json'
@@ -15,7 +15,7 @@ const getAppHeaders = () => {
 };
 
 const getBodyData = () => {
-  const adminId = localStorage.getItem("userName");
+  const adminId = sessionStorage.getItem("userName");
   const bodyData = {
     admin: "admin#" + adminId,
   };
@@ -23,7 +23,7 @@ const getBodyData = () => {
   return bodyData;
 };
 
-const baseUrl =
+export const baseUrl =
   "https://i2esbt8nni.execute-api.ap-south-1.amazonaws.com/dev/admin";
 
 export const fetchSellerBuyerData = async (id: String) => {

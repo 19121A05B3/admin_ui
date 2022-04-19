@@ -80,7 +80,7 @@ function App() {
   ////// retry logic ends
 
   useEffect(() => {
-    const userName = localStorage.getItem("userName") ?? "";
+    const userName = sessionStorage.getItem("userName") ?? "";
     if (userName !== undefined && userName !== "") {
       dispatch(setUserName(userName));
       dispatch(getFODetails(userName));
@@ -88,7 +88,7 @@ function App() {
   }, [userName]);
 
   useEffect(() => {
-    const userName = localStorage.getItem("userName") ?? "";
+    const userName = sessionStorage.getItem("userName") ?? "";
 
     if (isFoDetails && userName !== undefined && userName !== "") {
       dispatch(getTransactionData(userName));

@@ -5,7 +5,7 @@ import {
   CognitoUser,
 } from "amazon-cognito-identity-js";
 import axios from "axios";
-import { fetchFODetails } from "../api";
+import { baseUrl, fetchFODetails } from "../api";
 import S3FileUpload from "react-s3";
 import { dp } from "../../helper";
 
@@ -45,8 +45,8 @@ export const LoginCheck = async (val) => {
         var accessToken = data.getAccessToken().getJwtToken();
         const token = data.refreshToken.token;
         const tokenToSend = data.getIdToken().getJwtToken();
-        localStorage.setItem("userName", user.username);
-        localStorage.setItem("token", tokenToSend);
+        sessionStorage.setItem("userName", user.username);
+        sessionStorage.setItem("token", tokenToSend);
         dp(token);
         dp(accessToken);
         dp(user.username);
@@ -102,12 +102,13 @@ export const ForgetPassword = async (val) => {
     });
   });
 };
+
 export const Mailchecker = async (email) => {
   return new Promise((resolve, reject) => {
     // const email = 'balupremchand6@gmail.com';
     loggedInUser = getuser(email);
     axios
-      .post("/fieldofficer_profile", { admin: email })
+      .post(baseUrl + "/fieldofficer_cognito", { admin: email })
       .then((data) => {
         if (data.data.Status == "Success") {
           loggedInUser.forgotPassword({
@@ -165,9 +166,10 @@ const loginSlice = createSlice({
     //   console.log(action.payload);
     // });
   },
+
   reducers: {
     logout: (state) => {
-      localStorage.removeItem("userName");
+      sessionStorage.removeItem("userName");
       window.location.reload(false);
     },
     setUserName: (state, action) => {

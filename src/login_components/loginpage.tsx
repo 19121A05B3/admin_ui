@@ -54,7 +54,7 @@ const Loginpage = (props: any) => {
     setuser(vals.usename);
     if (vals == 1) {
       setval(1);
-      dispatch(setUserName(localStorage.getItem("userName") ?? ""));
+      dispatch(setUserName(sessionStorage.getItem("userName") ?? ""));
       form.resetFields();
     }
     if (vals == 2) {
