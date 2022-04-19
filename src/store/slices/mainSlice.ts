@@ -87,7 +87,6 @@ export const getActionsTabData = createAsyncThunk(
   "getActionsTabData",
   async (userName: string) => {
     dp(":::Fetching actions tab Data::::");
-
     if (isDev) return actionsTabDummyData;
     const res = await fetchactionTabData(userName);
     if (res == undefined) throw "Error while action tab data";
@@ -122,27 +121,16 @@ export const updateStatus = async (myData: {
 };
 
 export const createNewAction = async (formData: {}) => {
-  // BODY SCHEMA TO SEND
-  // {
-  //   pk:fo_id,(admin#9000242424)
-  //   sk:request/issue,
-  //   category:Produce/user,
-  //   seller/buyerid:user#457657866,
-  //   details:"dfghktjn",
-  //   doc_location:''(optional)
-  //   }
   let data = {
     ...formData,
   };
-
   if (isDev) return;
-
   const res = await createNewActionApi(JSON.stringify(data));
   console.log(res);
   if (res !== false) message.success(res.Status ?? "SUCCESS");
-
   return res;
 };
+
 export const idCard = async (myData: { userid: string; usertype: string }) => {
   const { userid, usertype } = myData;
   let data = {
@@ -335,22 +323,15 @@ const mainSlice = createSlice({
 
     builder.addCase(getActionsTabData.fulfilled, (state, action) => {
       state.isActionsTabData = true;
-      console.log(action.payload);
-      console.log("THIS IS THE PAYLOAD");
       state.actionsTabData = action.payload;
     });
 
     builder.addCase(getProduceData.fulfilled, (state, action) => {
       state.isProduceData = true;
-      console.log("produuuuuuuuuuuuuu");
-      console.log(action.payload);
 
       state.produceData = action.payload;
       state.summarizedData.sp = action.payload.summary["sp"];
       state.summarizedData.lto2 = action.payload.summary["lto"];
-      console.log(action.payload.summary["lto"]);
-      console.log("SUMMMMMMMM");
-      console.log("THIS IS THE PAYLOAD");
     });
 
     builder.addCase(getVBUsersData.fulfilled, (state, action) => {

@@ -4,7 +4,6 @@ import {
   AuthenticationDetails,
   CognitoUser,
 } from "amazon-cognito-identity-js";
-
 import axios from "axios";
 import { fetchFODetails } from "../api";
 import S3FileUpload from "react-s3";
@@ -45,16 +44,20 @@ export const LoginCheck = async (val) => {
       onSuccess: (data) => {
         var accessToken = data.getAccessToken().getJwtToken();
         const token = data.refreshToken.token;
+        const tokenToSend = data.getIdToken().getJwtToken();
         localStorage.setItem("userName", user.username);
-        console.log(token);
-        console.log(user.username);
+        localStorage.setItem("token", tokenToSend);
+        dp(token);
+        dp(accessToken);
+        dp(user.username);
         resolve(1);
       },
       onFailure: (err) => {
-        console.log(err);
+        dp(err);
         resolve(2);
       },
       newPasswordRequired: (data) => {
+        dp(data);
         resolve(3);
       },
     });
@@ -137,8 +140,6 @@ export const uploadFileToS3 = async (fileToUpload) => {
     accessKeyId: process.env.REACT_APP_S3_ACCESS_TOKEN,
     secretAccessKey: process.env.REACT_APP_S3_SECRET_KEY,
   };
-
-
 
   return new Promise((resolve, reject) => {
     S3FileUpload.uploadFile(fileToUpload, config)

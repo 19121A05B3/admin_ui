@@ -5,34 +5,34 @@ import { dp } from "../../helper";
 import { RootState } from "../../store";
 import store from "../index";
 
-// store.subscribe(listener);
+const getAppHeaders = () => {
+  const token = localStorage.getItem("token");
+  const headerData = {
+    "Authorization": token ?? "",
+    "Content-Type": 'application/json'
+  };
+  return headerData;
+};
 
-// function select(state: any) {
-//   return state.login.userName;
-// }
-
-// function listener() {
-//   let token = select(store.getState());
-//   userName = token;
-// }
+const getBodyData = () => {
+  const adminId = localStorage.getItem("userName");
+  const bodyData = {
+    admin: "admin#" + adminId,
+  };
+  dp(bodyData);
+  return bodyData;
+};
 
 const baseUrl =
   "https://i2esbt8nni.execute-api.ap-south-1.amazonaws.com/dev/admin";
-
-const headerValue = {
-  "Content-Type": "application/json",
-};
 
 export const fetchSellerBuyerData = async (id: String) => {
   try {
     let finalData = await axios({
       method: "post",
       url: baseUrl + "/transactions",
-      // url: "/transactions",
-      headers: headerValue,
-      data: {
-        admin: "admin#" + id,
-      },
+      data: getBodyData(),
+      headers: getAppHeaders(),
     });
     return finalData.data;
   } catch (err) {
@@ -46,12 +46,8 @@ export const fetchVBUserData = async (id: String) => {
     let finalData = await axios({
       method: "post",
       url: baseUrl + "/vbusers",
-      // url: "/vbusers",
-
-      headers: headerValue,
-      data: {
-        admin: "admin#" + id,
-      },
+      headers: getAppHeaders(),
+      data: getBodyData(),
     });
     return finalData.data;
   } catch (err) {
@@ -64,11 +60,8 @@ export const fetchProduceData = async (id: String) => {
     let finalData = await axios({
       method: "post",
       url: baseUrl + "/produces",
-      // url: "/produces",
-      headers: headerValue,
-      data: {
-        admin: "admin#" + id,
-      },
+      headers: getAppHeaders(),
+      data: getBodyData(),
     });
     return finalData.data;
   } catch (err) {
@@ -81,10 +74,8 @@ export const fetchactionTabData = async (id: string) => {
     let finalData = await axios({
       method: "post",
       url: baseUrl + "/request_issues",
-      // url: "/request_issues",
-
-      headers: headerValue,
-      data: { admin: "admin#" + id },
+      headers: getAppHeaders(),
+      data: getBodyData(),
     });
     console.log(finalData.data);
     return finalData.data;
@@ -98,9 +89,8 @@ export const updateStatusApi = async (dataToPost: any) => {
   try {
     let finalData = await axios({
       method: "post",
-      // url: "/status_change",
       url: baseUrl + "/status_change",
-      headers: headerValue,
+      headers: getAppHeaders(),
       data: dataToPost,
     });
     console.log(finalData);
@@ -116,7 +106,7 @@ export const idCardApi = async (dataToPost: any) => {
     let finalData = await axios({
       method: "post",
       url: baseUrl + "/idcard",
-      headers: headerValue,
+      headers: getAppHeaders(),
       data: dataToPost,
     });
     console.log(finalData);
@@ -132,8 +122,7 @@ export const createNewActionApi = async (dataToPost: any) => {
     let finalData = await axios({
       method: "post",
       url: baseUrl + "/create_action",
-      // url: "/create_action",
-      headers: headerValue,
+      headers: getAppHeaders(),
       data: dataToPost,
     });
     return finalData.data;
@@ -148,13 +137,16 @@ export const fetchFODetails = async (id: String) => {
     let finalData = await axios({
       method: "post",
       url: baseUrl + "/fieldofficer_details",
-      headers: headerValue,
-      data: {
-        admin: "admin#" + id,
-      },
+      headers: getAppHeaders(),
+      //  {
+      //   Authorization:
+      //     "eyJraWQiOiJLNDZVWjkydHEzZGJvcHhYbmE1ak5tWWRhUGhKbXBRc3ZxM3JERisyS1NVPSIsImFsZyI6IlJTMjU2In0",
+      // },
+      data: getBodyData(),
+      // {
+      //   admin: "admin#" + "9392024242",
+      // },
     });
-    console.log("FO DETAILS");
-    console.log(finalData.data);
     return finalData.data;
   } catch (err) {
     console.log(err);
@@ -167,7 +159,7 @@ export const fetchUserName = async (userID: String) => {
     let finalData = await axios({
       method: "post",
       url: "/findusername",
-      headers: headerValue,
+      headers: getAppHeaders(),
       data: {
         user: "user#" + userID,
       },

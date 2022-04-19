@@ -22,6 +22,7 @@ import { logout, setUserName } from "./store/slices/loginCheck";
 import store, { RootState } from "./store";
 import { loadingIndicator } from "./dashboard-ui/components/transactions";
 import { maxWidth } from "@mui/system";
+
 function App() {
   const { userName } = useSelector((state: RootState) => state.login);
   const {
@@ -40,8 +41,7 @@ function App() {
 
   const dispatch = useDispatch();
 
-  // Retrry logic
-
+  ///////////////// Retrry logic
   useEffect(() => {
     if (retryFO == 0) return;
     setTimeout(() => {
@@ -77,11 +77,10 @@ function App() {
     }, 3000);
   }, [retryVbUserData]);
 
-  // retry logic ends
+  ////// retry logic ends
 
   useEffect(() => {
     const userName = localStorage.getItem("userName") ?? "";
-
     if (userName !== undefined && userName !== "") {
       dispatch(setUserName(userName));
       dispatch(getFODetails(userName));

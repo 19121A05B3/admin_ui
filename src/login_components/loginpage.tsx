@@ -39,7 +39,7 @@ const Loginpage = (props: any) => {
   };
 
   const error = () => {
-    message.error("wrong credentials");
+    message.error("Wrong credentials");
   };
 
   const warning = () => {
