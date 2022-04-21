@@ -21,7 +21,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout, setUserName } from "./store/slices/loginCheck";
 import store, { RootState } from "./store";
 import { loadingIndicator } from "./dashboard-ui/components/transactions";
-import { maxWidth } from "@mui/system";
 
 function App() {
   const { userName } = useSelector((state: RootState) => state.login);

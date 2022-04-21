@@ -158,7 +158,7 @@ export const fetchUserName = async (userID: String) => {
   try {
     let finalData = await axios({
       method: "post",
-      url: "/findusername",
+      url: baseUrl +"/findusername",
       headers: getAppHeaders(),
       data: {
         user: "user#" + userID,

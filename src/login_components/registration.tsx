@@ -84,7 +84,12 @@ export default function Registration(props: any) {
       delete values["adharcardpic"];
       delete values["profilepic"];
       const hider = processingPopUp();
-      const register = await RegisterSingleCheck(values);
+      console.log(values);
+      const register = JSON.parse(await RegisterSingleCheck(values));
+      console.log(register);
+      // console.log(register?.data.body);
+      console.log(register?.status);
+
       hider();
       if (register == undefined || register.data.status !== "success") {
         setval(2);
@@ -99,7 +104,7 @@ export default function Registration(props: any) {
       const excels3 = await uploadFileToS3(
         values["excel"]["fileList"][0]["originFileObj"]
       );
-      
+
       values["url"] = excels3;
       delete values["excel"];
       const register = await RegisterBulkCheck(values);

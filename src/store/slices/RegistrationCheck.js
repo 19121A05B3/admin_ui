@@ -1,15 +1,15 @@
 import axios from "axios";
 import { dp } from "../../helper";
-import { baseUrl } from "../api";
 
+const baseUrl = "https://9uedorofia.execute-api.ap-south-1.amazonaws.com/dev/admin";
 export const RegisterSingleCheck = async (val) => {
   const headers = {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
   };
   try {
     let data = await axios.post(baseUrl + "/create_fo", val, headers);
-    return data;
+    console.log(data);
+    return data.data.body;
   } catch (err) {
     dp(err);
     dp("Error while registering single user");
@@ -19,7 +19,6 @@ export const RegisterSingleCheck = async (val) => {
 export const RegisterBulkCheck = async (val) => {
   const headers = {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
   };
   try {
     let data = await axios.post(baseUrl + "/bulkusersdemo", val, headers);
