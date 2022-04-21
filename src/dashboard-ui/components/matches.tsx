@@ -84,25 +84,25 @@ const columns: ColumnsType<User> = [
     key: "BuyerLocation",
     dataIndex: "buyer_location",
   },
-  {
-    title: "Days Since Added",
-    key: "DaysSinceAdded",
-    dataIndex: "created_at",
-    render: (created_at: any) => handleDateChange(created_at),
-  },
-  {
-    title: "Asking Delivery Date",
-    key: "AskingDeliveryDate",
-    dataIndex: "AskingDeliveryDate",
-    render: (ad: any) => {
-      return (
-        <>
-          {ad == undefined && <>---</>}
-          {ad && <>{ad}</>}
-        </>
-      );
-    },
-  },
+  // {
+  //   title: "Days Since Added",
+  //   key: "DaysSinceAdded",
+  //   dataIndex: "created_at",
+  //   render: (created_at: any) => handleDateChange(created_at),
+  // },
+  // {
+  //   title: "Asking Delivery Date",
+  //   key: "AskingDeliveryDate",
+  //   dataIndex: "AskingDeliveryDate",
+  //   render: (ad: any) => {
+  //     return (
+  //       <>
+  //         {ad == undefined && <>---</>}
+  //         {ad && <>{ad}</>}
+  //       </>
+  //     );
+  //   },
+  // },
 ];
 export default function App() {
   const data: string | any[] | readonly User[] | undefined = []; // Need to be removed when buyer matches enabled

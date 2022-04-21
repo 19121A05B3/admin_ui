@@ -20,10 +20,8 @@ export default function IDCard(props: propType) {
   const idRequest = async (userid: string, usertype: string) => {
     setVisible(true);
     const response = await idCard({ userid: userid, usertype: usertype });
-    response.length != 0 && console.log(response[0]["doc_location"]);
-    if(response.length != 0){
-    setIdLocation(response[0]["doc_location"]);
-    }
+    dp(response);
+    if (response) setIdLocation(response);
   };
 
   return (

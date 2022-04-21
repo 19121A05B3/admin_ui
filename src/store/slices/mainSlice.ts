@@ -137,22 +137,29 @@ export const idCard = async (myData: { userid: string; usertype: string }) => {
     userid: userid,
     usertype: usertype,
   };
-
   if (isDev) return;
   const res = await idCardApi(JSON.stringify(data));
-
-  // if (res) {
-  //   // message.success("SUCCESS");
-  // } else {
-  //   // message.error("Failed to update status");
-  // }
-  return res;
+  try {
+    const loc = await JSON.parse(res.body)["IDLocation"][0].doc_location;
+    dp(loc);
+    return loc;
+  } catch (err) {
+    dp(err);
+    return "";
+  }
 };
 
 export const getUserName = async (userID: string) => {
   if (isDev) return;
   const res = await fetchUserName(userID);
-  return res;
+
+  try {
+    dp(res.body);
+    return await JSON.parse(res.body)[0].name;
+  } catch (err) {
+    dp(err);
+    return "";
+  }
 };
 
 const initialState = {

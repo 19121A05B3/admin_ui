@@ -292,20 +292,20 @@ const ProduceTab2 = (props: propsType) => {
       ),
       dataIndex: "quantity",
     },
-    {
-      title: "Tentative Delivery",
-      dataIndex: "delivery_by",
-      render: (val: string) => {
-        return <>{val ? val.slice(0, val.indexOf("T")) : "---"}</>;
-      },
-    },
-    {
-      title: "Days Since Added",
-      dataIndex: "created_timestamp",
-      render: (val: string) => {
-        return <>{val ? val.slice(0, val.indexOf("T")) : "---"}</>;
-      },
-    },
+    // {
+    //   title: "Tentative Delivery",
+    //   dataIndex: "delivery_by",
+    //   render: (val: string) => {
+    //     return <>{val ? val.slice(0, val.indexOf("T")) : "---"}</>;
+    //   },
+    // },
+    // {
+    //   title: "Days Since Added",
+    //   dataIndex: "created_timestamp",
+    //   render: (val: string) => {
+    //     return <>{val ? val.slice(0, val.indexOf("T")) : "---"}</>;
+    //   },
+    // },
     {
       title: "More",
       dataIndex: "more",

@@ -68,53 +68,56 @@ export default function Registration(props: any) {
   };
 
   const onFinish = async (values: any) => {
-    delete values["prefix"];
-    if (Object.keys(values).length > 1) {
-      const profs3 = await uploadFileToS3(profileList[0]["originFileObj"]);
-      values["profile_loc"] = profs3;
-      const adhars3 = await uploadFileToS3(
-        values["adharcardpic"]["fileList"][0]["originFileObj"]
-      );
-      values["adhar_loc"] = adhars3;
-      const pans3 = await uploadFileToS3(
-        values["pancardpic"]["fileList"][0]["originFileObj"]
-      );
-      values["pan_loc"] = pans3;
-      delete values["pancardpic"];
-      delete values["adharcardpic"];
-      delete values["profilepic"];
-      const hider = processingPopUp();
-      console.log(values);
-      const register = JSON.parse(await RegisterSingleCheck(values));
-      console.log(register);
-      // console.log(register?.data.body);
-      console.log(register?.status);
-
-      hider();
-      if (register == undefined || register.data.status !== "success") {
-        setval(2);
+    const hider = processingPopUp();
+    try {
+      delete values["prefix"];
+      if (Object.keys(values).length > 1) {
+        const profs3 = await uploadFileToS3(profileList[0]["originFileObj"]);
+        values["profile_loc"] = profs3;
+        const adhars3 = await uploadFileToS3(
+          values["adharcardpic"]["fileList"][0]["originFileObj"]
+        );
+        values["adhar_loc"] = adhars3;
+        const pans3 = await uploadFileToS3(
+          values["pancardpic"]["fileList"][0]["originFileObj"]
+        );
+        values["pan_loc"] = pans3;
+        delete values["pancardpic"];
+        delete values["adharcardpic"];
+        delete values["profilepic"];
+        console.log(values);
+        const register = await JSON.parse(await RegisterSingleCheck(values));
+        console.log(register);
+        dp(register.status);
+        if (register == undefined || register.status != "success") {
+          setval(2);
+        } else {
+          setval(1);
+          form.resetFields();
+          props.closeRegister(false);
+        }
       } else {
-        setval(1);
-        form.resetFields();
-        props.closeRegister(false);
-      }
-    } else {
-      dp("CAME TO ELSE BLOCK");
-      let hider = processingPopUp();
-      const excels3 = await uploadFileToS3(
-        values["excel"]["fileList"][0]["originFileObj"]
-      );
+        dp("CAME TO ELSE BLOCK");
+        const excels3 = await uploadFileToS3(
+          values["excel"]["fileList"][0]["originFileObj"]
+        );
 
-      values["url"] = excels3;
-      delete values["excel"];
-      const register = await RegisterBulkCheck(values);
-      dp(register);
-      hider();
-      if (register == undefined || register.data.status !== "success") {
-        setval(2);
-      } else {
-        setval(1);
+        values["url"] = excels3;
+        delete values["excel"];
+        const register = await JSON.parse(await RegisterBulkCheck(values));
+        dp(register);
+        if (register == undefined || register.status != "success") {
+          setval(2);
+        } else {
+          setval(1);
+        }
       }
+    } catch (err) {
+      dp("Error in on finish");
+      dp(err);
+      message.error("Something went wrong");
+    } finally {
+      hider();
     }
   };
 

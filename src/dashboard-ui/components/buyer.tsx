@@ -337,7 +337,7 @@ function App() {
                 lg={{ span: 4 }}
                 md={{ span: 5 }}
               >
-                <Checkbox>View All Issues</Checkbox>
+                {/* <Checkbox>View All Issues</Checkbox> */}
               </Col>
             </Row>
           </div>

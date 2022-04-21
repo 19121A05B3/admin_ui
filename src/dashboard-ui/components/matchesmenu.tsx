@@ -321,24 +321,24 @@ function App(this: any) {
         </>
       ),
     },
-    {
-      title: "Days Since Added",
-      dataIndex: "created_at",
-      render: (created_at: any) => handleDateChange(created_at),
-    },
-    {
-      title: "Asking Delivery Date",
-      dataIndex: "askingdeliverydate",
-      key: "askingdeliverydate",
-      render: (ad: any) => {
-        return (
-          <>
-            {ad == undefined && <>---</>}
-            {ad && <>{ad}</>}
-          </>
-        );
-      },
-    },
+    // {
+    //   title: "Days Since Added",
+    //   dataIndex: "created_at",
+    //   render: (created_at: any) => handleDateChange(created_at),
+    // },
+    // {
+    //   title: "Asking Delivery Date",
+    //   dataIndex: "askingdeliverydate",
+    //   key: "askingdeliverydate",
+    //   render: (ad: any) => {
+    //     return (
+    //       <>
+    //         {ad == undefined && <>---</>}
+    //         {ad && <>{ad}</>}
+    //       </>
+    //     );
+    //   },
+    // },
   ];
 
   return (
@@ -369,7 +369,7 @@ function App(this: any) {
                         lg={{ span: 4 }}
                         md={{ span: 5 }}
                       >
-                        <Checkbox>View All Issues</Checkbox>
+                        {/* <Checkbox>View All Issues</Checkbox> */}
                       </Col>
                       <Col
                         xs={{ span: 8 }}
@@ -377,7 +377,7 @@ function App(this: any) {
                         lg={{ span: 4 }}
                         md={{ span: 5 }}
                       >
-                        <Checkbox>Clear All Filters</Checkbox>
+                        {/* <Checkbox>Clear All Filters</Checkbox> */}
                       </Col>
                     </Row>
                   </div>
@@ -398,14 +398,13 @@ function App(this: any) {
           {foDetails.assigned_user_type != "seller" && (
             <TabPane tab="Buyer Matches" key="2">
               <div className="mb25"></div>
-              {/* {Buyer_matches == undefined || Buyer_matches.length == 0 ? (
-        loadingIndicator
-      ) : (
+
               <Table
+                dataSource={[]}
                 columns={columns}
                 pagination={{ pageSize: 2, position: ["bottomLeft"] }}
                 scroll={{ x: 1350 }}
-              />)} */}
+              />
             </TabPane>
           )}
         </Tabs>

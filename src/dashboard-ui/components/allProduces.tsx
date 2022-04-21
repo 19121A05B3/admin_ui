@@ -772,40 +772,40 @@ const ProduceTab = (props: propType) => {
       ),
       dataIndex: "price_per_qnt",
     },
-    {
-      title: "Estimated Value",
-      dataIndex: "estimatedvalue",
-      render: (details: any) => {
-        return (
-          <>
-            {details == undefined && <>---</>}
-            {details && <>{details}</>}
-          </>
-        );
-      },
-    },
-    {
-      //   title: (
-      //     <RangeSelector
-      //       name="Apmc Rate"
-      //       min={apmc_price?.min ?? 0}
-      //       max={apmc_price?.max ?? 90000}
-      //       onSubmit={apmcratedataSelector}
-      //     />
-      //   ),
-      title: "Apmc Rate",
-      dataIndex: "apmc_rate_data",
-      render: (details: any) => {
-        return (
-          <>
-            {details == undefined && details?.apmc_price == undefined && (
-              <>---</>
-            )}
-            {details && details?.apmc_price && <>{details.apmc_price}</>}
-          </>
-        );
-      },
-    },
+    // {
+    //   title: "Estimated Value",
+    //   dataIndex: "estimatedvalue",
+    //   render: (details: any) => {
+    //     return (
+    //       <>
+    //         {details == undefined && <>---</>}
+    //         {details && <>{details}</>}
+    //       </>
+    //     );
+    //   },
+    // },
+    // {
+    //   //   title: (
+    //   //     <RangeSelector
+    //   //       name="Apmc Rate"
+    //   //       min={apmc_price?.min ?? 0}
+    //   //       max={apmc_price?.max ?? 90000}
+    //   //       onSubmit={apmcratedataSelector}
+    //   //     />
+    //   //   ),
+    //   title: "Apmc Rate",
+    //   dataIndex: "apmc_rate_data",
+    //   render: (details: any) => {
+    //     return (
+    //       <>
+    //         {details == undefined && details?.apmc_price == undefined && (
+    //           <>---</>
+    //         )}
+    //         {details && details?.apmc_price && <>{details.apmc_price}</>}
+    //       </>
+    //     );
+    //   },
+    // },
     {
       title: "Days Since Added",
       dataIndex: "created_timestamp",

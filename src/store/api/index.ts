@@ -8,8 +8,8 @@ import store from "../index";
 const getAppHeaders = () => {
   const token = sessionStorage.getItem("token");
   const headerData = {
-    "Authorization": token ?? "",
-    "Content-Type": 'application/json'
+    Authorization: token ?? "",
+    "Content-Type": "application/json",
   };
   return headerData;
 };
@@ -110,7 +110,7 @@ export const idCardApi = async (dataToPost: any) => {
       data: dataToPost,
     });
     console.log(finalData);
-    return finalData.data.IDLocation;
+    return finalData.data;
   } catch (err) {
     message.error(`${err}`);
     return undefined;
@@ -158,13 +158,13 @@ export const fetchUserName = async (userID: String) => {
   try {
     let finalData = await axios({
       method: "post",
-      url: baseUrl +"/findusername",
+      url: baseUrl + "/findusername",
       headers: getAppHeaders(),
       data: {
         user: "user#" + userID,
       },
     });
-    return finalData.data[0].name;
+    return finalData.data;
   } catch (err) {
     console.log(err);
     return undefined;

@@ -356,9 +356,9 @@ function App() {
                       lg={{ span: 4 }}
                       md={{ span: 5 }}
                     >
-                      <Checkbox onChange={(val: CheckboxChangeEvent) => {}}>
+                      {/* <Checkbox onChange={(val: CheckboxChangeEvent) => {}}>
                         View All Issues
-                      </Checkbox>
+                      </Checkbox> */}
                     </Col>
                   </Row>
                 </div>

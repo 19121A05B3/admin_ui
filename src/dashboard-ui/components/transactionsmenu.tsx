@@ -929,7 +929,7 @@ function App() {
                         lg={{ span: 4 }}
                         md={{ span: 5 }}
                       >
-                        <Checkbox>View All Issues</Checkbox>
+                        {/* <Checkbox>View All Issues</Checkbox> */}
                       </Col>
                       <Col
                         xs={{ span: 8 }}
@@ -937,7 +937,7 @@ function App() {
                         lg={{ span: 4 }}
                         md={{ span: 5 }}
                       >
-                        <Checkbox>Clear All Filters</Checkbox>
+                        {/* <Checkbox>Clear All Filters</Checkbox> */}
                       </Col>
                     </Row>
                   </div>
@@ -974,7 +974,7 @@ function App() {
                     lg={{ span: 4 }}
                     md={{ span: 5 }}
                   >
-                    <Checkbox>View All Issues</Checkbox>
+                    {/* <Checkbox>View All Issues</Checkbox> */}
                   </Col>
                   <Col
                     xs={{ span: 8 }}
@@ -982,7 +982,7 @@ function App() {
                     lg={{ span: 4 }}
                     md={{ span: 5 }}
                   >
-                    <Checkbox>Clear All Filters</Checkbox>
+                    {/* <Checkbox>Clear All Filters</Checkbox> */}
                   </Col>
                 </Row>
               </div>

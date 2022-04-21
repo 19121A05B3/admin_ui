@@ -135,6 +135,7 @@ export const Mailchecker = async (email) => {
 };
 
 export const uploadFileToS3 = async (fileToUpload) => {
+  
   const config = {
     bucketName: process.env.REACT_APP_BUCKET_NAME,
     region: "ap-south-1",
