@@ -23,8 +23,8 @@ const getBodyData = () => {
   return bodyData;
 };
 
-export const baseUrl =
-  "https://i2esbt8nni.execute-api.ap-south-1.amazonaws.com/dev/admin";
+//export const baseUrl = "https://i2esbt8nni.execute-api.ap-south-1.amazonaws.com/dev/admin";
+export const baseUrl = "https://enzdzh0pw2.execute-api.ap-south-1.amazonaws.com/dev/admin";
 
 export const fetchSellerBuyerData = async (id: String) => {
   try {

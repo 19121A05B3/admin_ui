@@ -1,8 +1,9 @@
 import axios from "axios";
 import { dp } from "../../helper";
 
-const baseUrl =
-  "https://9uedorofia.execute-api.ap-south-1.amazonaws.com/dev/admin";
+//const baseUrl ="https://9uedorofia.execute-api.ap-south-1.amazonaws.com/dev/admin";
+
+const baseUrl = "https://enzdzh0pw2.execute-api.ap-south-1.amazonaws.com/dev/admin";
 
 export const RegisterSingleCheck = async (val) => {
   const headers = {
