@@ -1,15 +1,5 @@
 import { DownOutlined } from "@ant-design/icons";
-import {
-  Button,
-  Checkbox,
-  Col,
-  Dropdown,
-  InputNumber,
-  Menu,
-  Row,
-  Slider,
-  Typography,
-} from "antd";
+import { Button, Col, Dropdown, InputNumber, Menu, Row, Slider, Typography } from "antd";
 import { useState } from "react";
 
 interface props {

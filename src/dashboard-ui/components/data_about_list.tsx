@@ -1,5 +1,3 @@
-import React from "react";
-
 interface propType {
   data: any;
   colors: Array<any>;
@@ -20,7 +18,7 @@ const DataAboutList = (props: propType) => {
         ></span>
         <span
           className={
-            appliedFilter == "All" || appliedFilter == legend
+            appliedFilter === "All" || appliedFilter === legend
               ? "data-legend"
               : "data-legend muted"
           }
@@ -29,25 +27,21 @@ const DataAboutList = (props: propType) => {
         </span>
         <span
           className={
-            appliedFilter == "All" || appliedFilter == legend
+            appliedFilter === "All" || appliedFilter === legend
               ? "data-value"
               : "data-value muted"
           }
         >
-          {value == undefined ? "0" : value}
+          {value === undefined ? "0" : value}
         </span>
       </li>
     );
   }
 
   return (
-    <div
-      className="data-about-list"
-    >
+    <div className="data-about-list">
       <div className="vl"></div>
-      <ul
-        className="ul-element"
-      >
+      <ul className="ul-element">
         {data &&
           data.map((item: any, index: any) =>
             fillLi(item["legend"], item["value"], props.colors[index])

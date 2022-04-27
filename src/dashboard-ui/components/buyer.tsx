@@ -1,18 +1,6 @@
-import React from "react";
 import "antd/dist/antd.css";
-import {
-  Tabs,
-  Table,
-  Typography,
-  Space,
-  Select,
-  Input,
-  Checkbox,
-  Row,
-  Col,
-} from "antd";
-import { ColumnsType } from "antd/es/table";
-import { useEffect, useState, useRef } from "react";
+import { Table, Select, Input, Row, Col } from "antd";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import ModalDemo from "./ModalDemo";
@@ -39,7 +27,7 @@ const ADDRESS_FILTER = "address1";
 const BUYER_TYPE_FILTER = "buyer_type";
 
 function App() {
-  const { Seller, Buyer, user_types } = useSelector(
+  const {  Buyer, user_types } = useSelector(
     (state: RootState) => state.main.vbUserData
   );
   const { Individual_Produces } = useSelector(
@@ -282,7 +270,7 @@ function App() {
               issues={0}
               is_seller={0}
             />
-            <a key="matches">Matches</a>
+            <a key="matches" href="/#" >Matches</a>
             <TransactionList
               seller_id={i["pk"]}
               name={i["name"]}
@@ -313,7 +301,7 @@ function App() {
   ];
   return (
     <>
-      {Buyer == undefined || Buyer.length == 0 ? (
+      {Buyer === undefined || Buyer.length === 0 ? (
         loadingIndicator
       ) : (
         <>

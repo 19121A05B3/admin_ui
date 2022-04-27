@@ -1,4 +1,3 @@
-import React from "react";
 import "antd/dist/antd.css";
 import { Table, Tooltip } from "antd";
 import { ColumnsType } from "antd/es/table";
@@ -105,7 +104,7 @@ export default function SampleTest(props: params) {
       dataIndex: "crop_image_1",
       render: (crop_image_1) => (
         <>
-          <a> Terms and Conditions</a>
+          <a href="/#"> Terms and Conditions</a>
           <br></br>
           <Photos val={crop_image_1} />
         </>
@@ -193,7 +192,7 @@ export default function SampleTest(props: params) {
       dataIndex: "crop_image_1",
       render: (crop_image_1) => (
         <>
-          <a> Terms and Conditions</a>
+          <a href="/#"> Terms and Conditions</a>
           <br></br>
           {/* <Photos val={crop_image_1} /> */}
         </>
@@ -239,7 +238,7 @@ export default function SampleTest(props: params) {
       render: (details: any) => {
         return (
           <>
-            {details == undefined && <>No details Provided</>}
+            {details === undefined && <>No details Provided</>}
             {details && <>{details}</>}
           </>
         );
@@ -253,7 +252,7 @@ export default function SampleTest(props: params) {
   ];
   return (
     <div className="st">
-      {props.issues == 0 && props.is_seller == 1 && (
+      {props.issues === 0 && props.is_seller === 1 && (
         <Table<propType>
           columns={columns}
           dataSource={props.produce_list}
@@ -261,7 +260,7 @@ export default function SampleTest(props: params) {
           scroll={{ x: 940 }}
         />
       )}
-      {props.issues == 0 && props.is_seller == 0 && (
+      {props.issues === 0 && props.is_seller === 0 && (
         <Table<propType>
           columns={Ibuyercolumns}
           dataSource={props.produce_list}
@@ -270,7 +269,7 @@ export default function SampleTest(props: params) {
         />
       )}
 
-      {props.issues == 1 && (
+      {props.issues === 1 && (
         <Table<propType>
           columns={issuesColumns}
           dataSource={props.produce_list}

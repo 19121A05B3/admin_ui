@@ -1,7 +1,7 @@
 import { ColumnsType } from "antd/es/table";
 import "antd/dist/antd.css";
-import { Tabs, Typography, Spin, Row, Col, Tooltip } from "antd";
-import { Table, Tag, Space } from "antd";
+import { Tabs, Typography, Row, Col, Tooltip } from "antd";
+import { Table, Space } from "antd";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { loadingIndicator } from "./transactions";
@@ -19,20 +19,20 @@ interface User {
   seller_final_price: string;
   askingdeliverydate: Date;
 }
-const handleDateChange = (date: any) => {
-  if (date) {
-    const currentDateInSeconds = new Date().getTime();
-    const dd = new Date(date);
-    const selectedDateInSeconds = dd.getTime();
-    const timeDifference = currentDateInSeconds - selectedDateInSeconds;
-    let timeDifferenceInDays = timeDifference / (1000 * 60 * 60 * 24);
-    if (timeDifferenceInDays > 0 && timeDifferenceInDays < 1) {
-      timeDifferenceInDays = 1;
-    }
-    timeDifferenceInDays = Math.ceil(timeDifferenceInDays);
-    return timeDifferenceInDays.toString();
-  }
-};
+// const handleDateChange = (date: any) => {
+//   if (date) {
+//     const currentDateInSeconds = new Date().getTime();
+//     const dd = new Date(date);
+//     const selectedDateInSeconds = dd.getTime();
+//     const timeDifference = currentDateInSeconds - selectedDateInSeconds;
+//     let timeDifferenceInDays = timeDifference / (1000 * 60 * 60 * 24);
+//     if (timeDifferenceInDays > 0 && timeDifferenceInDays < 1) {
+//       timeDifferenceInDays = 1;
+//     }
+//     timeDifferenceInDays = Math.ceil(timeDifferenceInDays);
+//     return timeDifferenceInDays.toString();
+//   }
+// };
 const columns: ColumnsType<User> = [
   {
     title: "ID",
@@ -109,15 +109,6 @@ export default function App() {
   const { Seller_matches } = useSelector(
     (state: RootState) => state.main.transactionData
   );
-  var issellgt5 = false;
-
-  if (Seller_matches.length > 5) {
-    var sell: any = [];
-    issellgt5 = true;
-    for (var i = 0; i < 5; i++) {
-      sell.push(Seller_matches[i]);
-    }
-  }
 
   const { foDetails } = useSelector((state: RootState) => state.main);
   const viewAllButton = (
@@ -137,7 +128,7 @@ export default function App() {
       </Typography.Title>
       <Space> </Space>
       <Tabs type="card" className="card">
-        {foDetails.assigned_user_type != "buyer" && (
+        {foDetails.assigned_user_type !== "buyer" && (
           <TabPane tab="Seller Matches" key="1">
             {Seller_matches.length !== 0 ? (
               <>
@@ -155,9 +146,9 @@ export default function App() {
           </TabPane>
         )}
 
-        {foDetails.assigned_user_type != "seller" && enabled && (
+        {foDetails.assigned_user_type !== "seller" && enabled && (
           <TabPane tab="Buyer Matches" key="2">
-            {data.length != 0 ? (
+            {data.length !== 0 ? (
               <>
                 <Table
                   columns={columns}

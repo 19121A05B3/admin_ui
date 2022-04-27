@@ -1,23 +1,11 @@
-import {
-  Table,
-  Row,
-  Col,
-  Button,
-  Select,
-  Typography,
-  Input,
-  Spin,
-  Tooltip,
-} from "antd";
+import { Table, Row, Col, Select, Input, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { IItsy } from "../../store/app_interfaces";
 import { RangeSelector } from "../../components/common/range_selector";
 const { Option } = Select;
-function onChange(date: any, dateString: any) {
-  console.log(date, dateString);
-}
+
 const PK_FILTER = "pk";
 const CATEGORY_NAME_FILTER = "crop_name";
 const CROP_NAME_FILTER = "category";
@@ -312,7 +300,7 @@ const ProduceTab2 = (props: propsType) => {
       render: (more: string) => {
         return (
           <>
-            <a>Terms and Conditions</a>
+            <a href="/#">Terms and Conditions</a>
           </>
         );
       },

@@ -1,9 +1,7 @@
-import React from "react";
 import Information from "./components/information";
 import { Tabs } from "antd";
 import ActionsUI from "./components/actions_ui";
 
-import { PageHeader, Button, Descriptions } from "antd";
 import { Typography } from "antd";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";

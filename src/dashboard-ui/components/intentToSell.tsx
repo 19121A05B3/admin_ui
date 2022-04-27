@@ -1,5 +1,5 @@
 import "antd/dist/antd.css";
-import { Tabs, Table, Typography, Space, Tooltip, Row, Col } from "antd";
+import { Tabs, Table, Typography, Space, Tooltip, Row } from "antd";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { Link } from "react-router-dom";
@@ -71,20 +71,20 @@ function App() {
     (state: RootState) => state.main.produceData
   );
   const { foDetails } = useSelector((state: RootState) => state.main);
- 
+
   var yes: any = [];
   for (var i = 0; i < 5; i++) {
     if (sellyes && sellyes[i]) yes.push(sellyes[i]);
   }
 
   var no: any = [];
-  for (var i = 0; i < 5; i++) {
+  for (i = 0; i < 5; i++) {
     if (sellno[i]) no.push(sellno[i]);
   }
   const viewAllButton = (
-        <Row justify="end" wrap={false}>
-          <Link to="/produces">View all Produces</Link>
-        </Row>
+    <Row justify="end" wrap={false}>
+      <Link to="/produces">View all Produces</Link>
+    </Row>
   );
   return (
     <div className="t card-container">
@@ -93,7 +93,7 @@ function App() {
       </Typography.Title>
       <Space> </Space>
       <Tabs type="card" className="card">
-        {foDetails.assigned_user_type != "buyer" && (
+        {foDetails.assigned_user_type !== "buyer" && (
           <TabPane tab="Intent to sell : Yes" key="1">
             {sellyes ? (
               <>
@@ -102,7 +102,9 @@ function App() {
                   dataSource={yes}
                   pagination={false}
                   scroll={{ x: 1350 }}
-                  footer={() =>{return viewAllButton;}}
+                  footer={() => {
+                    return viewAllButton;
+                  }}
                 />
               </>
             ) : (
@@ -110,7 +112,7 @@ function App() {
             )}
           </TabPane>
         )}
-        {foDetails.assigned_user_type != "buyer" && (
+        {foDetails.assigned_user_type !== "buyer" && (
           <TabPane tab="Intent to sell : No" key="2">
             {sellno.length ? (
               <>
@@ -119,7 +121,9 @@ function App() {
                   dataSource={no}
                   pagination={false}
                   scroll={{ x: 1350 }}
-                  footer={() =>{return viewAllButton;}}
+                  footer={() => {
+                    return viewAllButton;
+                  }}
                 />
               </>
             ) : (

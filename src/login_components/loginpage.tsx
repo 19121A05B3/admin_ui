@@ -17,23 +17,23 @@ const Loginpage = (props: any) => {
   const [visible, setVisible] = useState(false);
   const [val, setval] = useState(0);
   const [form] = Form.useForm();
-  const [user, setuser] = useState("");
+  // const [user, setuser] = useState("");
   useEffect(() => {
+    const showmessage = async () => {
+      if (val === 1) {
+        success();
+      }
+      if (val === 2) {
+        error();
+      }
+      if (val === 3) {
+        warning();
+      }
+    };
     showmessage();
   }, [val]);
   // message alearting funcitons
 
-  const showmessage = async () => {
-    if (val == 1) {
-      success();
-    }
-    if (val == 2) {
-      error();
-    }
-    if (val == 3) {
-      warning();
-    }
-  };
   const success = () => {
     message.success("Welcome to VikasBandhu");
   };
@@ -51,18 +51,17 @@ const Loginpage = (props: any) => {
     const vals = await LoginCheck(values);
     hider();
 
-    setuser(vals.usename);
-    if (vals == 1) {
+    if (vals === 1) {
       setval(1);
       dispatch(setUserName(sessionStorage.getItem("userName") ?? ""));
       form.resetFields();
     }
-    if (vals == 2) {
+    if (vals === 2) {
       setval(2);
       form.resetFields();
       form.setFieldsValue({ username: values.username });
     }
-    if (vals == 3) {
+    if (vals === 3) {
       setval(3);
       props.openresetpage(true);
     }
@@ -117,6 +116,7 @@ const Loginpage = (props: any) => {
         <Form.Item style={{ textAlign: "center" }}>
           {/* <Link className="login-form-forgot" to="./profileimg.txs" >Forgot password</Link>  */}
           <a
+            href="/#"
             className="login-form-forgot"
             style={{ textDecoration: "underline", color: "grey" }}
             onClick={() => {

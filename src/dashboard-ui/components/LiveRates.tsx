@@ -1,6 +1,3 @@
-import React from "react";
-// import "./LiveRates.scss";
-
 import { CaretDownOutlined, CaretUpOutlined } from "@ant-design/icons";
 interface liverates {
   change: number;

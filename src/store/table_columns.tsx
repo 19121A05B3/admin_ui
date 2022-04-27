@@ -27,11 +27,11 @@ export const CSellerColumns: ColumnsType<ISellerTransaction> = [
     render: (con, i: any) => {
       return (
         <>
-          {i["gsi_status"] == undefined && <>---</>}
+          {i["gsi_status"] === undefined && <>---</>}
           {i["gsi_status"] && (
             <p className={i["gsi_status"]}>{capitalize(i["gsi_status"])}</p>
           )}
-          {i["event_latest"] == undefined && <>---</>}
+          {i["event_latest"] === undefined && <>---</>}
           {i["event_latest"] && <>{i["event_latest"]}</>}
         </>
       );
@@ -100,11 +100,11 @@ export const CBuyerColumns: ColumnsType<IBuyerTransaction> = [
     render: (con, i: any) => {
       return (
         <>
-          {i["gsi_status"] == undefined && <>---</>}
+          {i["gsi_status"] === undefined && <>---</>}
           {i["gsi_status"] && (
             <p className={i["gsi_status"]}>{capitalize(i["gsi_status"])}</p>
           )}
-          {i["event_latest"] == undefined && <>---</>}
+          {i["event_latest"] === undefined && <>---</>}
           {i["event_latest"] && <>{i["event_latest"]}</>}
         </>
       );

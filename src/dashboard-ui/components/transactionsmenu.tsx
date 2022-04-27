@@ -1,3 +1,4 @@
+/* eslint-disable react/no-direct-mutation-state */
 import "antd/dist/antd.css";
 import {
   Tabs,
@@ -20,10 +21,9 @@ import { ColumnsType } from "antd/es/table";
 import {
   IBuyerTransaction,
   ISellerTransaction,
-  IUser,
 } from "../../store/app_interfaces";
 import { DownOutlined } from "@ant-design/icons";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { RangeSelector } from "../../components/common/range_selector";
@@ -53,9 +53,9 @@ export const ALL_EVENTS = {
 };
 const PK_FILTER = "pk";
 const PRODUCE_FILTER = "produce";
-const SELLER_FINAL_PRICE_FILTER = "seller_final_price";
-const MATCHED_QUANTITY_FILTER = "matched_quantity";
-const EVENT_LATEST = "event_latest";
+// const SELLER_FINAL_PRICE_FILTER = "seller_final_price";
+// const MATCHED_QUANTITY_FILTER = "matched_quantity";
+// const EVENT_LATEST = "event_latest";
 const BUYER_ID_FILTER = "buyer_id";
 const GSI_FILTER = "gsi";
 const SELLER_ID_FILTER = "buyer_id";
@@ -109,7 +109,9 @@ function App() {
   const [filteredBuyerData, setFilteredBuyerData] = useState(initBuyerData);
 
   const [isFiltering, setIsFiltering] = useState(false);
-  const [tabNo, setTabNo] = useState( foDetails.assigned_user_type == "buyer" ? 2 : 1);
+  const [tabNo, setTabNo] = useState(
+    foDetails.assigned_user_type === "buyer" ? 2 : 1
+  );
 
   const updateAllFilters = (grp: string, val: string) => {
     if (val === "undefined") val = "";
@@ -125,169 +127,160 @@ function App() {
   dp(isFiltering);
   dp("IS FILETERING VALUE");
   useEffect(() => {
-    // Everytime the filters change, Need to do filtering... so
-    doFilterV2();
-  }, [allFilters]);
-  const doFilterV2 = () => {
-    let noOfFilters = 0;
-    let isNestedFilter = false;
+    const doFilterV2 = () => {
+      let noOfFilters = 0;
+      let isNestedFilter = false;
 
-    for (const [key, value] of Object.entries(allFilters)) {
-      if (value.length !== 0) noOfFilters++;
-      if (noOfFilters > 1) {
-        isNestedFilter = true;
-        break;
-      }
-    } // if all values length is zero, It just mean that no filters are applied
-    if (noOfFilters === 0) {
-      setIsFiltering(false);
-      return;
-    }
-
-    let finalFilteredSellerData: Array<seller> = [];
-
-    let finalFilteredBuyerData: Array<seller> = [];
-
-    const noEmptyVal = (v: string) => {
-      if (!Boolean(v)) return "`";
-      return v;
-    };
-    let allData: any = Seller_data;
-
-    if (tabNo == 2) allData = Buyer_data;
-
-    allData.forEach((item: seller) => {
-      if (isNestedFilter) {
-        let include = false;
-        if (
-          item.gsi &&
-          item.gsi.toLowerCase().includes(allFilters.gsi) &&
-          item.pk &&
-          item.pk.toLowerCase().includes(allFilters.pk) &&
-          item.produce &&
-          item.produce.toLowerCase().includes(allFilters.produce) &&
-          item.matched_quantity &&
-          parseInt(item.matched_quantity) >= allFilters.matched_quantity[0] &&
-          item.matched_quantity &&
-          parseInt(item.matched_quantity) <= allFilters.matched_quantity[1]
-        )
-          include = true;
-
-        if (tabNo == 1) {
-          if (
-            item.seller_final_price &&
-            parseInt(item.seller_final_price) >=
-              allFilters.seller_final_price[0] &&
-            item.seller_final_price &&
-            parseInt(item.seller_final_price) <=
-              allFilters.seller_final_price[1] &&
-            ((item.buyer_id &&
-              item.buyer_id.toLowerCase().includes(allFilters.buyer_id)) ||
-              (item.buyer_location &&
-                item.buyer_location
-                  .toLowerCase()
-                  .includes(allFilters.buyer_id))) &&
-            include
-          ) {
-            finalFilteredSellerData.push(item);
-          }
-        } else {
-          if (
-            item.buyer_final_price &&
-            parseInt(item.buyer_final_price) >=
-              allFilters.buyer_final_price[0] &&
-            item.buyer_final_price &&
-            parseInt(item.buyer_final_price) <=
-              allFilters.buyer_final_price[1] &&
-            ((item.seller_id &&
-              item.seller_id.toLowerCase().includes(allFilters.seller_id)) ||
-              (item.seller_location &&
-                item.seller_location
-                  .toLowerCase()
-                  .includes(allFilters.seller_id))) &&
-            include
-          ) {
-            finalFilteredBuyerData.push(item);
-          }
+      for (const [key, value] of Object.entries(allFilters)) {
+        if (value.length !== 0) noOfFilters++;
+        if (noOfFilters > 1) {
+          isNestedFilter = true;
+          break;
         }
-      } else {
-        let include = false;
-        if (
-          (item.gsi &&
-            item.gsi.toLowerCase().includes(noEmptyVal(allFilters.gsi))) ||
-          (item.pk && item.pk.includes(noEmptyVal(allFilters.pk))) ||
-          (item.produce &&
-            item.produce
-              .toLowerCase()
-              .includes(noEmptyVal(allFilters.produce))) ||
-          (item.matched_quantity &&
+      } // if all values length is zero, It just mean that no filters are applied
+      if (noOfFilters === 0) {
+        setIsFiltering(false);
+        return;
+      }
+
+      let finalFilteredSellerData: Array<seller> = [];
+
+      let finalFilteredBuyerData: Array<seller> = [];
+
+      const noEmptyVal = (v: string) => {
+        if (!Boolean(v)) return "`";
+        return v;
+      };
+      let allData: any = Seller_data;
+
+      if (tabNo === 2) allData = Buyer_data;
+
+      allData.forEach((item: seller) => {
+        if (isNestedFilter) {
+          let include = false;
+          if (
+            item.gsi &&
+            item.gsi.toLowerCase().includes(allFilters.gsi) &&
+            item.pk &&
+            item.pk.toLowerCase().includes(allFilters.pk) &&
+            item.produce &&
+            item.produce.toLowerCase().includes(allFilters.produce) &&
+            item.matched_quantity &&
             parseInt(item.matched_quantity) >= allFilters.matched_quantity[0] &&
             item.matched_quantity &&
-            parseInt(item.matched_quantity) <= allFilters.matched_quantity[1])
-        ) {
-          include = true;
-        }
-        if (tabNo == 1) {
-          if (
-            (item.seller_final_price &&
+            parseInt(item.matched_quantity) <= allFilters.matched_quantity[1]
+          )
+            include = true;
+
+          if (tabNo === 1) {
+            if (
+              item.seller_final_price &&
               parseInt(item.seller_final_price) >=
                 allFilters.seller_final_price[0] &&
               item.seller_final_price &&
               parseInt(item.seller_final_price) <=
-                allFilters.seller_final_price[1]) ||
-            (item.buyer_id &&
-              item.buyer_id
-                .toLowerCase()
-                .includes(noEmptyVal(allFilters.buyer_id))) ||
-            (item.buyer_location &&
-              item.buyer_location
-                .toLowerCase()
-                .includes(noEmptyVal(allFilters.buyer_id))) ||
-            include
-          ) {
-            finalFilteredSellerData.push(item);
-          }
-        } else {
-          if (
-            (item.buyer_final_price &&
+                allFilters.seller_final_price[1] &&
+              ((item.buyer_id &&
+                item.buyer_id.toLowerCase().includes(allFilters.buyer_id)) ||
+                (item.buyer_location &&
+                  item.buyer_location
+                    .toLowerCase()
+                    .includes(allFilters.buyer_id))) &&
+              include
+            ) {
+              finalFilteredSellerData.push(item);
+            }
+          } else {
+            if (
+              item.buyer_final_price &&
               parseInt(item.buyer_final_price) >=
                 allFilters.buyer_final_price[0] &&
               item.buyer_final_price &&
               parseInt(item.buyer_final_price) <=
-                allFilters.buyer_final_price[1]) ||
-            (item.seller_id &&
-              item.seller_id
+                allFilters.buyer_final_price[1] &&
+              ((item.seller_id &&
+                item.seller_id.toLowerCase().includes(allFilters.seller_id)) ||
+                (item.seller_location &&
+                  item.seller_location
+                    .toLowerCase()
+                    .includes(allFilters.seller_id))) &&
+              include
+            ) {
+              finalFilteredBuyerData.push(item);
+            }
+          }
+        } else {
+          let include = false;
+          if (
+            (item.gsi &&
+              item.gsi.toLowerCase().includes(noEmptyVal(allFilters.gsi))) ||
+            (item.pk && item.pk.includes(noEmptyVal(allFilters.pk))) ||
+            (item.produce &&
+              item.produce
                 .toLowerCase()
-                .includes(noEmptyVal(allFilters.seller_id))) ||
-            (item.seller_location &&
-              item.seller_location
-                .toLowerCase()
-                .includes(noEmptyVal(allFilters.seller_id))) ||
-            include
+                .includes(noEmptyVal(allFilters.produce))) ||
+            (item.matched_quantity &&
+              parseInt(item.matched_quantity) >=
+                allFilters.matched_quantity[0] &&
+              item.matched_quantity &&
+              parseInt(item.matched_quantity) <= allFilters.matched_quantity[1])
           ) {
-            finalFilteredBuyerData.push(item);
+            include = true;
+          }
+          if (tabNo === 1) {
+            if (
+              (item.seller_final_price &&
+                parseInt(item.seller_final_price) >=
+                  allFilters.seller_final_price[0] &&
+                item.seller_final_price &&
+                parseInt(item.seller_final_price) <=
+                  allFilters.seller_final_price[1]) ||
+              (item.buyer_id &&
+                item.buyer_id
+                  .toLowerCase()
+                  .includes(noEmptyVal(allFilters.buyer_id))) ||
+              (item.buyer_location &&
+                item.buyer_location
+                  .toLowerCase()
+                  .includes(noEmptyVal(allFilters.buyer_id))) ||
+              include
+            ) {
+              finalFilteredSellerData.push(item);
+            }
+          } else {
+            if (
+              (item.buyer_final_price &&
+                parseInt(item.buyer_final_price) >=
+                  allFilters.buyer_final_price[0] &&
+                item.buyer_final_price &&
+                parseInt(item.buyer_final_price) <=
+                  allFilters.buyer_final_price[1]) ||
+              (item.seller_id &&
+                item.seller_id
+                  .toLowerCase()
+                  .includes(noEmptyVal(allFilters.seller_id))) ||
+              (item.seller_location &&
+                item.seller_location
+                  .toLowerCase()
+                  .includes(noEmptyVal(allFilters.seller_id))) ||
+              include
+            ) {
+              finalFilteredBuyerData.push(item);
+            }
           }
         }
+      });
+
+      setIsFiltering(true);
+      if (tabNo === 1) {
+        setFilteredSellerData(finalFilteredSellerData);
+      } else {
+        setFilteredBuyerData(finalFilteredBuyerData);
       }
-    });
-
-    // To remove any duplicates, If created at is same,
-    // Then we can be sure that it is a duplicate record we added in the list
-    // Got it from stackoverflow :P
-    // finalFilteredData = finalFilteredData.filter(
-    //     (value, index, self) =>
-    //         index === self.findIndex((t) => t.created_at === value.created_at)
-    // );
-
-    console.log(finalFilteredSellerData);
-
-    setIsFiltering(true);
-    if (tabNo == 1) {
-      setFilteredSellerData(finalFilteredSellerData);
-    } else {
-      setFilteredBuyerData(finalFilteredBuyerData);
-    }
-  };
+    };
+    // Everytime the filters change, Need to do filtering... so
+    doFilterV2();
+  }, [allFilters]);
 
   const [isCFilterVisible, setIsCFilterVisible] = useState(false);
 
@@ -638,11 +631,11 @@ function App() {
       render: (con, i: any) => {
         return (
           <>
-            {i["gsi_status"] == undefined && <>---</>}
+            {i["gsi_status"] === undefined && <>---</>}
             {i["gsi_status"] && (
               <p className={i["gsi_status"]}>{capitalize(i["gsi_status"])}</p>
             )}
-            {i["event_latest"] == undefined && <>---</>}
+            {i["event_latest"] === undefined && <>---</>}
             {i["event_latest"] && <>{i["event_latest"]}</>}
           </>
         );
@@ -781,11 +774,11 @@ function App() {
       render: (con, i: any) => {
         return (
           <>
-            {i["gsi_status"] == undefined && <>---</>}
+            {i["gsi_status"] === undefined && <>---</>}
             {i["gsi_status"] && (
               <p className={i["gsi_status"]}>{capitalize(i["gsi_status"])}</p>
             )}
-            {i["event_latest"] == undefined && <>---</>}
+            {i["event_latest"] === undefined && <>---</>}
 
             {i["event_latest"] && <>{i["event_latest"]}</>}
           </>
@@ -904,14 +897,14 @@ function App() {
             // if (foDetails.assigned_user_type == "buyer") {
             //   setTabNo(parseInt(val) + 1);
             // } else {
-              setTabNo(parseInt(val));
+            setTabNo(parseInt(val));
             // }
             setIsFiltering(false);
           }}
         >
-          {foDetails.assigned_user_type != "buyer" && (
+          {foDetails.assigned_user_type !== "buyer" && (
             <TabPane tab="Seller Transactions" key="1">
-              {Seller_data == undefined ? (
+              {Seller_data === undefined ? (
                 loadingIndicator
               ) : (
                 <>
@@ -957,7 +950,7 @@ function App() {
               )}
             </TabPane>
           )}
-          {foDetails.assigned_user_type != "seller" && (
+          {foDetails.assigned_user_type !== "seller" && (
             <TabPane tab="Buyer Transactions" key="2" className="buyer">
               {/* 1100*/}
               <div className="mb5 mt5">
@@ -998,7 +991,7 @@ function App() {
                 </Col>
               </Row>
             </div> */}
-              {Buyer_data == undefined
+              {Buyer_data === undefined
                 ? loadingIndicator
                 : Buyer_data && (
                     <Table<IBuyerTransaction>

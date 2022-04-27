@@ -1,8 +1,7 @@
-import React from "react";
 import "antd/dist/antd.css";
-import { Tabs, Table, Typography, Space, Row, Col } from "antd";
+import { Tabs, Table, Typography, Space, Row } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { Link } from "react-router-dom";
 import { loadingIndicator } from "./transactions";
@@ -48,10 +47,10 @@ const columns: ColumnsType<Seller> = [
     render: (con, i: any) => {
       return (
         <>
-          {i["phone_no"] == undefined && <>---</>}
+          {i["phone_no"] === undefined && <>---</>}
           {i["phone_no"] && <>{i["phone_no"]}</>}
           <br></br>
-          {i["email"] == undefined && <>---</>}
+          {i["email"] === undefined && <>---</>}
           {i["email"] && <>{i["email"]}</>}
           <br></br>
         </>
@@ -91,10 +90,10 @@ const columns1: ColumnsType<Buyer> = [
     render: (con, i: any) => {
       return (
         <>
-          {i["phone_no"] == undefined && <>---</>}
+          {i["phone_no"] === undefined && <>---</>}
           {i["phone_no"] && <>{i["phone_no"]}</>}
           <br></br>
-          {i["email"] == undefined && <>---</>}
+          {i["email"] === undefined && <>---</>}
           {i["email"] && <>{i["email"]}</>}
           <br></br>
         </>
@@ -114,7 +113,6 @@ const columns1: ColumnsType<Buyer> = [
   },
 ];
 function App() {
-  const dispatch = useDispatch();
   const { Seller, Buyer } = useSelector(
     (state: RootState) => state.main.vbUserData
   );
@@ -132,9 +130,9 @@ function App() {
       </Typography.Title>
       <Space> </Space>
       <Tabs type="card" className="card">
-        {foDetails.assigned_user_type != "buyer" && (
+        {foDetails.assigned_user_type !== "buyer" && (
           <TabPane tab="Seller" key="1">
-            {Seller.length != 0 ? (
+            {Seller.length !== 0 ? (
               <>
                 <Table<Seller>
                   columns={columns}
@@ -151,9 +149,9 @@ function App() {
             )}
           </TabPane>
         )}
-        {foDetails.assigned_user_type != "seller" && (
+        {foDetails.assigned_user_type !== "seller" && (
           <TabPane tab="Buyer" key="2">
-            {Buyer.length != 0 ? (
+            {Buyer.length !== 0 ? (
               <>
                 <Table<Buyer>
                   columns={columns1}

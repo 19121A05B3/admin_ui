@@ -7,23 +7,14 @@ import {
   Input,
   Select,
   Tooltip,
-  Radio,
-  Checkbox,
-  DatePicker,
   Row,
   Col,
-  InputNumber,
-  Slider,
-  Menu,
-  Divider,
-  Dropdown,
 } from "antd";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { RangeSelector } from "../../components/common/range_selector";
 import { loadingIndicator } from "./transactions";
-import { getFODetails } from "../../store/slices/mainSlice";
 
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -44,12 +35,6 @@ const BUYER_ID_FILTER = "buyer_id";
 const PRODUCE_FILTER = "produce";
 const GSI_FILTER = "gsi";
 
-const convertDateToDDMMYYYY = (date: Date) => {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const dateOfMonth = date.getDate();
-  return `${dateOfMonth}/${month}/${year}`;
-};
 function App(this: any) {
   const {
     Seller_matches,
@@ -58,20 +43,20 @@ function App(this: any) {
     match_quantity_range,
   } = useSelector((state: RootState) => state.main.transactionData);
   const { foDetails } = useSelector((state: RootState) => state.main);
-  const handleDateChange = (date: any) => {
-    if (date) {
-      const currentDateInSeconds = new Date().getTime();
-      const dd = new Date(date);
-      const selectedDateInSeconds = dd.getTime();
-      const timeDifference = currentDateInSeconds - selectedDateInSeconds;
-      let timeDifferenceInDays = timeDifference / (1000 * 60 * 60 * 24);
-      if (timeDifferenceInDays > 0 && timeDifferenceInDays < 1) {
-        timeDifferenceInDays = 1;
-      }
-      timeDifferenceInDays = Math.ceil(timeDifferenceInDays);
-      return timeDifferenceInDays.toString();
-    }
-  };
+  // const handleDateChange = (date: any) => {
+  //   if (date) {
+  //     const currentDateInSeconds = new Date().getTime();
+  //     const dd = new Date(date);
+  //     const selectedDateInSeconds = dd.getTime();
+  //     const timeDifference = currentDateInSeconds - selectedDateInSeconds;
+  //     let timeDifferenceInDays = timeDifference / (1000 * 60 * 60 * 24);
+  //     if (timeDifferenceInDays > 0 && timeDifferenceInDays < 1) {
+  //       timeDifferenceInDays = 1;
+  //     }
+  //     timeDifferenceInDays = Math.ceil(timeDifferenceInDays);
+  //     return timeDifferenceInDays.toString();
+  //   }
+  // };
   const [allFilters, setAllFilters] = useState({
     pk: "",
     produce: "",
@@ -349,9 +334,9 @@ function App(this: any) {
         </Typography.Title>
         <Space> </Space>
         <Tabs type="card" className="card">
-          {foDetails.assigned_user_type != "buyer" && (
+          {foDetails.assigned_user_type !== "buyer" && (
             <TabPane tab="Seller Matches" key="1">
-              {Seller_matches == undefined || Seller_matches.length == 0 ? (
+              {Seller_matches === undefined || Seller_matches.length === 0 ? (
                 loadingIndicator
               ) : (
                 <>
@@ -395,7 +380,7 @@ function App(this: any) {
             </Checkbox> */}
             </TabPane>
           )}
-          {foDetails.assigned_user_type != "seller" && (
+          {foDetails.assigned_user_type !== "seller" && (
             <TabPane tab="Buyer Matches" key="2">
               <div className="mb25"></div>
 
@@ -413,6 +398,3 @@ function App(this: any) {
   );
 }
 export default App;
-function handleDateChange(date: any) {
-  throw new Error("Function not implemented.");
-}

@@ -19,7 +19,7 @@ import {
 } from "./store/slices/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, setUserName } from "./store/slices/loginCheck";
-import store, { RootState } from "./store";
+import { RootState } from "./store";
 import { loadingIndicator } from "./dashboard-ui/components/transactions";
 
 function App() {
@@ -42,35 +42,35 @@ function App() {
 
   ///////////////// Retrry logic
   useEffect(() => {
-    if (retryFO == 0) return;
+    if (retryFO === 0) return;
     setTimeout(() => {
       dispatch(getFODetails(userName));
     }, 3000);
   }, [retryFO]);
 
   useEffect(() => {
-    if (retryActionsTabData == 0) return;
+    if (retryActionsTabData === 0) return;
     setTimeout(() => {
       dispatch(getActionsTabData(userName));
     }, 3000);
   }, [retryActionsTabData]);
 
   useEffect(() => {
-    if (retryProduceData == 0) return;
+    if (retryProduceData === 0) return;
     setTimeout(() => {
       dispatch(getProduceData(userName));
     }, 3000);
   }, [retryProduceData]);
 
   useEffect(() => {
-    if (retryTransactionData == 0) return;
+    if (retryTransactionData === 0) return;
     setTimeout(() => {
       dispatch(getTransactionData(userName));
     }, 3000);
   }, [retryTransactionData]);
 
   useEffect(() => {
-    if (retryVbUserData == 0) return;
+    if (retryVbUserData === 0) return;
     setTimeout(() => {
       dispatch(getVBUsersData(userName));
     }, 3000);
@@ -97,7 +97,7 @@ function App() {
     }
   }, [isFoDetails, isNewFO]);
 
-  if (userName == undefined || userName == "") return <Loginmodal />;
+  if (userName === undefined || userName === "") return <Loginmodal />;
 
   if (isNewFO)
     return (

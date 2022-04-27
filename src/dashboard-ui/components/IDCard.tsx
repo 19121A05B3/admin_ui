@@ -15,8 +15,6 @@ export default function IDCard(props: propType) {
   const [visible, setVisible] = useState(false);
   const [idLocation, setIdLocation] = useState("");
 
-  var respon: any = [];
-
   const idRequest = async (userid: string, usertype: string) => {
     setVisible(true);
     const response = await idCard({ userid: userid, usertype: usertype });
@@ -26,7 +24,9 @@ export default function IDCard(props: propType) {
 
   return (
     <>
-      <a onClick={() => idRequest(props.seller_id, props.type)}>ID Card</a>
+      <a href="/#" onClick={() => idRequest(props.seller_id, props.type)}>
+        ID Card
+      </a>
       <Modal
         centered
         visible={visible}
@@ -36,7 +36,7 @@ export default function IDCard(props: propType) {
       >
         <Card bordered={false}>
           <Meta title={"Seller ID: " + props.seller_id} />
-          {idLocation != "" ? (
+          {idLocation !== "" ? (
             <img src={idLocation} alt="error-loading" width="100%" />
           ) : (
             <p>No ID</p>
@@ -44,7 +44,7 @@ export default function IDCard(props: propType) {
         </Card>
 
         <div className="ac">
-          <a className="done" onClick={() => setVisible(false)}>
+          <a href="/#" className="done" onClick={() => setVisible(false)}>
             Done
           </a>
         </div>

@@ -1,13 +1,12 @@
 import Bar from "./bar";
 import Detail from "./Detprof";
 import { Link } from "react-router-dom";
-import { Breadcrumb, Image, Modal, Row, Col, Typography } from "antd";
-import { Layout, Menu, Dropdown } from "antd";
+import { Breadcrumb, Image, Row, Col, Typography } from "antd";
+import { Menu, Dropdown } from "antd";
 import { CaretDownOutlined, BellFilled } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import MobileDrawer from "./mobileHeader";
-import { logout } from "../../store/slices/loginCheck";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 const { Text } = Typography;
 
@@ -24,7 +23,6 @@ const menu = (
 const getStyledLink = (linkName: String) => <Text strong>{linkName}</Text>;
 
 function AppHeader() {
-
   const { foDetails } = useSelector((state: RootState) => state.main);
 
   return (
@@ -55,6 +53,7 @@ function AppHeader() {
               <Breadcrumb.Item>
                 <Dropdown overlay={menu}>
                   <a
+                    href="/#"
                     className="ant-dropdown-link"
                     onClick={(e) => e.preventDefault()}
                   >
@@ -76,7 +75,9 @@ function AppHeader() {
           </Row>
         </Col>
         <Col span={5}>
-          <Row justify="center">{foDetails.phone_no === "" ? "" : <Detail />}</Row>
+          <Row justify="center">
+            {foDetails.phone_no === "" ? "" : <Detail />}
+          </Row>
         </Col>
       </Row>
       {foDetails.phone_no === "" ? "" : <MobileDrawer />}

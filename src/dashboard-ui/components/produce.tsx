@@ -1,4 +1,4 @@
-import { Tabs, Row, Col, Button, Typography } from "antd";
+import { Tabs, Button, Typography } from "antd";
 import Producestab from "./producestab";
 import Producestab2 from "./producestab2";
 import Allproduces from "./allProduces";
@@ -42,13 +42,13 @@ export default function Produces() {
         Supported by VikasBandhu
       </Typography.Paragraph>
       <Tabs defaultActiveKey="1" type="card">
-        {!showAllProduces && foDetails.assigned_user_type != "buyer" && (
+        {!showAllProduces && foDetails.assigned_user_type !== "buyer" && (
           <TabPane tab="Intent to Sell : (Yes)" key="1">
             <div className="mb25"></div>
             {sellyes ? <Producestab sellData={sellyes} /> : loadingIndicator}
           </TabPane>
         )}
-        {showAllProduces && foDetails.assigned_user_type != "buyer" && (
+        {showAllProduces && foDetails.assigned_user_type !== "buyer" && (
           <TabPane tab="Intent to Sell : (Yes, No)" key="1">
             <div className="mb25"></div>
             {sellyes && sellno ? (
@@ -58,7 +58,7 @@ export default function Produces() {
             )}
           </TabPane>
         )}
-        {foDetails.assigned_user_type != "seller" && (
+        {foDetails.assigned_user_type !== "seller" && (
           <TabPane tab="Interested to Buy" key="2">
             <div className="mb25"></div>
             {buyer_data ? (
