@@ -51,6 +51,7 @@ function App() {
   });
   const [filteredData, setFilteredData] = useState([{}]);
   const [isFiltering, setIsFiltering] = useState(false);
+
   // useEffect(() => {
   //   // This one is to create all values for the selector fields, runs everytime ongoing data changes
   //   let buyer_type: Array<string> = [];
@@ -62,8 +63,9 @@ function App() {
   //     buyer_type: buyer_type,
   //   });
   // }, [Buyer]);
+
   const updateAllFilters = (grp: string, val: string) => {
-    if (val === "undefined") val = "";
+    if (val === "undefined" || val === undefined) val = "";
     val = val.toLowerCase();
     let currFilter: Record<string, string> = {};
     currFilter[`${grp}`] = val;
@@ -72,6 +74,7 @@ function App() {
       return f;
     });
   };
+
   console.log(allFilters);
   useEffect(() => {
     // Everytime the filters change, Need to do filtering... so

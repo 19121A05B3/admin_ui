@@ -23,8 +23,13 @@ interface Buyer {
   address1: any;
 }
 export const capitalize = (str: any) => {
-  const lower = str.toLowerCase();
-  return str.charAt(0).toUpperCase() + lower.slice(1);
+  try{
+    const lower = str.toLowerCase();
+    return str.charAt(0).toUpperCase() + lower.slice(1);
+  } catch (err){
+    return "";
+  }
+
 };
 
 const columns: ColumnsType<Seller> = [

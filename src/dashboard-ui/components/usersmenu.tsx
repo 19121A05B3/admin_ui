@@ -62,7 +62,7 @@ function App() {
   const [filteredData, setFilteredData] = useState([{}]);
   const [isFiltering, setIsFiltering] = useState(false);
   const updateAllFilters = (grp: string, val: string) => {
-    if (val === "undefined") val = "";
+    if (val === "undefined" || val === undefined) val = "";
     val = val.toLowerCase();
     let currFilter: Record<string, string> = {};
     currFilter[`${grp}`] = val;
