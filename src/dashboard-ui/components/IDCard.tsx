@@ -24,9 +24,7 @@ export default function IDCard(props: propType) {
 
   return (
     <>
-      <a href="/#" onClick={() => idRequest(props.seller_id, props.type)}>
-        ID Card
-      </a>
+      <a onClick={() => idRequest(props.seller_id, props.type)}>ID Card</a>
       <Modal
         centered
         visible={visible}
@@ -44,7 +42,7 @@ export default function IDCard(props: propType) {
         </Card>
 
         <div className="ac">
-          <a href="/#" className="done" onClick={() => setVisible(false)}>
+          <a className="done" onClick={() => setVisible(false)}>
             Done
           </a>
         </div>

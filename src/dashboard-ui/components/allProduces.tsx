@@ -405,7 +405,7 @@ const ProduceTab = (props: propType) => {
           <>
             <Photos val={val} />
             <br></br>
-            <a href="/#">Terms and Conditions</a>
+            <a>Terms and Conditions</a>
           </>
         );
       },

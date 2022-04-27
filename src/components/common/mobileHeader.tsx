@@ -36,7 +36,7 @@ const MobileDrawer = () => {
       </Menu.Item>
       <Menu.Item key={2}>
         <Dropdown overlay={dropdownmenu}>
-          <a href="/#" className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+          <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
             Operations
             <CaretDownOutlined />
           </a>
@@ -59,7 +59,7 @@ const MobileDrawer = () => {
         </Col>
         <Col span={13}></Col>
         <Col span={2}>
-          <a href="/#" onClick={() => dispatch(logout())}>
+          <a onClick={() => dispatch(logout())}>
             <Avatar className="mt11" />
           </a>
         </Col>

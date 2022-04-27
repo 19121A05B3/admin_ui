@@ -27,7 +27,7 @@ const ADDRESS_FILTER = "address1";
 const BUYER_TYPE_FILTER = "buyer_type";
 
 function App() {
-  const {  Buyer, user_types } = useSelector(
+  const { Buyer, user_types } = useSelector(
     (state: RootState) => state.main.vbUserData
   );
   const { Individual_Produces } = useSelector(
@@ -270,7 +270,7 @@ function App() {
               issues={0}
               is_seller={0}
             />
-            <a key="matches" href="/#" >Matches</a>
+            <a key="matches">Matches</a>
             <TransactionList
               seller_id={i["pk"]}
               name={i["name"]}

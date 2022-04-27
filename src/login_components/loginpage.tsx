@@ -116,7 +116,6 @@ const Loginpage = (props: any) => {
         <Form.Item style={{ textAlign: "center" }}>
           {/* <Link className="login-form-forgot" to="./profileimg.txs" >Forgot password</Link>  */}
           <a
-            href="/#"
             className="login-form-forgot"
             style={{ textDecoration: "underline", color: "grey" }}
             onClick={() => {

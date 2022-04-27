@@ -300,7 +300,7 @@ const ProduceTab2 = (props: propsType) => {
       render: (more: string) => {
         return (
           <>
-            <a href="/#">Terms and Conditions</a>
+            <a>Terms and Conditions</a>
           </>
         );
       },

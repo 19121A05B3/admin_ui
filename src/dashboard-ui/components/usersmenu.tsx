@@ -265,9 +265,7 @@ function App() {
               issues={0}
               is_seller={1}
             />
-            <a key="matches" href="/#">
-              Matches
-            </a>
+            <a key="matches">Matches</a>
             <TransactionList
               seller_id={i["pk"]}
               name={i["name"]}

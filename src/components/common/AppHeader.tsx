@@ -53,7 +53,6 @@ function AppHeader() {
               <Breadcrumb.Item>
                 <Dropdown overlay={menu}>
                   <a
-                    href="/#"
                     className="ant-dropdown-link"
                     onClick={(e) => e.preventDefault()}
                   >

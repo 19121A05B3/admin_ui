@@ -20,9 +20,7 @@ export default function Modals(props: proptype) {
   };
   return (
     <>
-      <a href="/#" onClick={showModal}>
-        Photos
-      </a>
+      <a onClick={showModal}>Photos</a>
       <Modal
         title="Produce Photos"
         visible={isModalVisible}
