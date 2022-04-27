@@ -336,7 +336,7 @@ function App(this: any) {
         <Tabs type="card" className="card">
           {foDetails.assigned_user_type !== "buyer" && (
             <TabPane tab="Seller Matches" key="1">
-              {Seller_matches === undefined || Seller_matches.length === 0 ? (
+              {Seller_matches === undefined ? (
                 loadingIndicator
               ) : (
                 <>

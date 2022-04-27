@@ -93,7 +93,7 @@ const TransactionsV2 = () => {
       <Tabs type="card" className="card">
         {foDetails.assigned_user_type !== "buyer" && (
           <TabPane tab="Seller Transactions" key="1">
-            {Seller_data.length !== 0 ? (
+            {Seller_data != undefined ? (
               <>
                 {/* Seller transactions table */}
                 <Table<ISellerTransaction>
@@ -119,7 +119,7 @@ const TransactionsV2 = () => {
         )}
         {foDetails.assigned_user_type !== "seller" && (
           <TabPane tab="Buyer Transactions" key="2">
-            {buyer.length !== 0 ? (
+            {buyer.length != undefined ? (
               <>
                 {/* Buyer transactions table */}
                 <Table<IBuyerTransaction>

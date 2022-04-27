@@ -130,7 +130,7 @@ export default function App() {
       <Tabs type="card" className="card">
         {foDetails.assigned_user_type !== "buyer" && (
           <TabPane tab="Seller Matches" key="1">
-            {Seller_matches.length !== 0 ? (
+            {Seller_matches != undefined ? (
               <>
                 <Table
                   columns={columns}
@@ -148,7 +148,7 @@ export default function App() {
 
         {foDetails.assigned_user_type !== "seller" && enabled && (
           <TabPane tab="Buyer Matches" key="2">
-            {data.length !== 0 ? (
+            {data != undefined ? (
               <>
                 <Table
                   columns={columns}

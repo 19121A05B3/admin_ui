@@ -137,7 +137,7 @@ function App() {
       <Tabs type="card" className="card">
         {foDetails.assigned_user_type !== "buyer" && (
           <TabPane tab="Seller" key="1">
-            {Seller.length !== 0 ? (
+            {Seller != undefined ? (
               <>
                 <Table<Seller>
                   columns={columns}
@@ -156,7 +156,7 @@ function App() {
         )}
         {foDetails.assigned_user_type !== "seller" && (
           <TabPane tab="Buyer" key="2">
-            {Buyer.length !== 0 ? (
+            {Buyer != undefined ? (
               <>
                 <Table<Buyer>
                   columns={columns1}

@@ -430,7 +430,7 @@ const ProduceTab = (props: propType) => {
 
   return (
     <div className="ongoing-actions">
-      {props.sellData === undefined || props.sellData.length === 0 ? (
+      {props.sellData === undefined  ? (
         loadingIndicator
       ) : (
         <Table
