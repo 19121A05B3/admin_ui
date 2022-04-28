@@ -1,8 +1,7 @@
-import React from "react";
 import "antd/dist/antd.css";
-import { Tabs, Table, Typography, Space, Row, Col } from "antd";
+import { Tabs, Table, Typography, Space, Row } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { Link } from "react-router-dom";
 import { loadingIndicator } from "./transactions";
@@ -24,8 +23,13 @@ interface Buyer {
   address1: any;
 }
 export const capitalize = (str: any) => {
-  const lower = str.toLowerCase();
-  return str.charAt(0).toUpperCase() + lower.slice(1);
+  try{
+    const lower = str.toLowerCase();
+    return str.charAt(0).toUpperCase() + lower.slice(1);
+  } catch (err){
+    return "";
+  }
+
 };
 
 const columns: ColumnsType<Seller> = [
@@ -48,10 +52,10 @@ const columns: ColumnsType<Seller> = [
     render: (con, i: any) => {
       return (
         <>
-          {i["phone_no"] == undefined && <>---</>}
+          {i["phone_no"] === undefined && <>---</>}
           {i["phone_no"] && <>{i["phone_no"]}</>}
           <br></br>
-          {i["email"] == undefined && <>---</>}
+          {i["email"] === undefined && <>---</>}
           {i["email"] && <>{i["email"]}</>}
           <br></br>
         </>
@@ -91,10 +95,10 @@ const columns1: ColumnsType<Buyer> = [
     render: (con, i: any) => {
       return (
         <>
-          {i["phone_no"] == undefined && <>---</>}
+          {i["phone_no"] === undefined && <>---</>}
           {i["phone_no"] && <>{i["phone_no"]}</>}
           <br></br>
-          {i["email"] == undefined && <>---</>}
+          {i["email"] === undefined && <>---</>}
           {i["email"] && <>{i["email"]}</>}
           <br></br>
         </>
@@ -114,7 +118,6 @@ const columns1: ColumnsType<Buyer> = [
   },
 ];
 function App() {
-  const dispatch = useDispatch();
   const { Seller, Buyer } = useSelector(
     (state: RootState) => state.main.vbUserData
   );
@@ -132,9 +135,9 @@ function App() {
       </Typography.Title>
       <Space> </Space>
       <Tabs type="card" className="card">
-        {foDetails.assigned_user_type != "buyer" && (
+        {foDetails.assigned_user_type !== "buyer" && (
           <TabPane tab="Seller" key="1">
-            {Seller.length != 0 ? (
+            {Seller != undefined ? (
               <>
                 <Table<Seller>
                   columns={columns}
@@ -151,9 +154,9 @@ function App() {
             )}
           </TabPane>
         )}
-        {foDetails.assigned_user_type != "seller" && (
+        {foDetails.assigned_user_type !== "seller" && (
           <TabPane tab="Buyer" key="2">
-            {Buyer.length != 0 ? (
+            {Buyer != undefined ? (
               <>
                 <Table<Buyer>
                   columns={columns1}

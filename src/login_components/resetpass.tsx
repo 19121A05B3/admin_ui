@@ -12,21 +12,21 @@ const Resetpass = (props: any) => {
   const [check, setCheck] = useState(0);
   const [form] = Form.useForm();
   useEffect(() => {
-    showmessage();
-  }, [check]);
-
-  const showmessage = async () => {
-    if (check == 1) {
+    
+    if (check === 1) {
       success();
     }
-    if (check == 2) {
+    if (check === 2) {
       error();
     }
-  };
+  }, [check]);
+
+
+
   const onFinish = async (values: any) => {
     let { newpassword } = values;
     const vals = await ResetPassword(newpassword);
-    if (vals == 1) {
+    if (vals === 1) {
       setCheck(1);
       form.resetFields();
       props.openresetpage(false);

@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
+import { useState } from "react";
 import "antd/dist/antd.css";
 import { Col, Modal, Row } from "antd";
-import { Table, Tag, Space } from "antd";
 import SampleTable from "./SampleTable";
 interface proptype {
   seller_id: string;
@@ -16,17 +14,17 @@ export default function ModalDemo(props: proptype) {
   const [visible, setVisible] = useState(false);
   return (
     <>
-      {props.issues == 0 && props.is_seller == 1 && (
+      {props.issues === 0 && props.is_seller === 1 && (
         <div className="produce-list" onClick={() => setVisible(true)}>
           Produce List
         </div>
       )}
-      {props.issues == 0 && props.is_seller == 0 && (
+      {props.issues === 0 && props.is_seller === 0 && (
         <div className="produce-list" onClick={() => setVisible(true)}>
           Interested to Buy
         </div>
       )}
-      {props.issues == 1 && props.produce_list[s].length > 0 && (
+      {props.issues === 1 && props.produce_list[s].length > 0 && (
         <div className="produce-list" onClick={() => setVisible(true)}>
           View
         </div>
@@ -62,7 +60,7 @@ export default function ModalDemo(props: proptype) {
           </Col>
           <Col>: {props.name}</Col>
         </Row>
-        {props.issues == 0 && (
+        {props.issues === 0 && (
           <Row>
             <Col
               xs={{ span: 4 }}
@@ -78,7 +76,7 @@ export default function ModalDemo(props: proptype) {
             {props && !props.produce_list[s]?.length && <td>: 0</td>}
           </Row>
         )}
-        {props.issues == 1 && (
+        {props.issues === 1 && (
           <Row>
             <Col
               xs={{ span: 4 }}

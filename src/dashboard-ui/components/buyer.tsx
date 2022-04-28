@@ -1,18 +1,6 @@
-import React from "react";
 import "antd/dist/antd.css";
-import {
-  Tabs,
-  Table,
-  Typography,
-  Space,
-  Select,
-  Input,
-  Checkbox,
-  Row,
-  Col,
-} from "antd";
-import { ColumnsType } from "antd/es/table";
-import { useEffect, useState, useRef } from "react";
+import { Table, Select, Input, Row, Col } from "antd";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import ModalDemo from "./ModalDemo";
@@ -39,7 +27,7 @@ const ADDRESS_FILTER = "address1";
 const BUYER_TYPE_FILTER = "buyer_type";
 
 function App() {
-  const { Seller, Buyer, user_types } = useSelector(
+  const { Buyer, user_types } = useSelector(
     (state: RootState) => state.main.vbUserData
   );
   const { Individual_Produces } = useSelector(
@@ -63,6 +51,7 @@ function App() {
   });
   const [filteredData, setFilteredData] = useState([{}]);
   const [isFiltering, setIsFiltering] = useState(false);
+
   // useEffect(() => {
   //   // This one is to create all values for the selector fields, runs everytime ongoing data changes
   //   let buyer_type: Array<string> = [];
@@ -74,8 +63,9 @@ function App() {
   //     buyer_type: buyer_type,
   //   });
   // }, [Buyer]);
+
   const updateAllFilters = (grp: string, val: string) => {
-    if (val === "undefined") val = "";
+    if (val === "undefined" || val === undefined) val = "";
     val = val.toLowerCase();
     let currFilter: Record<string, string> = {};
     currFilter[`${grp}`] = val;
@@ -84,6 +74,7 @@ function App() {
       return f;
     });
   };
+
   console.log(allFilters);
   useEffect(() => {
     // Everytime the filters change, Need to do filtering... so
@@ -313,7 +304,7 @@ function App() {
   ];
   return (
     <>
-      {Buyer == undefined || Buyer.length == 0 ? (
+      {Buyer === undefined || Buyer.length === 0 ? (
         loadingIndicator
       ) : (
         <>

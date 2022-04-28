@@ -1,19 +1,7 @@
-import React from "react";
+/* eslint-disable react/no-direct-mutation-state */
 import "antd/dist/antd.css";
-import {
-  Tabs,
-  Table,
-  Typography,
-  Space,
-  Select,
-  Input,
-  Checkbox,
-  Row,
-  Col,
-  message,
-} from "antd";
-import { ColumnsType } from "antd/es/table";
-import { useEffect, useState, useRef } from "react";
+import { Tabs, Table, Typography, Space, Select, Input, Row, Col } from "antd";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import ModalDemo from "./ModalDemo";
@@ -22,8 +10,6 @@ import IdCard from "./IDCard";
 import BuyerTable from "./buyer";
 import { capitalize } from "./users";
 import { loadingIndicator } from "./transactions";
-import { idCard } from "../../store/slices/mainSlice";
-import { CheckboxChangeEvent } from "antd/lib/checkbox";
 
 // import './matchesmenu.scss';
 
@@ -43,10 +29,9 @@ const NAME_FILTER = "name";
 const SELLER_TYPE_FILTER = "seller_type";
 const PHONE_NO_FILTER = "phone_no";
 const ADDRESS_FILTER = "address1";
-const BUYER_TYPE_FILTER = "buyer_type";
 
 function App() {
-  const { Seller, Buyer, user_types } = useSelector(
+  const { Seller, user_types } = useSelector(
     (state: RootState) => state.main.vbUserData
   );
   const { Individual_Produces } = useSelector(
@@ -77,7 +62,7 @@ function App() {
   const [filteredData, setFilteredData] = useState([{}]);
   const [isFiltering, setIsFiltering] = useState(false);
   const updateAllFilters = (grp: string, val: string) => {
-    if (val === "undefined") val = "";
+    if (val === "undefined" || val === undefined) val = "";
     val = val.toLowerCase();
     let currFilter: Record<string, string> = {};
     currFilter[`${grp}`] = val;
@@ -88,88 +73,81 @@ function App() {
   };
 
   useEffect(() => {
+    const doFilterV2 = () => {
+      let noOfFilters = 0;
+      let isNestedFilter = false;
+
+      for (const [key, value] of Object.entries(allFilters)) {
+        if (value.length !== 0) noOfFilters++;
+        if (noOfFilters > 1) {
+          isNestedFilter = true;
+          break;
+        }
+      } // if all values length is zero, It just mean that no filters are applied
+      if (noOfFilters === 0) {
+        setIsFiltering(false);
+        return;
+      }
+
+      let finalFilteredData: Array<seller> = [];
+
+      const noEmptyVal = (v: string) => {
+        if (!Boolean(v)) return "`";
+        return v;
+      };
+      let allData: any = Seller;
+      allData.forEach((item: seller) => {
+        if (isNestedFilter) {
+          if (
+            item.pk &&
+            item.pk.toLowerCase().includes(allFilters.pk) &&
+            item.name &&
+            item.name.toLowerCase().includes(allFilters.name) &&
+            item.seller_type &&
+            item.seller_type.toLowerCase().includes(allFilters.seller_type) &&
+            item.phone_no &&
+            item.phone_no.toLowerCase().includes(allFilters.phone_no) &&
+            ((item.address1 &&
+              item.address1.toLowerCase().includes(allFilters.address1)) ||
+              (item.address2 &&
+                item.address2.toLowerCase().includes(allFilters.address1)))
+            // item.buyer_type.includes(allFilters.buyer_type)
+          )
+            finalFilteredData.push(item);
+        } else {
+          if (
+            (item.pk && item.pk.includes(noEmptyVal(allFilters.pk))) ||
+            (item.name &&
+              item.name.toLowerCase().includes(noEmptyVal(allFilters.name))) ||
+            (item.seller_type &&
+              item.seller_type
+                .toLowerCase()
+                .includes(noEmptyVal(allFilters.seller_type))) ||
+            (item.phone_no &&
+              item.phone_no.includes(noEmptyVal(allFilters.phone_no))) ||
+            (item.address1 &&
+              item.address1
+                .toLowerCase()
+                .includes(noEmptyVal(allFilters.address1))) ||
+            (item.address2 &&
+              item.address2
+                .toLowerCase()
+                .includes(noEmptyVal(allFilters.address1)))
+
+            //    ||
+            //   item.buyer_type.includes(noEmptyVal(allFilters.buyer_type))
+          )
+            finalFilteredData.push(item);
+        }
+      });
+
+      setIsFiltering(true);
+      setFilteredData(finalFilteredData);
+    };
+
     // Everytime the filters change, Need to do filtering... so
     doFilterV2();
   }, [allFilters]);
-
-  const doFilterV2 = () => {
-    let noOfFilters = 0;
-    let isNestedFilter = false;
-
-    for (const [key, value] of Object.entries(allFilters)) {
-      if (value.length !== 0) noOfFilters++;
-      if (noOfFilters > 1) {
-        isNestedFilter = true;
-        break;
-      }
-    } // if all values length is zero, It just mean that no filters are applied
-    if (noOfFilters === 0) {
-      setIsFiltering(false);
-      return;
-    }
-
-    let finalFilteredData: Array<seller> = [];
-
-    const noEmptyVal = (v: string) => {
-      if (!Boolean(v)) return "`";
-      return v;
-    };
-    let allData: any = Seller;
-    allData.forEach((item: seller) => {
-      if (isNestedFilter) {
-        if (
-          item.pk &&
-          item.pk.toLowerCase().includes(allFilters.pk) &&
-          item.name &&
-          item.name.toLowerCase().includes(allFilters.name) &&
-          item.seller_type &&
-          item.seller_type.toLowerCase().includes(allFilters.seller_type) &&
-          item.phone_no &&
-          item.phone_no.toLowerCase().includes(allFilters.phone_no) &&
-          ((item.address1 &&
-            item.address1.toLowerCase().includes(allFilters.address1)) ||
-            (item.address2 &&
-              item.address2.toLowerCase().includes(allFilters.address1)))
-          // item.buyer_type.includes(allFilters.buyer_type)
-        )
-          finalFilteredData.push(item);
-      } else {
-        if (
-          (item.pk && item.pk.includes(noEmptyVal(allFilters.pk))) ||
-          (item.name &&
-            item.name.toLowerCase().includes(noEmptyVal(allFilters.name))) ||
-          (item.seller_type &&
-            item.seller_type
-              .toLowerCase()
-              .includes(noEmptyVal(allFilters.seller_type))) ||
-          (item.phone_no &&
-            item.phone_no.includes(noEmptyVal(allFilters.phone_no))) ||
-          (item.address1 &&
-            item.address1
-              .toLowerCase()
-              .includes(noEmptyVal(allFilters.address1))) ||
-          (item.address2 &&
-            item.address2
-              .toLowerCase()
-              .includes(noEmptyVal(allFilters.address1)))
-
-          //    ||
-          //   item.buyer_type.includes(noEmptyVal(allFilters.buyer_type))
-        )
-          finalFilteredData.push(item);
-      }
-    });
-
-    // To remove any duplicates, If created at is same,
-    // Then we can be sure that it is a duplicate record we added in the list
-    // Got it from stackoverflow :P
-    // finalFilteredData = finalFilteredData.filter(
-    //     (value, index, self) =>
-    //         index === self.findIndex((t) => t.created_at === value.created_at)
-    // );
-    setIsFiltering(true);
-    setFilteredData(finalFilteredData);
-  };
 
   const sellerColumns = [
     {
@@ -330,9 +308,9 @@ function App() {
       <Space> </Space>
 
       <Tabs type="card" className="card">
-        {foDetails.assigned_user_type != "buyer" && (
+        {foDetails.assigned_user_type !== "buyer" && (
           <TabPane tab="Seller" key="1">
-            {Seller == undefined || Seller.length == 0 ? (
+            {Seller === undefined || Seller.length === 0 ? (
               loadingIndicator
             ) : (
               <>
@@ -372,7 +350,7 @@ function App() {
             )}
           </TabPane>
         )}
-        {foDetails.assigned_user_type != "seller" && (
+        {foDetails.assigned_user_type !== "seller" && (
           <TabPane tab="Buyer" key="2">
             <BuyerTable />
           </TabPane>

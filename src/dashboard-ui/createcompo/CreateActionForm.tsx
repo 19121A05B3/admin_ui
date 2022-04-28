@@ -1,8 +1,6 @@
-import React from "react";
-import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 import { useState } from "react";
-import { Form, Input, Select, Button, Space, Checkbox, message } from "antd";
+import { Form, Input, Select, Button, Space, message } from "antd";
 import { CaretDownFilled } from "@ant-design/icons";
 import AttachFile from "./AttachFile";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,9 +19,8 @@ export default function CreateActionForm(props: propType) {
   const { onDone } = props;
 
   //declaring variables
-  const [form] = Form.useForm();
   const { TextArea } = Input;
-  const [value, setValue] = useState("");
+  const value = "";
   const [showUser, setShowUser] = useState(true);
   const [showProduce, setShowProduce] = useState(false);
   const [showSellerID, setShowSellerID] = useState(false);
@@ -32,7 +29,6 @@ export default function CreateActionForm(props: propType) {
   // const [isFileUploading, setIsFileUploading] = useState(false);
   const { userName } = useSelector((state: RootState) => state.login);
   const ADD_USER = "Add User";
-  const PRODUCE = "produce";
   const USER = "user";
   const [custormerName, setCustomerName] = useState("");
 
@@ -46,10 +42,6 @@ export default function CreateActionForm(props: propType) {
     request: "Add User",
   });
 
-  //fuctions taking care of events
-  const onChange = (e: any) => {
-    setValue(e.target.value);
-  };
   const onSubmitFile = async (file: any) => {
     console.log("On submit file");
     if (!file) return false;
@@ -74,11 +66,11 @@ export default function CreateActionForm(props: propType) {
       return {
         ...prevState,
         category_type: e ?? USER,
-        sk: e == USER ? ADD_USER : ADD_PRODUCE,
-        request: e == USER ? ADD_USER : ADD_PRODUCE,
+        sk: e === USER ? ADD_USER : ADD_PRODUCE,
+        request: e === USER ? ADD_USER : ADD_PRODUCE,
       };
     });
-    if (e == "user") {
+    if (e === "user") {
       setShowProduce(false);
       setShowUser(true);
 
@@ -99,16 +91,16 @@ export default function CreateActionForm(props: propType) {
     console.log(formData);
 
     if (formData.category_type !== "" && formData.sk !== "") {
-      if (formData.sk != ADD_USER && formData.sel_buy_id == "") {
+      if (formData.sk !== ADD_USER && formData.sel_buy_id === "") {
         message.error("Please fill all details");
         return;
       }
 
       if (
-        formData.request != "Login" &&
-        formData.request != "Change Phone Number" &&
-        formData.request != "Update Info" &&
-        formData.doc_location == ""
+        formData.request !== "Login" &&
+        formData.request !== "Change Phone Number" &&
+        formData.request !== "Update Info" &&
+        formData.doc_location === ""
       ) {
         message.error("File is required");
         return;
@@ -142,14 +134,6 @@ export default function CreateActionForm(props: propType) {
     setShowProduce(false);
     setShowUser(true);
 
-    setShowDetails(true);
-    setShowAttachFile(true);
-    setShowSellerID(false);
-  }
-
-  async function handleCancelling() {
-    setShowProduce(false);
-    setShowUser(true);
     setShowDetails(true);
     setShowAttachFile(true);
     setShowSellerID(false);
@@ -237,7 +221,7 @@ export default function CreateActionForm(props: propType) {
     console.log(formData);
   };
   const handleSellerBuyerId = async (e: any) => {
-    if (e.target.value && e.target.value.length == 10) {
+    if (e.target.value && e.target.value.length === 10) {
       const userName = await getUserName(e.target.value);
       if (userName && userName.length > 0) {
         setCustomerName(userName);
@@ -262,10 +246,6 @@ export default function CreateActionForm(props: propType) {
     labelCol: { span: 2 },
     wrapperCol: { offset: 1, span: 20 },
   };
-
-  function handleCancel() {
-    form.resetFields();
-  }
 
   return (
     <Form

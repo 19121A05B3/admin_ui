@@ -15,8 +15,6 @@ export default function IDCard(props: propType) {
   const [visible, setVisible] = useState(false);
   const [idLocation, setIdLocation] = useState("");
 
-  var respon: any = [];
-
   const idRequest = async (userid: string, usertype: string) => {
     setVisible(true);
     const response = await idCard({ userid: userid, usertype: usertype });
@@ -36,7 +34,7 @@ export default function IDCard(props: propType) {
       >
         <Card bordered={false}>
           <Meta title={"Seller ID: " + props.seller_id} />
-          {idLocation != "" ? (
+          {idLocation !== "" ? (
             <img src={idLocation} alt="error-loading" width="100%" />
           ) : (
             <p>No ID</p>

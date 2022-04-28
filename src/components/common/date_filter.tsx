@@ -1,19 +1,5 @@
 import { DownOutlined } from "@ant-design/icons";
-import {
-  Button,
-  Checkbox,
-  Col,
-  DatePicker,
-  Dropdown,
-  Input,
-  InputNumber,
-  Menu,
-  Radio,
-  Row,
-  Slider,
-  Space,
-  Typography,
-} from "antd";
+import { Button, Col, DatePicker, Dropdown, Menu, Row, Space, Typography } from "antd";
 import { useState } from "react";
 
 interface props {
@@ -35,7 +21,7 @@ export const DateFilter = (props: props) => {
   const localOnSubmit = (clear: boolean) => {
     toggleIsVisible();
     // setRadioValue(0);
-    if (selectedDate == undefined) return;
+    if (selectedDate === undefined) return;
 
     onSubmit(clear ? "" : selectedDate);
   };

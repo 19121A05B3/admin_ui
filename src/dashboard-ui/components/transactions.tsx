@@ -4,34 +4,22 @@ import {
   Table,
   Typography,
   Space,
-  Alert,
   Spin,
-  Tooltip,
-  Dropdown,
-  Badge,
-  Menu,
   Row,
   Col,
   Divider,
   Timeline,
 } from "antd";
-import {
-  BlockOutlined,
-  DownOutlined,
-  LoadingOutlined,
-} from "@ant-design/icons";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { LoadingOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import {
   IBuyerTransaction,
   ISellerTransaction,
-  IUser,
 } from "../../store/app_interfaces";
 import { CBuyerColumns, CSellerColumns } from "../../store/table_columns";
 import { Link } from "react-router-dom";
 const { TabPane } = Tabs;
-const { Title } = Typography;
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 export const loadingIndicator = (
   <div className="loin">
@@ -48,7 +36,7 @@ const TransactionsV2 = () => {
   for (var i = 0; i < 5; i++) {
     seller.push(Seller_data[i]);
   }
-  for (var i = 0; i < 5; i++) {
+  for (i = 0; i < 5; i++) {
     buyer.push(Buyer_data[i]);
   }
 
@@ -103,9 +91,9 @@ const TransactionsV2 = () => {
       </Typography.Title>
       <Space> </Space>
       <Tabs type="card" className="card">
-        {foDetails.assigned_user_type != "buyer" && (
+        {foDetails.assigned_user_type !== "buyer" && (
           <TabPane tab="Seller Transactions" key="1">
-            {Seller_data.length != 0 ? (
+            {Seller_data != undefined ? (
               <>
                 {/* Seller transactions table */}
                 <Table<ISellerTransaction>
@@ -129,9 +117,9 @@ const TransactionsV2 = () => {
             )}
           </TabPane>
         )}
-        {foDetails.assigned_user_type != "seller" && (
+        {foDetails.assigned_user_type !== "seller" && (
           <TabPane tab="Buyer Transactions" key="2">
-            {buyer.length != 0 ? (
+            {buyer.length != undefined ? (
               <>
                 {/* Buyer transactions table */}
                 <Table<IBuyerTransaction>

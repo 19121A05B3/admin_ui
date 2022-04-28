@@ -1,5 +1,3 @@
-import React from 'react';
-import logo from './logo.svg';
 import { MailOutlined,PhoneFilled } from '@ant-design/icons';
 
 function Bar(props:any) {
@@ -25,5 +23,5 @@ function Bar(props:any) {
         </div>
       );
   }
-  
-  export default Bar;
+
+export default Bar;

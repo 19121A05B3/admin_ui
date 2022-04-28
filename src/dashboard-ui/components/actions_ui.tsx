@@ -3,7 +3,6 @@ import OngoingActions from "./ongoing_actions";
 import CreateNewAction from "../createcompo/PopOverCompo";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-// import CreateNewAction from "./create_action";
 
 const { TabPane } = Tabs;
 

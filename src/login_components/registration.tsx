@@ -9,14 +9,13 @@ import {
   RegisterBulkCheck,
 } from "../store/slices/RegistrationCheck";
 import { Form, Input, InputNumber, Select, Upload, message } from "antd";
-import { RcFile } from "antd/lib/upload";
 import { dp, processingPopUp } from "../helper";
 (window as any).Buffer = (window as any).Buffer || require("buffer").Buffer;
 
-let profilePic: RcFile | string = "";
-let adharPic: RcFile | string = "";
-let panPic: RcFile | string = "";
-let exceldata: RcFile | string = "";
+// let profilePic: RcFile | string = "";
+// let adharPic: RcFile | string = "";
+// let panPic: RcFile | string = "";
+// let exceldata: RcFile | string = "";
 
 export default function Registration(props: any) {
   const { Option } = Select;
@@ -40,7 +39,6 @@ export default function Registration(props: any) {
   const [form] = Form.useForm();
   const [stage, setStage] = useState(1);
   const [profileList, setProfileList] = useState([]);
-  const [mobile, setmobile] = useState("");
   const [isnumError, setIsnumError] = useState(true);
   const [isprofileError, setIsprofileError] = useState(false);
   const [ispanError, setIspanError] = useState(true);
@@ -49,16 +47,14 @@ export default function Registration(props: any) {
   const [val, setval] = useState(0);
 
   useEffect(() => {
-    showmessage();
-  }, [val]);
-  const showmessage = async () => {
-    if (val == 1) {
+    if (val === 1) {
       success();
     }
-    if (val == 2) {
+    if (val === 2) {
       error();
     }
-  };
+  }, [val]);
+
   const success = () => {
     message.success("Successfully Registered");
   };
@@ -89,7 +85,7 @@ export default function Registration(props: any) {
         const register = await JSON.parse(await RegisterSingleCheck(values));
         console.log(register);
         dp(register.status);
-        if (register == undefined || register.status != "success") {
+        if (register === undefined || register.status !== "success") {
           setval(2);
         } else {
           setval(1);
@@ -106,7 +102,7 @@ export default function Registration(props: any) {
         delete values["excel"];
         const register = await JSON.parse(await RegisterBulkCheck(values));
         dp(register);
-        if (register == undefined || register.status != "success") {
+        if (register === undefined || register.status !== "success") {
           setval(2);
         } else {
           setval(1);
@@ -185,12 +181,12 @@ export default function Registration(props: any) {
             onFieldsChange={(_, allFields) => {
               let pandata;
               let adhardata;
-              if (allFields[13]["value"] != undefined) {
+              if (allFields[13]["value"] !== undefined) {
                 pandata = Object.keys(
                   allFields[13]["value"]["fileList"]
                 ).length;
               }
-              if (allFields[14]["value"] != undefined) {
+              if (allFields[14]["value"] !== undefined) {
                 adhardata = Object.keys(
                   allFields[14]["value"]["fileList"]
                 ).length;
@@ -303,7 +299,6 @@ export default function Registration(props: any) {
                 addonBefore={prefixSelector}
                 style={{ width: "100%" }}
                 onChange={(e) => {
-                  setmobile(e.target.value);
                   if (e.target.value.length === 10) {
                     setIsnumError(true);
                   } else {
@@ -376,7 +371,7 @@ export default function Registration(props: any) {
                 name="pancard"
                 maxCount={1}
                 beforeUpload={(file) => {
-                  panPic = file;
+                  // panPic = file;
                   return false;
                 }}
                 listType="picture"
@@ -399,7 +394,7 @@ export default function Registration(props: any) {
                 name="adhar"
                 maxCount={1}
                 beforeUpload={(file) => {
-                  adharPic = file;
+                  // adharPic = file;
                   return false;
                 }}
                 listType="picture"
@@ -420,7 +415,7 @@ export default function Registration(props: any) {
             </Form.Item>
           </Form>
         )}
-        {stage == 2 && (
+        {stage === 2 && (
           <Form
             {...formItemLayout}
             form={form}
@@ -434,7 +429,7 @@ export default function Registration(props: any) {
                 data = Object.keys(allFields[0]["value"]["fileList"]).length;
               }
 
-              if (data == 0) {
+              if (data === 0) {
                 setIsexcelError(false);
               } else {
                 setIsexcelError(true);
@@ -454,7 +449,7 @@ export default function Registration(props: any) {
               <Upload
                 name="excel"
                 beforeUpload={(file) => {
-                  exceldata = file;
+                  // exceldata = file;
                   return false;
                 }}
                 accept=".csv"

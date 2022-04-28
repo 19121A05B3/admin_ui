@@ -1,16 +1,4 @@
-import {
-  Table,
-  Row,
-  Col,
-  Button,
-  Select,
-  Typography,
-  Input,
-  Spin,
-  Tooltip,
-  Modal,
-  Image,
-} from "antd";
+import { Table, Row, Col, Select, Input, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
@@ -21,9 +9,7 @@ import { DateFilter } from "../../components/common/date_filter";
 import { loadingIndicator } from "./transactions";
 
 const { Option } = Select;
-function onChange(date: any, dateString: any) {
-  console.log(date, dateString);
-}
+
 const PK_FILTER = "pk";
 const CATEGORY_NAME_FILTER = "category_name";
 const CROP_NAME_FILTER = "crop_name";
@@ -42,7 +28,7 @@ const ProduceTab = (props: propType) => {
     grade,
     category,
     variety,
-    apmc_price,
+    // apmc_price,
     price_per_qnt,
     seller_qty,
   } = useSelector((state: RootState) => state.main.produceData);
@@ -413,7 +399,7 @@ const ProduceTab = (props: propType) => {
         <>
           <DateFilter
             onSubmit={(selectedDate: string | undefined) => {
-              if (selectedDate == undefined) return;
+              if (selectedDate === undefined) return;
               console.log(selectedDate);
               updateAllFilters(CREATE_DATE, selectedDate);
             }}
@@ -444,7 +430,7 @@ const ProduceTab = (props: propType) => {
 
   return (
     <div className="ongoing-actions">
-      {props.sellData == undefined || props.sellData.length == 0 ? (
+      {props.sellData === undefined  ? (
         loadingIndicator
       ) : (
         <Table

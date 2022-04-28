@@ -1,12 +1,9 @@
 import "antd/dist/antd.css";
 import { Popover, Button } from "antd";
-// import "./PopOverCompo.scss";
-import { Select } from "antd";
 
 import CreateActionForm from "./CreateActionForm";
 import { useState } from "react";
 
-const { Option } = Select;
 export default function PopOverCompo() {
   const [isPopVisible, setIsPopVisible] = useState(false);
 

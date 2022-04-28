@@ -59,7 +59,7 @@ const MobileDrawer = () => {
         </Col>
         <Col span={13}></Col>
         <Col span={2}>
-          <a href="#" onClick={() => dispatch(logout())}>
+          <a onClick={() => dispatch(logout())}>
             <Avatar className="mt11" />
           </a>
         </Col>

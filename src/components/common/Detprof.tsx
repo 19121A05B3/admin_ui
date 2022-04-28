@@ -16,7 +16,7 @@ function Detail(props: any) {
         <Row className="foid">FO ID:{foDetails.phone_no}</Row>
       </Col>
       <Col>
-        <a href="#" onClick={() => dispatch(logout())}>
+        <a onClick={() => dispatch(logout())}>
           <Avatar />
         </a>
       </Col>

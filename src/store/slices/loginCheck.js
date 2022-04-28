@@ -1,11 +1,11 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import {
   CognitoUserPool,
   AuthenticationDetails,
   CognitoUser,
 } from "amazon-cognito-identity-js";
 import axios from "axios";
-import { baseUrl, fetchFODetails } from "../api";
+import { baseUrl } from "../api";
 import S3FileUpload from "react-s3";
 import { dp } from "../../helper";
 
@@ -110,7 +110,7 @@ export const Mailchecker = async (email) => {
     axios
       .post(baseUrl + "/fieldofficer_cognito", { admin: email })
       .then((data) => {
-        if (data.data.Status == "Success") {
+        if (data.data.Status === "Success") {
           loggedInUser.forgotPassword({
             onSuccess: (data) => {
               console.log(data);
@@ -124,7 +124,7 @@ export const Mailchecker = async (email) => {
             },
           });
         }
-        if (data.data.Status == "Not Found") {
+        if (data.data.Status === "Not Found") {
           resolve(2);
         }
       })

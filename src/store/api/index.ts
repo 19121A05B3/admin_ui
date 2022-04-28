@@ -1,9 +1,6 @@
 import { message } from "antd";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import { dp } from "../../helper";
-import { RootState } from "../../store";
-import store from "../index";
 
 const getAppHeaders = () => {
   const token = sessionStorage.getItem("token");

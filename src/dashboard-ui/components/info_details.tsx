@@ -1,9 +1,7 @@
 import { Col, Row } from "antd";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 import { Doughnut } from "react-chartjs-2";
-import { useSelector } from "react-redux";
 import DataAboutList from "./data_about_list";
-import { RootState } from "../../store";
 import { loadingIndicator } from "./transactions";
 
 interface PropType {
@@ -17,7 +15,7 @@ interface PropType {
 function InfoDetails(props: PropType) {
   let { chartData, isHalfDonut, appliedFilter, group, calculatedCount } = props;
 
-  group = group ?? "";
+  // group = group ?? "";
   let totalCols = Math.ceil(chartData.length / 3) + 1;
   let widthOfEachCol = Math.ceil(24 / totalCols);
   let uselessMap = [];
@@ -99,7 +97,7 @@ function InfoDetails(props: PropType) {
             beforeDraw(chart: any, args: any, options: any) {
               const {
                 ctx,
-                chartArea: { top, right, bottom, left, width, height },
+                chartArea: { top, width, height },
               } = chart;
               ctx.save();
               ctx.font = "15px Roboto";

@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { message } from "antd";
-import { useSelector } from "react-redux";
-import store from "../index";
 
 import {
   fetchProduceData,
@@ -29,7 +27,7 @@ export const getFODetails = createAsyncThunk(
   async (id: String) => {
     dp(":::Fetching FO Details::::");
     const res = await fetchFODetails(id);
-    if (res == undefined) throw "Error while fetching fo details";
+    if (res === undefined) throw new Error("Error while fetching fo details");
     dp("fo data fetched success");
 
     const finalData = await JSON.parse(res.body);
@@ -46,7 +44,7 @@ export const getTransactionData = createAsyncThunk(
 
     if (isDev) return transactionDummyData;
     const res = await fetchSellerBuyerData(id);
-    if (res == undefined) throw "Error while transaction data";
+    if (res === undefined) throw new Error("Error while transaction data");
     dp("transaction data fetched success");
     const finalData = await JSON.parse(res.body);
     return finalData;
@@ -60,11 +58,11 @@ export const getVBUsersData = createAsyncThunk(
 
     if (isDev) return vbuserDummyData;
     const res = await fetchVBUserData(id);
-    if (res == undefined) throw "Error while fetching vb user data";
+    if (res === undefined) throw new Error("Error while fetching vb user data");
     dp("VB USER data fetched success");
     const finalData = await JSON.parse(res.body);
     return finalData;
-    return res;
+    // return res;
   }
 );
 
@@ -75,11 +73,11 @@ export const getProduceData = createAsyncThunk(
 
     if (isDev) return produceDummyData;
     const res = await fetchProduceData(id);
-    if (res == undefined) throw "Error while produce data";
+    if (res === undefined) throw new Error("Error while produce data");
     dp("produce data fetched success");
     const finalData = await JSON.parse(res.body);
     return finalData;
-    return res;
+    // return res;
   }
 );
 
@@ -89,11 +87,11 @@ export const getActionsTabData = createAsyncThunk(
     dp(":::Fetching actions tab Data::::");
     if (isDev) return actionsTabDummyData;
     const res = await fetchactionTabData(userName);
-    if (res == undefined) throw "Error while action tab data";
+    if (res === undefined) throw new Error("Error while action tab data");
     dp("action tab data fetched success");
     const finalData = await JSON.parse(res.body);
     return finalData;
-    return res;
+    // return res;
   }
 );
 

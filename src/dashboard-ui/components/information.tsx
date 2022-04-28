@@ -1,21 +1,13 @@
 import { Row, Col, Card, Select, Anchor } from "antd";
 import "antd/dist/antd.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import InfoDetails from "./info_details";
-import { useEffect, useState } from "react";
-import Transactions from "./transactions";
+import { useState } from "react";
 import Intentosell from "./intentToSell";
 import Matches from "./matches";
 import Users from "./users";
 import TransactionsV2 from "./transactions";
-
-import {
-  getTransactionData,
-  getProduceData,
-  getVBUsersData,
-  getActionsTabData,
-} from "../../store/slices/mainSlice";
 
 const { Link } = Anchor;
 const { Option } = Select;
@@ -25,22 +17,6 @@ const SP = "SP";
 const TTV = "TTV";
 const VBU = "VBU";
 const MS = "MS";
-
-const LiveTransactionLegends = [
-  "Trade Pending",
-  "Trade Confirmed",
-  "Transportation to be Assigned",
-  "Transportation Assigned",
-  "Produce to be Picked",
-  "Produce Picked",
-  "Produce in Transit",
-  "Produce Delivered",
-];
-
-interface ltoType {
-  legend: string;
-  value: number;
-}
 
 const initFilterData = {
   filterText: "All",
@@ -114,24 +90,16 @@ export default function Information() {
     setShowUsers(true);
     setShowintenttosell(false);
   };
-
-  const [finalData, setFinalData] = useState({
-    lto: {
-      data: [{}],
-      count: 0,
-    },
-  });
-
   const getData = (group: string) => {
-    if (group == AT) {
+    if (group === AT) {
       const atData = summarizedData.at;
-      if (atData != undefined && atData.length == 3) return atData;
+      if (atData !== undefined && atData.length === 3) return atData;
       return initSummaryData.slice(12, 15);
-    } else if (group == TTV) {
+    } else if (group === TTV) {
       const ttvData = summarizedData.ttv;
-      if (ttvData != undefined && ttvData.length == 5) return ttvData;
+      if (ttvData !== undefined && ttvData.length === 5) return ttvData;
       return initSummaryData.slice(17, 22);
-    } else if (group == LTO) {
+    } else if (group === LTO) {
       const lto1 = summarizedData.lto1;
       const lto2 = summarizedData.lto2;
       const combinedData: Array<{ legend: string; value: number }> =
@@ -141,21 +109,21 @@ export default function Information() {
         localCount += Number.parseInt(val["value"] ?? "0");
       });
       return combinedData.concat(initSummaryData.slice(combinedData.length, 9));
-    } else if (group == VBU) {
+    } else if (group === VBU) {
       const fetchedData = summarizedData.vbu;
-      if (fetchedData != undefined && fetchedData.length == 2)
+      if (fetchedData !== undefined && fetchedData.length === 2)
         return fetchedData;
       return initSummaryData.slice(9, 12);
-    } else if (group == SP) {
+    } else if (group === SP) {
       const fetchedData = summarizedData.sp;
-      if (fetchedData != undefined && fetchedData.length == 2)
+      if (fetchedData !== undefined && fetchedData.length === 2)
         return fetchedData;
       return initSummaryData.slice(15, 17);
-    } else if (group == MS) {
+    } else if (group === MS) {
       const fetchedData = summarizedData.match_status;
-      if (fetchedData != undefined && fetchedData.length == 2) {
+      if (fetchedData !== undefined && fetchedData.length === 2) {
         return fetchedData;
-      } else if (fetchedData != undefined && fetchedData.length == 1) {
+      } else if (fetchedData !== undefined && fetchedData.length === 1) {
         var b = initSummaryData.slice(22, 23);
         b[1] = fetchedData[0];
         return b;
@@ -189,10 +157,9 @@ export default function Information() {
   // }, []);
 
   const getFilterText = (group: string) =>
-    group == filterData["group"] ? filterData["filterText"] : "All";
+    group === filterData["group"] ? filterData["filterText"] : "All";
 
   const buildSelector = (data: any, group: string) => {
-    const grp: string = group;
     return (
       <Select
         defaultValue="All"
@@ -314,7 +281,9 @@ export default function Information() {
               {totalintent && (
                 <InfoDetails
                   appliedFilter={
-                    SP == filterData["group"] ? filterData["filterText"] : "All"
+                    SP === filterData["group"]
+                      ? filterData["filterText"]
+                      : "All"
                   }
                   isHalfDonut={false}
                   chartData={getData(SP)}
