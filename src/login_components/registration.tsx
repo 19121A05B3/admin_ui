@@ -9,6 +9,7 @@ import {
   RegisterBulkCheck,
 } from "../store/slices/RegistrationCheck";
 import { Form, Input, InputNumber, Select, Upload, message } from "antd";
+import { RcFile } from "antd/lib/upload";
 import { dp, processingPopUp } from "../helper";
 (window as any).Buffer = (window as any).Buffer || require("buffer").Buffer;
 
@@ -39,29 +40,13 @@ export default function Registration(props: any) {
   const [form] = Form.useForm();
   const [stage, setStage] = useState(1);
   const [profileList, setProfileList] = useState([]);
+  const [mobile, setmobile] = useState("");
   const [isnumError, setIsnumError] = useState(true);
   const [isprofileError, setIsprofileError] = useState(false);
   const [ispanError, setIspanError] = useState(true);
   const [isadharError, setIsadharError] = useState(true);
   const [isexcelError, setIsexcelError] = useState(true);
   const [val, setval] = useState(0);
-
-  useEffect(() => {
-    if (val === 1) {
-      success();
-    }
-    if (val === 2) {
-      error();
-    }
-  }, [val]);
-
-  const success = () => {
-    message.success("Successfully Registered");
-  };
-
-  const error = () => {
-    message.error("Something Went Wrong");
-  };
 
   const onFinish = async (values: any) => {
     const hider = processingPopUp();
@@ -81,14 +66,18 @@ export default function Registration(props: any) {
         delete values["pancardpic"];
         delete values["adharcardpic"];
         delete values["profilepic"];
-        console.log(values);
         const register = await JSON.parse(await RegisterSingleCheck(values));
-        console.log(register);
         dp(register.status);
-        if (register === undefined || register.status !== "success") {
-          setval(2);
+        if (register.status === "success") {
+          message.success("Successfully Registered");
+          form.resetFields();
+          props.closeRegister(false);
+        } else if (register.status.message === "User account already exists") {
+          message.warning("User account already exists use other credentials");
+          form.resetFields();
+          props.closeRegister(false);
         } else {
-          setval(1);
+          message.error("Something went wrong");
           form.resetFields();
           props.closeRegister(false);
         }
@@ -97,17 +86,26 @@ export default function Registration(props: any) {
         const excels3 = await uploadFileToS3(
           values["excel"]["fileList"][0]["originFileObj"]
         );
-
         values["url"] = excels3;
         delete values["excel"];
         const register = await JSON.parse(await RegisterBulkCheck(values));
         dp(register);
-        if (register === undefined || register.status !== "success") {
-          setval(2);
+        if (register.status === "success") {
+          message.success("Successfully Registered");
+          form.resetFields();
+          props.closeRegister(false);
+        } else if (register.status.message === "User account already exists") {
+          message.warning("User account already exists use other credentials");
+          form.resetFields();
+          props.closeRegister(false);
         } else {
-          setval(1);
+          message.error("Something went wrong");
+          form.resetFields();
+          props.closeRegister(false);
         }
       }
+      form.resetFields();
+      setProfileList([]);
     } catch (err) {
       dp("Error in on finish");
       dp(err);
@@ -178,17 +176,17 @@ export default function Registration(props: any) {
             }}
             scrollToFirstError
             labelAlign="left"
-            onFieldsChange={(_, allFields) => {
-              let pandata;
-              let adhardata;
-              if (allFields[13]["value"] !== undefined) {
+            onValuesChange={(_, allValues) => {
+              let pandata = 0;
+              let adhardata = 0;
+              if (allValues["pancardpic"] != undefined) {
                 pandata = Object.keys(
-                  allFields[13]["value"]["fileList"]
+                  allValues["pancardpic"]["fileList"]
                 ).length;
               }
-              if (allFields[14]["value"] !== undefined) {
+              if (allValues["adharcardpic"] != undefined) {
                 adhardata = Object.keys(
-                  allFields[14]["value"]["fileList"]
+                  allValues["adharcardpic"]["fileList"]
                 ).length;
               }
               if (pandata === 0) {
@@ -213,6 +211,7 @@ export default function Registration(props: any) {
             >
               <ImgCrop>
                 <Upload
+                  beforeUpload={() => false}
                   listType="picture-card"
                   fileList={profileList}
                   onChange={onProfileChange}
@@ -299,6 +298,7 @@ export default function Registration(props: any) {
                 addonBefore={prefixSelector}
                 style={{ width: "100%" }}
                 onChange={(e) => {
+                  setmobile(e.target.value);
                   if (e.target.value.length === 10) {
                     setIsnumError(true);
                   } else {
@@ -306,6 +306,8 @@ export default function Registration(props: any) {
                   }
                 }}
                 id="phone_no"
+                title="Enter 10 digit number"
+                pattern="[1-9]{1}[0-9]{9}"
               />
             </Form.Item>
 
@@ -369,12 +371,22 @@ export default function Registration(props: any) {
             >
               <Upload
                 name="pancard"
-                maxCount={1}
+                maxCount={2}
                 beforeUpload={(file) => {
-                  // panPic = file;
+                  const isPNG = [
+                    "image/jpeg",
+                    "image/png",
+                    "image/gif",
+                    ".pdf",
+                    "application/pdf",
+                  ].includes(file.type);
+                  if (!isPNG) {
+                    message.error(`${file.name} is not a proper file`);
+                    return isPNG || Upload.LIST_IGNORE;
+                  }
                   return false;
                 }}
-                listType="picture"
+                accept="image/*,.pdf"
               >
                 <Button icon={<UploadOutlined />}>Click to upload</Button>
               </Upload>
@@ -394,10 +406,20 @@ export default function Registration(props: any) {
                 name="adhar"
                 maxCount={1}
                 beforeUpload={(file) => {
-                  // adharPic = file;
+                  const isPNG = [
+                    "image/jpeg",
+                    "image/png",
+                    "image/gif",
+                    ".pdf",
+                    "application/pdf",
+                  ].includes(file.type);
+                  if (!isPNG) {
+                    message.error(`${file.name} is not a proper file`);
+                    return isPNG || Upload.LIST_IGNORE;
+                  }
                   return false;
                 }}
-                listType="picture"
+                accept="image/*,.pdf"
               >
                 <Button icon={<UploadOutlined />}>Click to upload</Button>
               </Upload>
@@ -415,7 +437,7 @@ export default function Registration(props: any) {
             </Form.Item>
           </Form>
         )}
-        {stage === 2 && (
+        {stage == 2 && (
           <Form
             {...formItemLayout}
             form={form}
@@ -429,7 +451,7 @@ export default function Registration(props: any) {
                 data = Object.keys(allFields[0]["value"]["fileList"]).length;
               }
 
-              if (data === 0) {
+              if (data == 0) {
                 setIsexcelError(false);
               } else {
                 setIsexcelError(true);
@@ -449,7 +471,16 @@ export default function Registration(props: any) {
               <Upload
                 name="excel"
                 beforeUpload={(file) => {
-                  // exceldata = file;
+                  const isPNG = [
+                    "text/csv",
+                    "text/comma-separated-values",
+                    "application/csv",
+                  ].includes(file.type);
+                  console.log(file.type);
+                  if (!isPNG) {
+                    message.error(`${file.name} is not a proper file`);
+                    return isPNG || Upload.LIST_IGNORE;
+                  }
                   return false;
                 }}
                 accept=".csv"
