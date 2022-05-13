@@ -1,48 +1,29 @@
-import { Form, Input, Button, message, Typography } from "antd";
+import { Form, Input, message, Typography } from "antd";
 import { useState, useEffect } from "react";
 import "antd/dist/antd.css";
 import validator from "validator";
+import Button from "antd-button-color";
 import "./Sass/customComponent.scss";
 import { ResetPassword } from "../store/slices/loginCheck";
 const { Text, Title } = Typography;
 
 const Resetpass = (props: any) => {
-  const customClassName = `custom-primary-button`;
   const [errorMessage, setErrorMessage] = useState(false);
   const [check, setCheck] = useState(0);
   const [form] = Form.useForm();
-  useEffect(() => {
-    
-    if (check === 1) {
-      success();
-    }
-    if (check === 2) {
-      error();
-    }
-  }, [check]);
-
-
 
   const onFinish = async (values: any) => {
     let { newpassword } = values;
     const vals = await ResetPassword(newpassword);
-    if (vals === 1) {
-      setCheck(1);
+    if (vals == 1) {
+      message.success("Please login with your new password");
       form.resetFields();
       props.openresetpage(false);
     } else {
-      setCheck(2);
+      message.error("Something went wrong");
     }
-    setCheck(0);
   };
 
-  const success = () => {
-    message.success("Please login with your new password");
-  };
-
-  const error = () => {
-    message.error("Something went wrong");
-  };
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
@@ -113,12 +94,7 @@ const Resetpass = (props: any) => {
         </Form.Item>
 
         <Form.Item>
-          <Button
-            type="primary"
-            {...{ className: customClassName }}
-            htmlType="submit"
-            block
-          >
+          <Button type="success" htmlType="submit" block>
             Reset Password
           </Button>
         </Form.Item>
