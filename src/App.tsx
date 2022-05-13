@@ -88,7 +88,6 @@ function App() {
 
   useEffect(() => {
     const userName = sessionStorage.getItem("userName") ?? "";
-
     if (isFoDetails && userName !== undefined && userName !== "") {
       dispatch(getTransactionData(userName));
       dispatch(getProduceData(userName));
