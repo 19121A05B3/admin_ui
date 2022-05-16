@@ -2,7 +2,7 @@ import axios from "axios";
 import { dp } from "../../helper";
 
 const baseUrl =
-  "https://9uedorofia.execute-api.ap-south-1.amazonaws.com/dev/admin";
+"https://enzdzh0pw2.execute-api.ap-south-1.amazonaws.com/dev/";
 
 export const RegisterSingleCheck = async (val) => {
   const headers = {
