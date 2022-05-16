@@ -6,12 +6,12 @@ import Registration from "./registration";
 import { Modal, PageHeader, Carousel } from "antd";
 import Button from "antd-button-color";
 import "antd-button-color/dist/css/style.css";
-import Logo from "./static/assets/vbLogo.png";
-import firstImage from "./static/assets/landingImage.png";
-import secondImage from "./static/assets/Vikasbandhu_Five.jpg";
-import thirdImage from "./static/assets/Vikasbandhu_One.jpg";
-import fourthImage from "./static/assets/Vikasbandhu_Two.jpg";
-import fifthImage from "./static/assets/Image_Govt1.jpg";
+import Logo from "../images/vbLogo.png";
+import firstImage from "../images/landingImage.png";
+import secondImage from "../images/Vikasbandhu_Five.jpg";
+import thirdImage from "../images/Vikasbandhu_One.jpg";
+import fourthImage from "../images/Vikasbandhu_Two.jpg";
+import fifthImage from "../images/Image_Govt1.jpg";
 const contentStyle = {
   height: "88vh",
   color: "#fff",
