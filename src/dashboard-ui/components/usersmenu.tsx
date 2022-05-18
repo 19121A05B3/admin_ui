@@ -190,9 +190,8 @@ function App() {
       title: (
         <Row>
           <Col span={24}>Type</Col>
-          <Col span={24}>
+          <Col span={24} className="filters">
             <Select
-              className="filters"
               placeholder="Select"
               allowClear
               onChange={(val) => updateAllFilters(SELLER_TYPE_FILTER, `${val}`)}

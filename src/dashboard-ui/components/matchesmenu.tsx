@@ -225,9 +225,8 @@ function App(this: any) {
       title: (
         <Row>
           <Col span={24}>Produce-Variety-Grade</Col>
-          <Col span={24}>
+          <Col span={24} className="filters">
             <Select
-              className="filters"
               placeholder="Select"
               allowClear
               onChange={(val) => updateAllFilters(PRODUCE_FILTER, `${val}`)}

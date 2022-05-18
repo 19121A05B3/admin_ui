@@ -61,6 +61,7 @@ export const getVBUsersData = createAsyncThunk(
     if (res === undefined) throw new Error("Error while fetching vb user data");
     dp("VB USER data fetched success");
     const finalData = await JSON.parse(res.body);
+    console.log(finalData);
     return finalData;
     // return res;
   }

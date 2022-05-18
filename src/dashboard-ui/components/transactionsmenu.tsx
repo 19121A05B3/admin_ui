@@ -578,23 +578,26 @@ function App() {
   console.log(foDetails.assigned_user_type);
 
   const tags1V2 = (
-    <>
-      <Typography.Paragraph>Status</Typography.Paragraph>
-      <Dropdown
-        overlay={myMenu}
-        placement="bottomCenter"
-        arrow
-        visible={isCFilterVisible}
-      >
-        <Button
-          onClick={() => {
-            setIsCFilterVisible(!isCFilterVisible);
-          }}
+    <Row>
+      <Col span={24}>Status</Col>
+      <Col span={24} className="filters">
+        <Dropdown
+          overlay={myMenu}
+          placement="bottomCenter"
+          arrow
+          visible={isCFilterVisible}
         >
-          Select <DownOutlined />
-        </Button>
-      </Dropdown>
-    </>
+          <Button
+            onClick={() => {
+              setIsCFilterVisible(!isCFilterVisible);
+            }}
+            style={{ width: "160px", textAlign: "left" }}
+          >
+            Select <DownOutlined style={{ float: "right", marginTop: "5px" }} />
+          </Button>
+        </Dropdown>
+      </Col>
+    </Row>
   );
 
   const CSellerColumns: ColumnsType<ISellerTransaction> = [
@@ -646,9 +649,8 @@ function App() {
       title: (
         <Row>
           <Col span={24}>Produce</Col>
-          <Col span={24}>
+          <Col span={24} className="filters">
             <Select
-              className="filters"
               placeholder="Select"
               allowClear
               onChange={(val) => updateAllFilters(PRODUCE_FILTER, `${val}`)}
@@ -790,9 +792,8 @@ function App() {
       title: (
         <Row>
           <Col span={24}>Produce</Col>
-          <Col span={24}>
+          <Col span={24} className="filters">
             <Select
-              className="filters"
               placeholder="Select"
               allowClear
               onChange={(val) => updateAllFilters(PRODUCE_FILTER, `${val}`)}

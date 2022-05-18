@@ -4,6 +4,7 @@ import { dp } from "../../helper";
 
 const getAppHeaders = () => {
   const token = sessionStorage.getItem("token");
+  console.log(token);
   const headerData = {
     Authorization: token ?? "",
     "Content-Type": "application/json",
@@ -21,7 +22,7 @@ const getBodyData = () => {
 };
 
 export const baseUrl =
-  "https://enzdzh0pw2.execute-api.ap-south-1.amazonaws.com/dev/admin";
+  "https://i2esbt8nni.execute-api.ap-south-1.amazonaws.com/dev/admin";
 
 export const fetchSellerBuyerData = async (id: String) => {
   try {
@@ -46,6 +47,7 @@ export const fetchVBUserData = async (id: String) => {
       headers: getAppHeaders(),
       data: getBodyData(),
     });
+    console.log(finalData.data);
     return finalData.data;
   } catch (err) {
     dp(err);

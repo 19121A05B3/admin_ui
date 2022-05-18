@@ -1,12 +1,21 @@
-import { DownOutlined } from "@ant-design/icons";
-import { Button, Col, Dropdown, InputNumber, Menu, Row, Slider, Typography } from "antd";
+import { DownOutlined, PropertySafetyOutlined } from "@ant-design/icons";
+import {
+  Button,
+  Col,
+  Dropdown,
+  InputNumber,
+  Menu,
+  Row,
+  Slider,
+  Typography,
+} from "antd";
 import { useState } from "react";
 
 interface props {
   onSubmit: Function;
   min: number;
   max: number;
-  name:string;
+  name: string;
 }
 
 export const RangeSelector = (props: props) => {
@@ -91,17 +100,25 @@ export const RangeSelector = (props: props) => {
 
   return (
     <>
-      <Typography.Paragraph>{props.name}</Typography.Paragraph>
-      <Dropdown
-        visible={isVisible}
-        overlay={insideOverlay}
-        placement="bottomCenter"
-        arrow
-      >
-        <Button onClick={toggleIsVisible}>
-          Select <DownOutlined />
-        </Button>
-      </Dropdown>
+      <Row>
+        <Col span={24}>{props.name}</Col>
+        <Col span={24}>
+          <Dropdown
+            visible={isVisible}
+            overlay={insideOverlay}
+            placement="bottomCenter"
+            arrow
+          >
+            <Button
+              onClick={toggleIsVisible}
+              style={{ width: "160px", marginTop: "7px", textAlign: "left" }}
+            >
+              Select{" "}
+              <DownOutlined style={{ float: "right", marginTop: "5px" }} />
+            </Button>
+          </Dropdown>
+        </Col>
+      </Row>
     </>
   );
 };
