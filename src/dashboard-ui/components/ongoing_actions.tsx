@@ -1,11 +1,21 @@
 import { PaperClipOutlined } from "@ant-design/icons";
-import { Table, Row, Col, Button, Select, Input, Tooltip, message } from "antd";
+import {
+  Table,
+  Row,
+  Col,
+  Button,
+  Select,
+  Input,
+  Tooltip,
+  message,
+  Modal,
+} from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { getActionsTabData, updateStatus } from "../../store/slices/mainSlice";
 import { loadingIndicator } from "./transactions";
-
+const { TextArea } = Input;
 const SK_FILTER = "sk";
 const DETAILS_FILTER = "details";
 const CATEGORY_FILTER = "category_type";
@@ -36,6 +46,16 @@ interface propType {
   name: string;
 }
 const OngoingActions = (props: propType) => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setremarks("");
+    setIsModalVisible(false);
+  };
   const { requests, category_type, status } = useSelector(
     (state: RootState) => state.main.actionsTabData
   );
@@ -50,6 +70,7 @@ const OngoingActions = (props: propType) => {
   //   request_issue: [""],
   //   status: [""],
   // });
+
   const [allFilters, setAllFilters] = useState({
     pk: "",
     details: "",
@@ -60,6 +81,7 @@ const OngoingActions = (props: propType) => {
 
   const [filteredData, setFilteredData] = useState([{}]);
   const [isFiltering, setIsFiltering] = useState(false);
+  const [remarks, setremarks] = useState("");
 
   // useEffect(() => {
   //   // This one is to create all values for the selector fields, runs everytime ongoing data changes
@@ -341,9 +363,25 @@ const OngoingActions = (props: propType) => {
   const ACCEPT = "approved";
   const REJECT = "rejected";
   const ESCALATE_TO_ADMIN = "escalate to admin";
+  let skey = "";
+  let pkey = "";
+  const [keyData, setKeyData] = useState({
+    sKey: "",
+    pKey: "",
+  });
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
 
-  const handleStatusChange = async (pk: string, sk: string, key: number) => {
+  const handleStatusChange = async (
+    pk: string,
+    sk: string,
+    key: number,
+    remarks: string
+  ) => {
+    // console.log(skey, pkey);
     let status = ACCEPT;
+    let re = remarks;
     switch (key) {
       case 0:
         status = ACCEPT;
@@ -353,25 +391,48 @@ const OngoingActions = (props: propType) => {
         break;
       default:
         status = ESCALATE_TO_ADMIN;
+        console.log(status);
     }
+    console.log(pk, sk);
+    console.log("SJSJSJ");
+    // const response = await updateStatus({
+    //   sk: skey,
+    //   pk: pkey,
+    //   status: status,
+    //   remarks: re,
+    // });
+    setIsModalVisible(false);
+    //   const hide = message.loading("Action in progress..", 0);
 
-    const response = await updateStatus({ sk: sk, pk: pk, status: status });
-    const hide = message.loading("Action in progress..", 0);
+    // hide();
+    // setTimeout(() => {
+    //   dispatch(getActionsTabData(userName));
+    // }, 3000);
 
-    hide();
-    setTimeout(() => {
-      dispatch(getActionsTabData(userName));
-    }, 3000);
+    setremarks("");
   };
 
   const decideHtml = (text: string, pk: string, sk: string) => {
     text = text.toLocaleLowerCase();
-    if (text && text.includes("pending")) {
+    sk = sk.toLocaleLowerCase();
+    if (
+      sk &&
+      (sk.includes("verification") ||
+        sk.includes("cheque_confirmation") ||
+        sk.includes("cash_confirmation")) &&
+      text &&
+      text.includes("pending")
+    ) {
       return (
         <Row gutter={[10, 10]}>
           <Col span={12}>
             <Button
-              onClick={() => handleStatusChange(pk, sk, 0)}
+              onClick={() => {
+                pkey = pk;
+                skey = sk;
+
+                handleStatusChange(pk, sk, 0, remarks);
+              }}
               className="approveButton"
               block
               type="primary"
@@ -382,7 +443,86 @@ const OngoingActions = (props: propType) => {
           <Col span={12}>
             <Button
               block
-              onClick={() => handleStatusChange(pk, sk, 1)}
+              onClick={() => {
+                pkey = pk;
+                skey = sk;
+
+                setKeyData({
+                  sKey: sk,
+                  pKey: pk,
+                });
+
+                showModal();
+              }}
+              className="rejectButton"
+            >
+              Reject
+            </Button>
+            <Modal
+              title="Remarks"
+              visible={isModalVisible}
+              onOk={(e) => {
+                if (remarks.length == 0) {
+                  handleCancel();
+                  return;
+                }
+
+                handleStatusChange(keyData.pKey, keyData.sKey, 1, remarks);
+              }}
+              onCancel={handleCancel}
+              centered
+            >
+              <TextArea
+                rows={4}
+                style={{ marginTop: "-20px" }}
+                onChange={(e) => {
+                  setremarks(e.target.value);
+                }}
+                value={remarks}
+                required={true}
+              />
+            </Modal>
+          </Col>
+          <Col span={24}>
+            <Button
+              className="escalateButtonStyle"
+              onClick={() => {
+                pkey = pk;
+                skey = sk;
+                handleStatusChange(pk, sk, 2, remarks);
+              }}
+              block
+            >
+              Escalate to Admin
+            </Button>
+          </Col>
+        </Row>
+      );
+    } else if (text && text.includes("pending")) {
+      return (
+        <Row gutter={[10, 10]}>
+          <Col span={12}>
+            <Button
+              onClick={() => {
+                pkey = pk;
+                skey = sk;
+                handleStatusChange(pk, sk, 0, remarks);
+              }}
+              className="approveButton"
+              block
+              type="primary"
+            >
+              Approve
+            </Button>
+          </Col>
+          <Col span={12}>
+            <Button
+              block
+              onClick={() => {
+                pkey = pk;
+                skey = sk;
+                handleStatusChange(pk, sk, 1, remarks);
+              }}
               className="rejectButton"
             >
               Reject
@@ -391,7 +531,14 @@ const OngoingActions = (props: propType) => {
           <Col span={24}>
             <Button
               className="escalateButtonStyle"
-              onClick={() => handleStatusChange(pk, sk, 2)}
+              onClick={() => {
+                pkey = pk;
+                skey = sk;
+                console.log("escalate........");
+                console.log(skey);
+                console.log(pkey);
+                handleStatusChange(pk, sk, 2, remarks);
+              }}
               block
             >
               Escalate to Admin
@@ -404,7 +551,7 @@ const OngoingActions = (props: propType) => {
         <Row gutter={[10, 10]}>
           <Col span={12}>
             <Button
-              onClick={() => handleStatusChange(pk, sk, 0)}
+              onClick={() => handleStatusChange(pk, sk, 0, remarks)}
               className="approveButton"
               block
               type="primary"
@@ -416,7 +563,7 @@ const OngoingActions = (props: propType) => {
           <Col span={12}>
             <Button
               block
-              onClick={() => handleStatusChange(pk, sk, 1)}
+              onClick={() => handleStatusChange(pk, sk, 1, remarks)}
               className="rejectButton"
               disabled
             >
@@ -426,7 +573,7 @@ const OngoingActions = (props: propType) => {
           <Col span={24}>
             <Button
               className="escalateButtonStyle"
-              onClick={() => handleStatusChange(pk, sk, 2)}
+              onClick={() => handleStatusChange(pk, sk, 2, remarks)}
               block
               disabled
             >

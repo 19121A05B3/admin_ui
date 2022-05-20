@@ -123,6 +123,42 @@ export default function Registration(props: any) {
     </Form.Item>
   );
 
+  const onPreviewProfile = async (file: any) => {
+    let src = file.url;
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
+    }
+    const image = new Image();
+    image.src = src;
+    let imgWindow = window.open(src)!;
+    imgWindow.document.write(image.outerHTML);
+  };
+
+  const onPreviewPan = async (file: any) => {
+    let src = file.url;
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
+    }
+  };
+
+  const onPreviewAdhar = async (file: any) => {
+    let src = file.url;
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
+    }
+  };
   const onProfileChange = ({ fileList: newFileList }: any) => {
     setProfileList(newFileList);
     if (newFileList.length === 0) {
@@ -211,10 +247,27 @@ export default function Registration(props: any) {
             >
               <ImgCrop>
                 <Upload
-                  beforeUpload={() => false}
+                  beforeUpload={(file) => {
+                    const isPNG = [
+                      "image/jpeg",
+                      "image/png",
+                      "image/gif",
+                    ].includes(file.type);
+                    console.log(file.size, "in image");
+                    if (file.size > 1048576) {
+                      message.error(`${file.name} the file is larger than 1MB`);
+                      return Upload.LIST_IGNORE;
+                    }
+                    if (!isPNG) {
+                      message.error(`${file.name} is not a proper file`);
+                      return isPNG || Upload.LIST_IGNORE;
+                    }
+                    return false;
+                  }}
                   listType="picture-card"
                   fileList={profileList}
                   onChange={onProfileChange}
+                  onPreview={onPreviewProfile}
                   accept="image/*"
                 >
                   {profileList.length < 1 && "+ Upload"}
@@ -233,11 +286,16 @@ export default function Registration(props: any) {
                 <Option value="other">Others</Option>
               </Select>
             </Form.Item>
-
             <Form.Item
-              label="name"
+              label="Name"
               name="name"
-              rules={[{ required: true, message: "Please input your Name!" }]}
+              rules={[
+                { required: true, message: "Please input your Name!" },
+                {
+                  pattern: new RegExp(/^[a-zA-Z]*$/),
+                  message: "only alphabets are allowed",
+                },
+              ]}
             >
               <Input style={{ width: "100%" }} />
             </Form.Item>
@@ -269,16 +327,16 @@ export default function Registration(props: any) {
 
             <Form.Item
               name="years_of_experience"
-              label="experience"
+              label="Experience"
               rules={[
                 {
                   type: "number",
                   min: 0,
-                  max: 99,
+                  max: 12,
                 },
                 {
                   required: true,
-                  message: "Please enter experience",
+                  message: "Please enter month number",
                 },
               ]}
             >
@@ -292,7 +350,13 @@ export default function Registration(props: any) {
                 validateStatus: "error",
                 help: "Should be 10 digit number",
               })}
-              rules={[{ required: true, message: "Please input phone num!" }]}
+              rules={[
+                { required: true, message: "Please input phone number!" },
+                {
+                  pattern: new RegExp(/^[0-9]{10,10}$/),
+                  message: "enter 10 digit number",
+                },
+              ]}
             >
               <Input
                 addonBefore={prefixSelector}
@@ -322,9 +386,15 @@ export default function Registration(props: any) {
             </Form.Item>
 
             <Form.Item
-              label="Thaluka"
+              label="Taluk"
               name="thaluka"
-              rules={[{ required: true, message: "Please input your Taluka!" }]}
+              rules={[
+                { required: true, message: "Please input your Taluk!" },
+                {
+                  pattern: new RegExp(/^[a-zA-Z]*$/),
+                  message: "only alphabets are allowed",
+                },
+              ]}
             >
               <Input style={{ width: "100%" }} />
             </Form.Item>
@@ -334,6 +404,10 @@ export default function Registration(props: any) {
               name="distict"
               rules={[
                 { required: true, message: "Please input your Distict!" },
+                {
+                  pattern: new RegExp(/^[a-zA-Z]*$/),
+                  message: "only alphabets are allowed",
+                },
               ]}
             >
               <Input style={{ width: "100%" }} />
@@ -342,7 +416,13 @@ export default function Registration(props: any) {
             <Form.Item
               label="State"
               name="state"
-              rules={[{ required: true, message: "Please input your State!" }]}
+              rules={[
+                { required: true, message: "Please input your State!" },
+                {
+                  pattern: new RegExp(/^[a-zA-Z]*$/),
+                  message: "only alphabets are allowed",
+                },
+              ]}
             >
               <Input style={{ width: "100%" }} />
             </Form.Item>
@@ -352,6 +432,10 @@ export default function Registration(props: any) {
               name="zip"
               rules={[
                 { required: true, message: "Please input your pin code!" },
+                {
+                  pattern: new RegExp(/^[0-9]{6,6}$/),
+                  message: "enter six digit number",
+                },
               ]}
             >
               <Input style={{ width: "100%" }} />
@@ -380,12 +464,18 @@ export default function Registration(props: any) {
                     ".pdf",
                     "application/pdf",
                   ].includes(file.type);
+                  console.log(file.size, "check file size");
                   if (!isPNG) {
                     message.error(`${file.name} is not a proper file`);
                     return isPNG || Upload.LIST_IGNORE;
                   }
+                  if (file.size > 1048576) {
+                    message.error(`${file.name} the file is larger than 1MB`);
+                    return Upload.LIST_IGNORE;
+                  }
                   return false;
                 }}
+                onPreview={onPreviewPan}
                 accept="image/*,.pdf"
               >
                 <Button icon={<UploadOutlined />}>Click to upload</Button>
@@ -393,7 +483,7 @@ export default function Registration(props: any) {
             </Form.Item>
 
             <Form.Item
-              label="adharcard"
+              label="AadhaarCard"
               name="adharcardpic"
               {...(!isadharError && {
                 validateStatus: "error",
@@ -417,8 +507,13 @@ export default function Registration(props: any) {
                     message.error(`${file.name} is not a proper file`);
                     return isPNG || Upload.LIST_IGNORE;
                   }
+                  if (file.size > 1048576) {
+                    message.error(`${file.name} the file is larger than 1MB`);
+                    return Upload.LIST_IGNORE;
+                  }
                   return false;
                 }}
+                onPreview={onPreviewAdhar}
                 accept="image/*,.pdf"
               >
                 <Button icon={<UploadOutlined />}>Click to upload</Button>
@@ -430,7 +525,7 @@ export default function Registration(props: any) {
                 type="success"
                 htmlType="submit"
                 block
-                disabled={!isprofileError || !ispanError || !isadharError}
+                disabled={!ispanError || !isadharError}
               >
                 Register
               </Button>

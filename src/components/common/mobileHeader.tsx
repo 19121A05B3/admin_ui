@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Dropdown, Menu, Col, Image, Row, Avatar } from "antd";
-import { MenuOutlined, CaretDownOutlined } from "@ant-design/icons";
+import Icon, {
+  MenuOutlined,
+  CaretDownOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "./customStyles.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +16,7 @@ const MobileDrawer = () => {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
 
+  const [profilevisible, setprofileVisible] = useState(false);
   const { foDetails } = useSelector((state: RootState) => state.main);
 
   const dropdownmenu = (
@@ -50,7 +55,22 @@ const MobileDrawer = () => {
       </Menu.Item>
     </Menu>
   );
-
+  const menu1 = (
+    <Menu
+      className="dropdown-menu"
+      onClick={() => setprofileVisible(true)}
+      theme="dark"
+    >
+      <Menu.Item key={1}>
+        <Link to="/">Profile</Link>
+      </Menu.Item>
+      <Menu.Item key={2}>
+        <a onClick={() => dispatch(logout())}>
+          <LogoutOutlined /> Logout
+        </a>
+      </Menu.Item>
+    </Menu>
+  );
   return (
     <div className="mobile-visible">
       <Row>
@@ -59,9 +79,16 @@ const MobileDrawer = () => {
         </Col>
         <Col span={13}></Col>
         <Col span={2}>
-          <a onClick={() => dispatch(logout())}>
-            <Avatar className="mt11" />
-          </a>
+          <Dropdown
+            className="mobile-dropdown"
+            overlay={menu1}
+            onVisibleChange={() => setprofileVisible(!profilevisible)}
+            visible={profilevisible}
+          >
+            <a onClick={(e) => e.preventDefault()}>
+              <Avatar className="mt11" />
+            </a>
+          </Dropdown>
         </Col>
         <Col span={5} className="mt6">
           <Row className="foname">{capitalize(foDetails["name "])}</Row>

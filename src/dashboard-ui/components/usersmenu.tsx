@@ -34,6 +34,35 @@ function App() {
   const { Seller, user_types } = useSelector(
     (state: RootState) => state.main.vbUserData
   );
+  // const { user_types } = useSelector(
+  //   (state: RootState) => state.main.vbUserData
+  // );
+  // const Seller = [
+  //   {
+  //     buyer_type: "",
+  //     is_seller: true,
+  //     zip: "583239",
+  //     phone_no: "9740751099",
+  //     email: "sunil@gmail.com",
+  //     name: "Sunil",
+  //     seller_type: "farmer",
+  //     consent: true,
+  //     assignedfieldofficer: "admin#9392024242",
+  //     state: "Karnataka",
+  //     taluk: "Hospet",
+  //     district: "Bellary",
+  //     UIDAI: "",
+  //     sk: "profile",
+  //     is_buyer: false,
+  //     pk: "user#9740751099",
+  //     PAN: "",
+  //     address1: "# 129/B Aditya nagar",
+  //     address2: "Hospet, Bellary, Karnataka",
+  //   },
+  // ];
+  // const userdata: any = {
+  //   "user#9740751099": "d123",
+  // };
   const { Individual_Produces } = useSelector(
     (state: RootState) => state.main.produceData
   );
@@ -166,6 +195,12 @@ function App() {
       ),
       dataIndex: "pk",
       key: "pk",
+      // render: (add: any, record: any) => (
+      //   <>
+      //     <>{userdata[record.pk]}</>
+      //     <br></br>
+      //   </>
+      // ),
     },
     {
       title: (

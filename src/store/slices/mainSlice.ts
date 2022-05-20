@@ -100,16 +100,22 @@ export const updateStatus = async (myData: {
   pk: string;
   sk: string;
   status: string;
+  remarks: string;
 }) => {
-  const { pk, sk, status } = myData;
+  const { pk, sk, status, remarks } = myData;
+  const adminId = sessionStorage.getItem("userName");
   let data = {
     pk: pk,
     sk: sk,
     status_change: status,
+    remarks: remarks,
+    FO_id: "admin#" + adminId,
   };
+  console.log(data);
 
   if (isDev) return;
   const res = await updateStatusApi(JSON.stringify(data));
+  console.log(res);
   if (res) {
     message.success("SUCCESS");
   } else {
