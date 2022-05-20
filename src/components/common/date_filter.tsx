@@ -22,6 +22,7 @@ export const DateFilter = (props: props) => {
   const [isVisible, setIsVisible] = useState(false);
   // let initDate: string | undefined = undefined;
   const [selectedDate, setSelectedDate] = useState("");
+  const [isCalenderShowing, setIsCalenderShowing] = useState(false);
 
   const toggleIsVisible = () => {
     setIsVisible((prevState) => !prevState);
@@ -60,8 +61,13 @@ export const DateFilter = (props: props) => {
           {/* <Radio value={6}>Select Date</Radio> */}
           {/* {radioValue === 6 ? ( */}
           <DatePicker
+            onClick={() => {
+              setIsCalenderShowing((prevState) => !prevState);
+            }}
+            open={isCalenderShowing}
             onChange={(date) => {
               setSelectedDate(date?.toISOString() ?? "");
+              setIsCalenderShowing(false);
             }}
           />
           {/* ) : null} */}

@@ -1,5 +1,5 @@
 import "antd/dist/antd.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Input, Select, Button, Space, message } from "antd";
 import { CaretDownFilled } from "@ant-design/icons";
 import AttachFile from "./AttachFile";
@@ -15,8 +15,8 @@ import { processingPopUp } from "../../helper";
 interface propType {
   onDone: Function;
 }
-export default function CreateActionForm(props: propType) {
-  const { onDone } = props;
+export default function CreateActionForm() {
+  // const { onDone } = props;
 
   //declaring variables
   const { TextArea } = Input;
@@ -31,6 +31,7 @@ export default function CreateActionForm(props: propType) {
   const ADD_USER = "Add User";
   const USER = "user";
   const [custormerName, setCustomerName] = useState("");
+  const [myForm] = Form.useForm();
 
   const ADD_PRODUCE = "Add Produce";
   const [formData, setFormData] = useState({
@@ -130,7 +131,7 @@ export default function CreateActionForm(props: propType) {
       message.error("Please fill required details");
     }
 
-    onDone();
+    // onDone();
     setShowProduce(false);
     setShowUser(true);
 
@@ -252,7 +253,8 @@ export default function CreateActionForm(props: propType) {
       className="form-item"
       name="basic"
       {...layout}
-      initialValues={{ remember: true }}
+      form={myForm}
+      // initialValues={{ remember: true }}
       autoComplete="off"
       labelAlign="left"
       colon={false}

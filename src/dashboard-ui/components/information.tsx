@@ -17,6 +17,7 @@ const SP = "SP";
 const TTV = "TTV";
 const VBU = "VBU";
 const MS = "MS";
+const US = "US";
 
 const initFilterData = {
   filterText: "All",
@@ -54,6 +55,16 @@ const initSummaryData = [
   // Match status
   { legend: "Buyer to confirm", value: 0 },
   { legend: "Seller to confirm", value: 0 },
+  // User Status
+  { legend: "Active", value: 0 },
+  { legend: "Active/F", value: 0 },
+  { legend: "Add Produce Blocked", value: 0 },
+  { legend: "", value: 0 },
+  { legend: "", value: 0 },
+  { legend: "", value: 0 },
+  { legend: "", value: 0 },
+  { legend: "", value: 0 },
+  { legend: "", value: 0 },
 ];
 
 export default function Information() {
@@ -129,10 +140,19 @@ export default function Information() {
         return b;
       } // Need to be removed once both seller and buyer matches data is ready
       return initSummaryData.slice(22, 25);
+    } else if (group === US) {
+      const fetchedData = summarizedData.userStatusBuyer;
+      const combinedData =
+        fetchedData.concat(summarizedData.userStatusSeller) ?? [];
+
+      if (combinedData !== undefined && combinedData.length === 7) {
+        return combinedData;
+      }
+
+      return initSummaryData.slice(25, 32);
     }
 
     return [];
-
     // Just to satisfy ts
   };
 
@@ -352,8 +372,46 @@ export default function Information() {
               </Anchor>
             </Card>
           </Col>
+
+          <Col span={24}>
+            <Card
+              className="boxShadowStyle"
+              title="User Status"
+              extra={buildSelector(getData(US), "US")}
+            >
+              {totallto !== "" && totallto2 !== "" ? (
+                <InfoDetails
+                  group={US}
+                  calculatedCount={0}
+                  appliedFilter={getFilterText(US)}
+                  isHalfDonut={true}
+                  chartData={getData(US)}
+                  colors={[
+                    "rgba(24, 87, 141, 1)",
+                    "rgba(26, 75, 132, 1)",
+                    "rgba(29, 63, 121, 1)",
+                    "rgba(32, 51, 110, 1)",
+                    "rgba(134, 221, 212, 1)",
+                    "rgba(102, 197, 202, 1)",
+                    "rgba(45, 72, 123, 1)",
+                    "rgba(87, 185, 196, 1)",
+                    "rgba(73, 173, 191, 1)",
+                  ]}
+                />
+              ) : null}
+              <Anchor
+                onClick={transactions}
+                targetOffset={110}
+                affix={false}
+                className="scroll"
+              >
+                <Link href="#transactionsDiv" title="View Details" />
+              </Anchor>
+            </Card>
+          </Col>
         </Row>
       </div>
+      
       <div id="transactionsDiv" className="mt50">
         {showTransactions ? <TransactionsV2 /> : null}
         {showMatches ? <Matches /> : null}

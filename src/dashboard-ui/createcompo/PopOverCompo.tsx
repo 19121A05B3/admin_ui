@@ -3,22 +3,25 @@ import { Popover, Button } from "antd";
 
 import CreateActionForm from "./CreateActionForm";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 export default function PopOverCompo() {
-  const [isPopVisible, setIsPopVisible] = useState(false);
+  const [instanceKey, setInstanceKey] = useState(0);
 
-  const togglePopup = () => {
-    setIsPopVisible((prevState) => {
-      return !prevState;
-    });
-  };
+
+
 
   return (
     <div className="popover" style={{ clear: "both", whiteSpace: "nowrap" }}>
       <Popover
         placement="bottomLeft"
-        content={<CreateActionForm onDone={togglePopup} />}
+        content={<CreateActionForm key={instanceKey} />}
         trigger="click"
+        onVisibleChange={() => {
+          const newKey = instanceKey + 1;
+          setInstanceKey(newKey);
+          console.log(instanceKey);
+        }}
         overlayStyle={{
           width: "100%",
           maxWidth: "91%",
@@ -29,14 +32,10 @@ export default function PopOverCompo() {
           boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25)",
           borderRadius: "10px",
         }}
-        visible={isPopVisible}
+        // visible={isPopVisible}
         autoAdjustOverflow={true}
       >
-        <Button
-          className="createnewButton"
-          type="primary"
-          onClick={togglePopup}
-        >
+        <Button className="createnewButton" type="primary">
           + Create New Action
         </Button>
       </Popover>

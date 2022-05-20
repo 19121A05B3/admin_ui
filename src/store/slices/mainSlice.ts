@@ -285,6 +285,8 @@ const initialState = {
     ttv: [],
     vbu: [],
     match_status: [],
+    userStatusSeller: [],
+    userStatusBuyer: [],
   },
 };
 
@@ -345,6 +347,10 @@ const mainSlice = createSlice({
       state.vbUserData = action.payload;
       if (action.payload) {
         state.summarizedData.vbu = action.payload.summary["vbu"];
+        state.summarizedData.userStatusSeller =
+          action.payload.summary["status"]["seller"];
+        state.summarizedData.userStatusBuyer =
+          action.payload.summary["status"]["Buyer"];
       }
     });
 
@@ -359,5 +365,4 @@ const mainSlice = createSlice({
     });
   },
 });
-
 export default mainSlice.reducer;
