@@ -1,5 +1,14 @@
 import { DownOutlined } from "@ant-design/icons";
-import { Button, Col, DatePicker, Dropdown, Menu, Row, Space, Typography } from "antd";
+import {
+  Button,
+  Col,
+  DatePicker,
+  Dropdown,
+  Menu,
+  Row,
+  Space,
+  Typography,
+} from "antd";
 import { useState } from "react";
 
 interface props {
@@ -13,6 +22,7 @@ export const DateFilter = (props: props) => {
   const [isVisible, setIsVisible] = useState(false);
   // let initDate: string | undefined = undefined;
   const [selectedDate, setSelectedDate] = useState("");
+  const [isCalenderShowing, setIsCalenderShowing] = useState(false);
 
   const toggleIsVisible = () => {
     setIsVisible((prevState) => !prevState);
@@ -51,8 +61,13 @@ export const DateFilter = (props: props) => {
           {/* <Radio value={6}>Select Date</Radio> */}
           {/* {radioValue === 6 ? ( */}
           <DatePicker
+            onClick={() => {
+              setIsCalenderShowing((prevState) => !prevState);
+            }}
+            open={isCalenderShowing}
             onChange={(date) => {
               setSelectedDate(date?.toISOString() ?? "");
+              setIsCalenderShowing(false);
             }}
           />
           {/* ) : null} */}
@@ -63,7 +78,10 @@ export const DateFilter = (props: props) => {
       <Menu.Item>
         <Row>
           <Col>
-            <Button style={{ margin: "auto" }} onClick={() =>  localOnSubmit(true)}>
+            <Button
+              style={{ margin: "auto" }}
+              onClick={() => localOnSubmit(true)}
+            >
               Reset
             </Button>
           </Col>
@@ -84,17 +102,25 @@ export const DateFilter = (props: props) => {
 
   return (
     <>
-      <Typography.Paragraph>{props.name}</Typography.Paragraph>
-      <Dropdown
-        visible={isVisible}
-        overlay={insideOverlay}
-        placement="bottomCenter"
-        arrow
-      >
-        <Button onClick={toggleIsVisible}>
-          Select <DownOutlined />
-        </Button>
-      </Dropdown>
+      <Row>
+        <Col span={24}>{props.name}</Col>
+        <Col span={24}>
+          <Dropdown
+            visible={isVisible}
+            overlay={insideOverlay}
+            placement="bottomCenter"
+            arrow
+          >
+            <Button
+              onClick={toggleIsVisible}
+              style={{ width: "160px", marginTop: "7px", textAlign: "left" }}
+            >
+              Select{" "}
+              <DownOutlined style={{ float: "right", marginTop: "5px" }} />
+            </Button>
+          </Dropdown>
+        </Col>
+      </Row>
     </>
   );
 };
