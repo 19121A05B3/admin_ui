@@ -240,6 +240,7 @@ const initialState = {
     Buyer: [],
     totalusers: "",
     summary: {},
+    user_destiny_data: {},
     user_types: {
       buyer: [],
       seller: [],

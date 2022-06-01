@@ -10,6 +10,7 @@ import IdCard from "./IDCard";
 import BuyerTable from "./buyer";
 import { capitalize } from "./users";
 import { loadingIndicator } from "./transactions";
+import PickerButton from "antd/es/date-picker/PickerButton";
 
 // import './matchesmenu.scss';
 
@@ -33,6 +34,9 @@ const ADDRESS_FILTER = "address1";
 function App() {
   const { Seller, user_types } = useSelector(
     (state: RootState) => state.main.vbUserData
+  );
+  const user_destiny_data: any = useSelector(
+    (state: RootState) => state.main.vbUserData.user_destiny_data
   );
   // const { user_types } = useSelector(
   //   (state: RootState) => state.main.vbUserData
@@ -60,9 +64,6 @@ function App() {
   //     address2: "Hospet, Bellary, Karnataka",
   //   },
   // ];
-  // const userdata: any = {
-  //   "user#9740751099": "d123",
-  // };
   const { Individual_Produces } = useSelector(
     (state: RootState) => state.main.produceData
   );
@@ -87,11 +88,24 @@ function App() {
     address1: "",
     buyer_type: "",
   });
+  function getKeyByValue(object: any, value: any) {
+    return Object.keys(object).find((key) => object[key] === value);
+  }
 
   const [filteredData, setFilteredData] = useState([{}]);
   const [isFiltering, setIsFiltering] = useState(false);
   const updateAllFilters = (grp: string, val: string) => {
     if (val === "undefined" || val === undefined) val = "";
+    if (grp == "pk" && val != "") {
+      console.log(val);
+      console.log(getKeyByValue(user_destiny_data, val));
+      val = val.toUpperCase();
+      var c: any = getKeyByValue(user_destiny_data, val);
+
+      if (c === "undefined" || c === undefined) val = "xyz";
+      else val = c;
+      console.log(val);
+    }
     val = val.toLowerCase();
     let currFilter: Record<string, string> = {};
     currFilter[`${grp}`] = val;
@@ -162,7 +176,6 @@ function App() {
               item.address2
                 .toLowerCase()
                 .includes(noEmptyVal(allFilters.address1)))
-
             //    ||
             //   item.buyer_type.includes(noEmptyVal(allFilters.buyer_type))
           )
@@ -195,12 +208,16 @@ function App() {
       ),
       dataIndex: "pk",
       key: "pk",
-      // render: (add: any, record: any) => (
-      //   <>
-      //     <>{userdata[record.pk]}</>
-      //     <br></br>
-      //   </>
-      // ),
+      render: (pk: any) => (
+        <>
+          {user_destiny_data[pk] != "" ? (
+            <>{user_destiny_data[pk]}</>
+          ) : (
+            <>{pk}</>
+          )}
+          <br></br>
+        </>
+      ),
     },
     {
       title: (
