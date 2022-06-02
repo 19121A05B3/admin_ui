@@ -1,9 +1,12 @@
 import { useState } from "react";
 import "antd/dist/antd.css";
-import { Modal } from "antd";
+import { Col, Modal, Row } from "antd";
 import { Card } from "antd";
 import { idCard } from "../../store/slices/mainSlice";
 import { dp } from "../../helper";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+
 const { Meta } = Card;
 
 interface propType {
@@ -14,6 +17,9 @@ interface propType {
 export default function IDCard(props: propType) {
   const [visible, setVisible] = useState(false);
   const [idLocation, setIdLocation] = useState("");
+  const user_destiny_data: any = useSelector(
+    (state: RootState) => state.main.vbUserData.user_destiny_data
+  );
 
   const idRequest = async (userid: string, usertype: string) => {
     setVisible(true);
@@ -33,7 +39,22 @@ export default function IDCard(props: propType) {
         footer={null}
       >
         <Card bordered={false}>
-          <Meta title={"Seller ID: " + props.seller_id} />
+          {/* <Meta title={"Seller ID: " + props.seller_id} /> */}
+          <Row>
+            <Col
+              xs={{ span: 5 }}
+              sm={{ span: 5 }}
+              lg={{ span: 3 }}
+              md={{ span: 4 }}
+            >
+              ID &emsp;
+            </Col>
+            {user_destiny_data[props.seller_id] != "" ? (
+              <Col>: {user_destiny_data[props.seller_id]}</Col>
+            ) : (
+              <Col>: ---</Col>
+            )}
+          </Row>
           {idLocation !== "" ? (
             <img src={idLocation} alt="error-loading" width="100%" />
           ) : (

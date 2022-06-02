@@ -30,7 +30,9 @@ const NAME_FILTER = "name";
 const SELLER_TYPE_FILTER = "seller_type";
 const PHONE_NO_FILTER = "phone_no";
 const ADDRESS_FILTER = "address1";
-
+export function getKeyByValue(object: any, value: any) {
+  return Object.keys(object).find((key) => object[key] === value);
+}
 function App() {
   const { Seller, user_types } = useSelector(
     (state: RootState) => state.main.vbUserData
@@ -88,9 +90,7 @@ function App() {
     address1: "",
     buyer_type: "",
   });
-  function getKeyByValue(object: any, value: any) {
-    return Object.keys(object).find((key) => object[key] === value);
-  }
+
 
   const [filteredData, setFilteredData] = useState([{}]);
   const [isFiltering, setIsFiltering] = useState(false);
@@ -101,8 +101,7 @@ function App() {
       console.log(getKeyByValue(user_destiny_data, val));
       val = val.toUpperCase();
       var c: any = getKeyByValue(user_destiny_data, val);
-
-      if (c === "undefined" || c === undefined) val = "xyz";
+      if (c === "undefined" || c === undefined) val = "###^&*(^&*";
       else val = c;
       console.log(val);
     }
@@ -213,7 +212,7 @@ function App() {
           {user_destiny_data[pk] != "" ? (
             <>{user_destiny_data[pk]}</>
           ) : (
-            <>{pk}</>
+            <>---</>
           )}
           <br></br>
         </>
@@ -321,6 +320,7 @@ function App() {
               seller_id={i["pk"]}
               name={i["name"]}
               transaction_list={transaction_list}
+              seller={1}
             />{" "}
             <IdCard seller_id={i["pk"]} name={i["name"]} type={"seller"} />
             {/* <a

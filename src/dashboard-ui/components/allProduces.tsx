@@ -6,6 +6,7 @@ import { IItsy } from "../../store/app_interfaces";
 import Photos from "./Modal";
 import { RangeSelector } from "../../components/common/range_selector";
 import { loadingIndicator } from "./transactions";
+import { getKeyByValue } from "./usersmenu";
 
 const { Option } = Select;
 
@@ -30,6 +31,9 @@ const ProduceTab = (props: propType) => {
     seller_qty,
   } = useSelector((state: RootState) => state.main.produceData);
   console.log(props.sellData);
+  const user_destiny_data: any = useSelector(
+    (state: RootState) => state.main.vbUserData.user_destiny_data
+  );
 
   // if (props.allproduces == 1) {
   //   console.log(sellyes);
@@ -64,6 +68,15 @@ const ProduceTab = (props: propType) => {
 
   const updateAllFilters = (grp: string, val: string) => {
     if (val === "undefined") val = "";
+    if (grp == "pk" && val != "") {
+      console.log(val);
+      console.log(getKeyByValue(user_destiny_data, val));
+      val = val.toUpperCase();
+      var c: any = getKeyByValue(user_destiny_data, val);
+      if (c === "undefined" || c === undefined) val = "###^&*(^&*";
+      else val = c;
+      console.log(val);
+    }
     let currFilter: Record<string, string> = {};
     currFilter[`${grp}`] = val;
     setAllFilters((prevState) => {
@@ -332,6 +345,16 @@ const ProduceTab = (props: propType) => {
         </Row>
       ),
       dataIndex: "pk",
+      render: (pk: any) => (
+        <>
+          {user_destiny_data[pk] != "" ? (
+            <>{user_destiny_data[pk]}</>
+          ) : (
+            <>---</>
+          )}
+          <br></br>
+        </>
+      ),
     },
     {
       title: (
@@ -414,7 +437,7 @@ const ProduceTab = (props: propType) => {
 
   return (
     <div className="ongoing-actions">
-      {props.sellData === undefined  ? (
+      {props.sellData === undefined ? (
         loadingIndicator
       ) : (
         <Table

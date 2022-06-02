@@ -4,6 +4,9 @@ import { ColumnsType } from "antd/es/table";
 import Produce from "./Produce copy";
 import LiveRates from "./LiveRates";
 import Photos from "./Modal";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+
 interface propType {
   crop_image_1: string;
   crop_name: string;
@@ -21,6 +24,9 @@ interface params {
   is_seller: any;
 }
 export default function SampleTest(props: params) {
+  const user_destiny_data: any = useSelector(
+    (state: RootState) => state.main.vbUserData.user_destiny_data
+  );
   const columns: ColumnsType<propType> = [
     {
       title: "Produce",
@@ -230,6 +236,16 @@ export default function SampleTest(props: params) {
       title: "Seller/Buyer ID",
       key: "pk",
       dataIndex: "pk",
+      render: (pk: any) => (
+        <>
+          {user_destiny_data[pk] != "" ? (
+            <>{user_destiny_data[pk]}</>
+          ) : (
+            <>---</>
+          )}
+          <br></br>
+        </>
+      ),
     },
     {
       title: "Details",

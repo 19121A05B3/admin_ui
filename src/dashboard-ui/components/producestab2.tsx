@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { IItsy } from "../../store/app_interfaces";
 import { RangeSelector } from "../../components/common/range_selector";
+import { getKeyByValue } from "./usersmenu";
 const { Option } = Select;
 
 const PK_FILTER = "pk";
@@ -22,7 +23,9 @@ const ProduceTab2 = (props: propsType) => {
   const { produce, grade, category, variety, buyer_qty } = useSelector(
     (state: RootState) => state.main.produceData
   );
-
+  const user_destiny_data: any = useSelector(
+    (state: RootState) => state.main.vbUserData.user_destiny_data
+  );
   // const [selectorValues, setSelectorValues] = useState({
   //     category: [""],
   //     crop_name: [""],
@@ -56,6 +59,15 @@ const ProduceTab2 = (props: propsType) => {
 
   const updateAllFilters = (grp: string, val: string) => {
     if (val === "undefined") val = "";
+    if (grp == "pk" && val != "") {
+      console.log(val);
+      console.log(getKeyByValue(user_destiny_data, val));
+      val = val.toUpperCase();
+      var c: any = getKeyByValue(user_destiny_data, val);
+      if (c === "undefined" || c === undefined) val = "###^&*(^&*";
+      else val = c;
+      console.log(val);
+    }
     let currFilter: Record<string, string> = {};
     currFilter[`${grp}`] = val;
     setAllFilters((prevState) => {
@@ -268,6 +280,16 @@ const ProduceTab2 = (props: propsType) => {
         </Row>
       ),
       dataIndex: "pk",
+      render: (pk: any) => (
+        <>
+          {user_destiny_data[pk] != "" ? (
+            <>{user_destiny_data[pk]}</>
+          ) : (
+            <>---</>
+          )}
+          <br></br>
+        </>
+      ),
     },
     {
       title: (

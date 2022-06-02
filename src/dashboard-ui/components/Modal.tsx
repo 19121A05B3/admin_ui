@@ -1,5 +1,6 @@
 import { Modal, Image } from "antd";
 import { useState } from "react";
+
 interface proptype {
   val: string;
 }

@@ -33,77 +33,7 @@ interface User {
 //     return timeDifferenceInDays.toString();
 //   }
 // };
-const columns: ColumnsType<User> = [
-  {
-    title: "ID",
-    dataIndex: "pk",
-    key: "ID",
-    render: (val: string) => {
-      return (
-        <>
-          <Tooltip title={val}>
-            <span>
-              {val && val.slice(val.indexOf("#") + 1, val.indexOf("#") + 10)}..
-            </span>
-          </Tooltip>
-        </>
-      );
-    },
-  },
-  {
-    title: "Produce",
-    dataIndex: "produce",
-    key: "Produce",
-  },
-  {
-    title: "Transaction Value",
-    dataIndex: "seller_final_price",
-    key: "TransactionValue",
-    render: (sfp: Number) => <>₹{sfp}</>,
-  },
-  {
-    title: "Quantity",
-    key: "Quantity",
-    dataIndex: "matched_quantity",
-    render: (mq: Number) => <>{mq}qtl</>,
-  },
-  {
-    title: "Seller ID",
-    key: "SellerID",
-    dataIndex: "gsi",
-    render: (SellerID: Number) => <>{SellerID}</>,
-  },
-  {
-    title: "Buyer ID",
-    key: "BuyerID",
-    dataIndex: "buyer_id",
-    render: (BuyerID: String) => <>{BuyerID}</>,
-  },
-  {
-    title: "Buyer Location",
-    key: "BuyerLocation",
-    dataIndex: "buyer_location",
-  },
-  // {
-  //   title: "Days Since Added",
-  //   key: "DaysSinceAdded",
-  //   dataIndex: "created_at",
-  //   render: (created_at: any) => handleDateChange(created_at),
-  // },
-  // {
-  //   title: "Asking Delivery Date",
-  //   key: "AskingDeliveryDate",
-  //   dataIndex: "AskingDeliveryDate",
-  //   render: (ad: any) => {
-  //     return (
-  //       <>
-  //         {ad == undefined && <>---</>}
-  //         {ad && <>{ad}</>}
-  //       </>
-  //     );
-  //   },
-  // },
-];
+
 export default function App() {
   const data: string | any[] | readonly User[] | undefined = []; // Need to be removed when buyer matches enabled
   const { Seller_matches } = useSelector(
@@ -111,6 +41,99 @@ export default function App() {
   );
 
   const { foDetails } = useSelector((state: RootState) => state.main);
+  const user_destiny_data: any = useSelector(
+    (state: RootState) => state.main.vbUserData.user_destiny_data
+  );
+  const columns: ColumnsType<User> = [
+    {
+      title: "ID",
+      dataIndex: "pk",
+      key: "ID",
+      render: (val: string) => {
+        return (
+          <>
+            <Tooltip title={val}>
+              <span>
+                {val && val.slice(val.indexOf("#") + 1, val.indexOf("#") + 10)}
+                ..
+              </span>
+            </Tooltip>
+          </>
+        );
+      },
+    },
+    {
+      title: "Produce",
+      dataIndex: "produce",
+      key: "Produce",
+    },
+    {
+      title: "Transaction Value",
+      dataIndex: "seller_final_price",
+      key: "TransactionValue",
+      render: (sfp: Number) => <>₹{sfp}</>,
+    },
+    {
+      title: "Quantity",
+      key: "Quantity",
+      dataIndex: "matched_quantity",
+      render: (mq: Number) => <>{mq}qtl</>,
+    },
+    {
+      title: "Seller ID",
+      key: "SellerID",
+      dataIndex: "gsi",
+      render: (pk: any) => (
+        <>
+          {user_destiny_data[pk] != "" ? (
+            <>{user_destiny_data[pk]}</>
+          ) : (
+            <>---</>
+          )}
+          <br></br>
+        </>
+      ),
+    },
+    {
+      title: "Buyer ID",
+      key: "BuyerID",
+      dataIndex: "buyer_id",
+      render: (pk: any) => (
+        <>
+          {user_destiny_data[pk] != "" ? (
+            <>{user_destiny_data[pk]}</>
+          ) : (
+            <>---</>
+          )}
+          <br></br>
+        </>
+      ),
+    },
+    {
+      title: "Buyer Location",
+      key: "BuyerLocation",
+      dataIndex: "buyer_location",
+    },
+    // {
+    //   title: "Days Since Added",
+    //   key: "DaysSinceAdded",
+    //   dataIndex: "created_at",
+    //   render: (created_at: any) => handleDateChange(created_at),
+    // },
+    // {
+    //   title: "Asking Delivery Date",
+    //   key: "AskingDeliveryDate",
+    //   dataIndex: "AskingDeliveryDate",
+    //   render: (ad: any) => {
+    //     return (
+    //       <>
+    //         {ad == undefined && <>---</>}
+    //         {ad && <>{ad}</>}
+    //       </>
+    //     );
+    //   },
+    // },
+  ];
   const viewAllButton = (
     <div className="vab">
       <br></br>
@@ -146,7 +169,7 @@ export default function App() {
           </TabPane>
         )}
 
-        {foDetails.assigned_user_type !== "seller" && enabled && (
+        {foDetails.assigned_user_type !== "seller" && (
           <TabPane tab="Buyer Matches" key="2">
             {data != undefined ? (
               <>

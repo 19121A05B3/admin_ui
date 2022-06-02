@@ -22,6 +22,8 @@ export interface ISellerTransaction {
   events: [];
   seller_final_price: string;
   buyer_location: string;
+  seller_location:string;
+  seller_id:string;
 }
 
 export interface IBuyerTransaction {

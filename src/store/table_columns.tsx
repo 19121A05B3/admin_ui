@@ -1,7 +1,10 @@
 import { Tooltip } from "antd";
 import { ColumnsType } from "antd/lib/table";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 import { capitalize } from "../dashboard-ui/components/users";
 import { IBuyerTransaction, ISellerTransaction } from "./app_interfaces";
+
 
 export const CSellerColumns: ColumnsType<ISellerTransaction> = [
   {
@@ -127,15 +130,12 @@ export const CBuyerColumns: ColumnsType<IBuyerTransaction> = [
     title: "Quantity",
     dataIndex: "matched_quantity",
     key: "matched_quantity",
-
     render: (matched_quantity: string) => <>{matched_quantity}qtl</>,
   },
-
   {
     title: "Buyer ID",
     dataIndex: "gsi",
     key: "gsi",
-    render: (BuyerID: string) => <>{BuyerID}</>,
   },
   {
     title: "Seller",

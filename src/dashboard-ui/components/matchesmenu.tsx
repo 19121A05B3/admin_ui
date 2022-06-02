@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import { RangeSelector } from "../../components/common/range_selector";
 import { loadingIndicator } from "./transactions";
+import { getKeyByValue } from "./usersmenu";
 
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -43,6 +44,9 @@ function App(this: any) {
     match_quantity_range,
   } = useSelector((state: RootState) => state.main.transactionData);
   const { foDetails } = useSelector((state: RootState) => state.main);
+  const user_destiny_data: any = useSelector(
+    (state: RootState) => state.main.vbUserData.user_destiny_data
+  );
   // const handleDateChange = (date: any) => {
   //   if (date) {
   //     const currentDateInSeconds = new Date().getTime();
@@ -69,7 +73,25 @@ function App(this: any) {
   const [filteredData, setFilteredData] = useState([{}]);
   const [isFiltering, setIsFiltering] = useState(false);
   const updateAllFilters = (grp: string, val: string) => {
+    var h = val;
     if (val === "undefined" || val === undefined) val = "";
+    if (grp == "gsi" && val != "") {
+      console.log(val);
+      console.log(getKeyByValue(user_destiny_data, val));
+      val = val.toUpperCase();
+      var c: any = getKeyByValue(user_destiny_data, val);
+      if (c === "undefined" || c === undefined) val = "###^&*(^&*";
+      else val = c;
+      console.log(val);
+    }
+    if ((grp == "buyer_id" && val != "") || (grp == "seller_id" && val != "")) {
+      console.log(val);
+      console.log(getKeyByValue(user_destiny_data, val.toUpperCase()));
+      var c: any = getKeyByValue(user_destiny_data, val.toUpperCase());
+      if (c !== "undefined" || c !== undefined) val = c;
+      if (c === "undefined" || c === undefined) val = h;
+      console.log(val);
+    }
     val = val.toLowerCase();
     let currFilter: Record<string, string> = {};
     currFilter[`${grp}`] = val;
@@ -279,6 +301,16 @@ function App(this: any) {
         </Row>
       ),
       dataIndex: "gsi",
+      render: (pk: any) => (
+        <>
+          {user_destiny_data[pk] != "" ? (
+            <>{user_destiny_data[pk]}</>
+          ) : (
+            <>---</>
+          )}
+          <br></br>
+        </>
+      ),
     },
     {
       title: (
@@ -297,9 +329,13 @@ function App(this: any) {
         </Row>
       ),
       dataIndex: ["buyer_id", "buyer_location"],
-      render: (add: any, i: any) => (
+      render: (_buyer: any, i: any) => (
         <>
-          <>{i["buyer_id"]}</>
+          {user_destiny_data[i["buyer_id"]] != "" ? (
+            <>{user_destiny_data[i["buyer_id"]]}</>
+          ) : (
+            <>---</>
+          )}
           <br></br>
           <>{i["buyer_location"]}</>
         </>

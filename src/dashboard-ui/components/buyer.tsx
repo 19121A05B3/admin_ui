@@ -8,6 +8,7 @@ import TransactionList from "./TransactionList";
 import IdCard from "./IDCard";
 import { capitalize } from "./users";
 import { loadingIndicator } from "./transactions";
+import { getKeyByValue } from "./usersmenu";
 
 const { Option } = Select;
 interface seller {
@@ -30,6 +31,9 @@ function App() {
   const { Buyer, user_types } = useSelector(
     (state: RootState) => state.main.vbUserData
   );
+  const user_destiny_data: any = useSelector(
+    (state: RootState) => state.main.vbUserData.user_destiny_data
+  );
   const { Individual_Produces } = useSelector(
     (state: RootState) => state.main.produceData
   );
@@ -42,6 +46,7 @@ function App() {
   // const [selectorValues, setSelectorValues] = useState({
   //   buyer_type: [""]
   // });
+  console.log(Buyer);
   const [allFilters, setAllFilters] = useState({
     pk: "",
     name: "",
@@ -66,6 +71,15 @@ function App() {
 
   const updateAllFilters = (grp: string, val: string) => {
     if (val === "undefined" || val === undefined) val = "";
+    if (grp == "pk" && val != "") {
+      console.log(val);
+      console.log(getKeyByValue(user_destiny_data, val));
+      val = val.toUpperCase();
+      var c: any = getKeyByValue(user_destiny_data, val);
+      if (c === "undefined" || c === undefined) val = "###^&*(^&*";
+      else val = c;
+      console.log(val);
+    }
     val = val.toLowerCase();
     let currFilter: Record<string, string> = {};
     currFilter[`${grp}`] = val;
@@ -176,6 +190,16 @@ function App() {
       ),
       dataIndex: "pk",
       key: "pk",
+      render: (pk: any) => (
+        <>
+          {user_destiny_data[pk] != "" ? (
+            <>{user_destiny_data[pk]}</>
+          ) : (
+            <>---</>
+          )}
+          <br></br>
+        </>
+      ),
     },
     {
       title: (
@@ -277,6 +301,7 @@ function App() {
               seller_id={i["pk"]}
               name={i["name"]}
               transaction_list={transaction_list}
+              seller={0}
             />{" "}
             <IdCard seller_id={i["pk"]} name={i["name"]} type={"buyer"} />
           </div>

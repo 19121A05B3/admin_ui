@@ -30,6 +30,7 @@ import { RangeSelector } from "../../components/common/range_selector";
 import { capitalize } from "./users";
 import { loadingIndicator } from "./transactions";
 import { dp } from "../../helper";
+import { getKeyByValue } from "./usersmenu";
 const { TabPane } = Tabs;
 const { Option } = Select;
 
@@ -58,7 +59,7 @@ const PRODUCE_FILTER = "produce";
 // const EVENT_LATEST = "event_latest";
 const BUYER_ID_FILTER = "buyer_id";
 const GSI_FILTER = "gsi";
-const SELLER_ID_FILTER = "buyer_id";
+const SELLER_ID_FILTER = "seller_id";
 
 interface seller {
   pk: string;
@@ -78,6 +79,9 @@ interface seller {
 }
 
 function App() {
+  const user_destiny_data: any = useSelector(
+    (state: RootState) => state.main.vbUserData.user_destiny_data
+  );
   const [allFilters, setAllFilters] = useState({
     pk: "",
     event_latest: "",
@@ -114,7 +118,25 @@ function App() {
   );
 
   const updateAllFilters = (grp: string, val: string) => {
+    var h = val;
     if (val === "undefined" || val === undefined) val = "";
+    if (grp == "gsi" && val != "") {
+      console.log(val);
+      console.log(getKeyByValue(user_destiny_data, val));
+      val = val.toUpperCase();
+      var c: any = getKeyByValue(user_destiny_data, val);
+      if (c === "undefined" || c === undefined) val = "###^&*(^&*";
+      else val = c;
+      console.log(val);
+    }
+    if ((grp == "buyer_id" && val != "") || (grp == "seller_id" && val != "")) {
+      console.log(val);
+      console.log(getKeyByValue(user_destiny_data, val.toUpperCase()));
+      var c: any = getKeyByValue(user_destiny_data, val.toUpperCase());
+      if (c !== "undefined" || c !== undefined) val = c;
+      if (c === "undefined" || c === undefined) val = h;
+      console.log(val);
+    }
     val = val.toLowerCase();
     let currFilter: Record<string, string> = {};
     currFilter[`${grp}`] = val;
@@ -642,6 +664,7 @@ function App() {
             {i["event_latest"] && <>{i["event_latest"]}</>}
           </>
         );
+        
       },
     },
 
@@ -710,7 +733,16 @@ function App() {
       ),
       dataIndex: "gsi",
       key: "gsi",
-      render: (SellerID: string) => <p key={SellerID}>{SellerID}</p>,
+      render: (pk: any) => (
+        <>
+          {user_destiny_data[pk] != "" ? (
+            <>{user_destiny_data[pk]}</>
+          ) : (
+            <>---</>
+          )}
+          <br></br>
+        </>
+      ),
     },
 
     {
@@ -733,8 +765,13 @@ function App() {
       key: "buyer_id",
       render: (_buyer, i) => (
         <>
-          <Typography.Paragraph>{i["buyer_id"]}</Typography.Paragraph>
-          <Typography.Paragraph>{i["buyer_location"]}</Typography.Paragraph>
+          {user_destiny_data[i["buyer_id"]] != "" ? (
+            <>{user_destiny_data[i["buyer_id"]]}</>
+          ) : (
+            <>---</>
+          )}
+          <br></br>
+          <>{i["buyer_location"]}</>
         </>
       ),
     },
@@ -853,8 +890,15 @@ function App() {
       ),
       dataIndex: "gsi",
       key: "gsi",
-      render: (BuyerID: string) => (
-        <Typography.Paragraph key={BuyerID}>{BuyerID}</Typography.Paragraph>
+      render: (pk: any) => (
+        <>
+          {user_destiny_data[pk] != "" ? (
+            <>{user_destiny_data[pk]}</>
+          ) : (
+            <>---</>
+          )}
+          <br></br>
+        </>
       ),
     },
     {
@@ -875,10 +919,15 @@ function App() {
       ),
       dataIndex: ["seller_id", "seller_location"],
       key: "seller_id",
-      render: (_seller, i) => (
+      render: (_buyer, i) => (
         <>
-          <Typography.Paragraph>{i["seller_id"]}</Typography.Paragraph>
-          <Typography.Paragraph>{i["seller_location"]}</Typography.Paragraph>
+          {user_destiny_data[i["seller_id"]] != "" ? (
+            <>{user_destiny_data[i["seller_id"]]}</>
+          ) : (
+            <>---</>
+          )}
+          <br></br>
+          <>{i["seller_location"]}</>
         </>
       ),
     },

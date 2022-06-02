@@ -389,7 +389,6 @@ export default function Information() {
                   colors={[
                     "rgba(24, 87, 141, 1)",
                     "rgba(26, 75, 132, 1)",
-                    "rgba(29, 63, 121, 1)",
                     "rgba(32, 51, 110, 1)",
                     "rgba(134, 221, 212, 1)",
                     "rgba(102, 197, 202, 1)",
@@ -400,7 +399,7 @@ export default function Information() {
                 />
               ) : null}
               <Anchor
-                onClick={transactions}
+                onClick={user}
                 targetOffset={110}
                 affix={false}
                 className="scroll"
@@ -411,7 +410,7 @@ export default function Information() {
           </Col>
         </Row>
       </div>
-      
+
       <div id="transactionsDiv" className="mt50">
         {showTransactions ? <TransactionsV2 /> : null}
         {showMatches ? <Matches /> : null}

@@ -2,6 +2,9 @@ import { useState } from "react";
 import "antd/dist/antd.css";
 import { Col, Modal, Row } from "antd";
 import SampleTable from "./SampleTable";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
+
 interface proptype {
   seller_id: string;
   name: string;
@@ -10,7 +13,11 @@ interface proptype {
   is_seller: number;
 }
 export default function ModalDemo(props: proptype) {
+  const user_destiny_data: any = useSelector(
+    (state: RootState) => state.main.vbUserData.user_destiny_data
+  );
   var s = props.seller_id;
+
   const [visible, setVisible] = useState(false);
   return (
     <>
@@ -47,7 +54,12 @@ export default function ModalDemo(props: proptype) {
           >
             ID
           </Col>
-          <Col>: {props.seller_id}</Col>
+          {user_destiny_data[props.seller_id] != "" ? (
+            <Col>: {user_destiny_data[props.seller_id]}</Col>
+          ) : (
+            <Col>: ---</Col>
+          )}
+
         </Row>
         <Row>
           <Col

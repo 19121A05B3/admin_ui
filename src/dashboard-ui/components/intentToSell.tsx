@@ -21,56 +21,66 @@ interface Buyer {
   address1: any;
 }
 
-const columns = [
-  {
-    title: "ID",
-    dataIndex: "sk",
-    render: (val: string) => {
-      return (
-        <>
-          <Tooltip title={val}>
-            <span style={{ marginLeft: "10px" }}>
-              {val.slice(val.indexOf("#") + 1, val.indexOf("#") + 10)}..
-            </span>
-          </Tooltip>
-        </>
-      );
-    },
-  },
-  {
-    title: "Category",
-    dataIndex: "category_name",
-  },
-  {
-    title: "Produce",
-    dataIndex: "crop_name",
-  },
-  {
-    title: "Variety",
-    dataIndex: "sub_category",
-  },
-  {
-    title: "Grade",
-    dataIndex: "grade",
-  },
-  {
-    title: "Seller ID",
-    dataIndex: "pk",
-  },
-  {
-    title: "Quantity",
-    dataIndex: "quantity",
-  },
-  {
-    title: "Price Per Quintal",
-    dataIndex: "price_per_qnt",
-  },
-];
+
 function App() {
+  const user_destiny_data: any = useSelector(
+    (state: RootState) => state.main.vbUserData.user_destiny_data
+  );
   const { sellyes, sellno } = useSelector(
     (state: RootState) => state.main.produceData
   );
   const { foDetails } = useSelector((state: RootState) => state.main);
+  const columns = [
+    {
+      title: "ID",
+      dataIndex: "sk",
+      render: (val: string) => {
+        return (
+          <>
+            <Tooltip title={val}>
+              <span style={{ marginLeft: "10px" }}>
+                {val.slice(val.indexOf("#") + 1, val.indexOf("#") + 10)}..
+              </span>
+            </Tooltip>
+          </>
+        );
+      },
+    },
+    {
+      title: "Category",
+      dataIndex: "category_name",
+    },
+    {
+      title: "Produce",
+      dataIndex: "crop_name",
+    },
+    {
+      title: "Variety",
+      dataIndex: "sub_category",
+    },
+    {
+      title: "Grade",
+      dataIndex: "grade",
+    },
+    {
+      title: "Seller ID",
+      dataIndex: "pk",
+      render: (pk: any) => (
+        <>
+          {user_destiny_data[pk] != "" ? <>{user_destiny_data[pk]}</> : <>---</>}
+          <br></br>
+        </>
+      ),
+    },
+    {
+      title: "Quantity",
+      dataIndex: "quantity",
+    },
+    {
+      title: "Price Per Quintal",
+      dataIndex: "price_per_qnt",
+    },
+  ];
 
   var yes: any = [];
   for (var i = 0; i < 5; i++) {
