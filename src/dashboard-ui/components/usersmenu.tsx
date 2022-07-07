@@ -10,9 +10,7 @@ import IdCard from "./IDCard";
 import BuyerTable from "./buyer";
 import { capitalize } from "./users";
 import { loadingIndicator } from "./transactions";
-import PickerButton from "antd/es/date-picker/PickerButton";
-
-// import './matchesmenu.scss';
+import MatchesList from "./matchesList";
 
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -72,6 +70,9 @@ function App() {
   const transaction_list = useSelector(
     (state: RootState) => state.main.transactionData.Individual_Transactions
   );
+  const matches_list = useSelector(
+    (state: RootState) => state.main.transactionData.Individual_matches
+  );
   const { Issues_Individual } = useSelector(
     (state: RootState) => state.main.actionsTabData
   );
@@ -90,7 +91,6 @@ function App() {
     address1: "",
     buyer_type: "",
   });
-
 
   const [filteredData, setFilteredData] = useState([{}]);
   const [isFiltering, setIsFiltering] = useState(false);
@@ -315,7 +315,12 @@ function App() {
               issues={0}
               is_seller={1}
             />
-            <a key="matches">Matches</a>
+            <MatchesList
+              seller_id={i["pk"]}
+              name={i["name"]}
+              matches_list={matches_list}
+              seller={1}
+            />
             <TransactionList
               seller_id={i["pk"]}
               name={i["name"]}

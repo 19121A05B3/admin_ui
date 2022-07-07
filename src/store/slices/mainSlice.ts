@@ -183,7 +183,7 @@ const initialState = {
 
   foDetails: {
     assigned_user_type: "",
-    "name ": "",
+    name: "",
     phone_no: "",
     username: "",
     zips_assigned: [],
@@ -192,10 +192,17 @@ const initialState = {
     users: [],
     years_of_experience: "",
     thaluka: "",
+    pan_loc: "",
+    profile_loc: "",
+    gender: "",
+    state: "",
+    adhar_loc: "",
+    distict: "",
   },
 
   transactionData: {
     Individual_Transactions: {},
+    Individual_matches: {},
     Buyer_data: [],
     Seller_data: [],
     Seller_matches: [],

@@ -28,6 +28,8 @@ export default function CreateActionForm() {
   const [showAttachFile, setShowAttachFile] = useState(true);
   // const [isFileUploading, setIsFileUploading] = useState(false);
   const { userName } = useSelector((state: RootState) => state.login);
+
+  const [isnumError, setIsnumError] = useState(true);
   const ADD_USER = "Add User";
   const USER = "user";
   const [custormerName, setCustomerName] = useState("");
@@ -222,20 +224,27 @@ export default function CreateActionForm() {
     console.log(formData);
   };
   const handleSellerBuyerId = async (e: any) => {
-    if (e.target.value && e.target.value.length === 10) {
+    if (
+      /^[0-9]+$/.test(e.target.value) &&
+      e.target.value &&
+      e.target.value.length === 10
+    ) {
+      console.log("hello");
+      setIsnumError(true);
       const userName = await getUserName(e.target.value);
       if (userName && userName.length > 0) {
         setCustomerName(userName);
       }
+      setFormData((prevState) => {
+        return {
+          ...prevState,
+          sel_buy_id: "user#" + e.target.value,
+        };
+      });
     } else {
+      setIsnumError(false);
       setCustomerName("");
     }
-    setFormData((prevState) => {
-      return {
-        ...prevState,
-        sel_buy_id: "user#" + e.target.value,
-      };
-    });
 
     console.log(formData);
   };
@@ -321,22 +330,40 @@ export default function CreateActionForm() {
         </Form.Item>
       )}
       {showSellerID && (
-        <Form.Item name="sellerID" label="Seller/Buyer ID">
+        <Form.Item
+          name="SellerID"
+          label="Seller/Buyer ID"
+          {...(!isnumError && {
+            validateStatus: "error",
+            help: "Should be 10 digit number",
+          })}
+          rules={[
+            { required: true, message: "Please input phone number!" },
+            {
+              pattern: new RegExp(/^[0-9]{10,10}$/),
+              message: "enter 10 digit number",
+            },
+          ]}
+        >
           <Space>
             <Input
-              bordered={false}
               style={{
                 width: 205,
                 border: "1px solid #C4C4C4",
                 borderRadius: "5px",
               }}
+              id="seller/buyerid"
+              title="Enter 10 digit number"
+              pattern="[1-9]{10}"
               onChange={handleSellerBuyerId}
             />
+
             <p style={{ color: "#6F6B6B" }}>
               {custormerName && custormerName.length > 0 && "Seller/Buyer:"}{" "}
               {custormerName}
             </p>
           </Space>
+          <p style={{ color: "#6F6B6B" }}>Please enter Seller/Buyer Id</p>
         </Form.Item>
       )}
       {showDetails && (

@@ -9,6 +9,7 @@ import { RootState } from "../../store";
 interface tlist {
   transaction_list: any;
   seller: number;
+  matches: number;
 }
 export default function Transactions(props: tlist) {
   const user_destiny_data: any = useSelector(
@@ -36,7 +37,7 @@ export default function Transactions(props: tlist) {
       title: "Status",
       dataIndex: ["gsi_status", "event_latest"],
       key: "gsi_status",
-
+      className: props.matches !== 1 ? "" : "display-none",
       render: (_Status, i) => (
         <>
           <p className={i["gsi_status"]}>{capitalize(i["gsi_status"])}</p>

@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 interface propType {
   seller_id: string;
   name: string;
-  transaction_list: any;
+  matches_list: any;
   seller: number;
 }
 export default function ModalDemo(props: propType) {
@@ -21,7 +21,7 @@ export default function ModalDemo(props: propType) {
   return (
     <>
       <div className="produce-list" onClick={() => setVisible(true)}>
-        Transactions
+        Matches
       </div>
 
       <Modal
@@ -66,20 +66,20 @@ export default function ModalDemo(props: propType) {
             lg={{ span: 3 }}
             md={{ span: 4 }}
           >
-            Transactions &emsp;
+            Matches &emsp;
           </Col>
-          {props.transaction_list[s]?.length > 0 && (
-            <Col>: {props.transaction_list[s].length}</Col>
+          {props.matches_list[s]?.length > 0 && (
+            <Col>: {props.matches_list[s].length}</Col>
           )}
 
-          {!props.transaction_list[s]?.length && <Col>: 0</Col>}
+          {!props.matches_list[s]?.length && <Col>: 0</Col>}
         </Row>
         <br></br>
-        {props.transaction_list[s]?.length > 0 && (
+        {props.matches_list[s]?.length > 0 && (
           <Transactions
-            transaction_list={props.transaction_list[s]}
+            transaction_list={props.matches_list[s]}
             seller={props.seller}
-            matches={0}
+            matches={1}
           />
         )}
 

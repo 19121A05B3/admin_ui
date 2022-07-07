@@ -9,6 +9,7 @@ import IdCard from "./IDCard";
 import { capitalize } from "./users";
 import { loadingIndicator } from "./transactions";
 import { getKeyByValue } from "./usersmenu";
+import MatchesList from "./matchesList";
 
 const { Option } = Select;
 interface seller {
@@ -30,6 +31,9 @@ const BUYER_TYPE_FILTER = "buyer_type";
 function App() {
   const { Buyer, user_types } = useSelector(
     (state: RootState) => state.main.vbUserData
+  );
+  const matches_list = useSelector(
+    (state: RootState) => state.main.transactionData.Individual_matches
   );
   const user_destiny_data: any = useSelector(
     (state: RootState) => state.main.vbUserData.user_destiny_data
@@ -296,7 +300,12 @@ function App() {
               issues={0}
               is_seller={0}
             />
-            <a key="matches">Matches</a>
+            <MatchesList
+              seller_id={i["pk"]}
+              name={i["name"]}
+              matches_list={matches_list}
+              seller={0}
+            />{" "}
             <TransactionList
               seller_id={i["pk"]}
               name={i["name"]}
