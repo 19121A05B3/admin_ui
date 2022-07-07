@@ -29,7 +29,7 @@ function AppHeader() {
     <div className="header app-header">
       <div className="standard-bar">
         <Bar
-          mail="support@vikasbandhu.com    "
+          mail="contactus@samparkbindhu.in    "
           phone="        +91 9876543210"
         />
       </div>
