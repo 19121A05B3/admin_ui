@@ -444,7 +444,9 @@ const ProduceTab = (props: propType) => {
           <>
             <Photos val={val} />
             <br></br>
-            <a>Terms and Conditions</a>
+            <a href="https://vikasbandhu.in/terms&conditions" target="_blank">
+              Terms and Conditions
+            </a>
           </>
         );
       },

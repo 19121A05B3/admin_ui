@@ -322,7 +322,9 @@ const ProduceTab2 = (props: propsType) => {
       render: (more: string) => {
         return (
           <>
-            <a>Terms and Conditions</a>
+            <a href="https://vikasbandhu.in/terms&conditions" target="_blank">
+              Terms and Conditions
+            </a>
           </>
         );
       },

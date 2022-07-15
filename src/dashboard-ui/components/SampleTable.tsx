@@ -110,7 +110,9 @@ export default function SampleTest(props: params) {
       dataIndex: "crop_image_1",
       render: (crop_image_1) => (
         <>
-          <a> Terms and Conditions</a>
+          <a href="https://vikasbandhu.in/terms&conditions" target="_blank">
+            Terms and Conditions
+          </a>
           <br></br>
           <Photos val={crop_image_1} />
         </>
@@ -198,7 +200,9 @@ export default function SampleTest(props: params) {
       dataIndex: "crop_image_1",
       render: (crop_image_1) => (
         <>
-          <a> Terms and Conditions</a>
+          <a href="https://vikasbandhu.in/terms&conditions" target="_blank">
+            Terms and Conditions
+          </a>
           <br></br>
           {/* <Photos val={crop_image_1} /> */}
         </>
